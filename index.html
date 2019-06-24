@@ -31,10 +31,10 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav" data-bind="foreach: pages">
+            <ul class="navbar-nav" data-bind="foreach: Main.pages">
                 <li class="nav-item" data-bind="
-                    css: { active: $data == $root.chosenPageId() },
-                    click: $root.goToPage">
+                    css: { active: $data == $root.Main.chosenPageId() },
+                    click: $root.Main.goToPage">
                     <a class="nav-link" data-bind="text: $data">Features</a>
                 </li>
 
@@ -43,21 +43,29 @@
     </nav>
 
 
-    <div data-bind="template: { name: template, data:pageData }"></div>
+    <div data-bind="template: { name: $root.Main.template }"></div>
 
+
+
+    <!-- home/static page template-->
     <script type="text/html" id="page-template">
-        <h3 data-bind="text: title"></h3>
+        <div data-bind="with: Page">
+        <h3 data-bind="text: name"></h3>
         <div data-bind="text: content"></div>
+        </div>
     </script>
 
     <script type="text/html" id="product-template">
+        <div data-bind="with: Product"> 
         <h3 data-bind="text: title"></h3>
-        <div data-bind="text: content"></div>
-        <a href="#" data-bind="click: goToProduct(1)">Details</a>
+        <div data-bind="text: productid"></div>
+        <div data-bind="text: skuid"></div>
+        <button data-bind="click: function(){ $root.Main.goToProduct(productid) }">Details</button>
+        </div>
     </script>
 
 
-    
+
 
     <script type="text/javascript" src="js/app.js"></script>
 
