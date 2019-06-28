@@ -1,0 +1,302 @@
+.facetSection{
+    margin-top: 5px;
+    padding-left: 0;
+    padding-right: 0;
+}
+.productListSection{
+    padding-left: 0;
+    padding-right: 0;
+}
+.headSection{
+    padding: 15px;
+    background-color: #2874f0;
+}
+.headSearch{
+    width: 100%;
+}
+.filterDiv{
+    background-color: rgb(255, 255, 255);
+}
+section{
+    padding: 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+.row{
+    margin-left: 0;
+    margin-right: 0;
+}
+.category{
+    padding : 0  0 0 15px;
+}
+.priceFilter{
+    padding: 15px;
+}
+
+
+.slidecontainer {
+    width: 100%;
+  }
+  
+  .slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 5px;
+    border-radius: 5px;
+    background: wheat;
+    outline: none;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    margin-bottom: 10px;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border:  1px solid black;
+    background:white;
+    cursor: pointer;
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+.clickable{
+    cursor: pointer;   
+}
+.panel{
+    margin-bottom: 0;
+}
+.panel-heading{
+    padding: 15px;
+}
+.panel-primary{
+    border: none;
+}
+.panel-body{
+    display: none;
+}
+.panel-primary >.panel-heading{
+    color: black;
+    background-color: white;
+    border: none;
+}
+.panel-heading span {
+	margin-top: -20px;
+	font-size: 15px;
+}
+.filterSection{
+    padding-left: 0;
+    padding-right: 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.bredScrum{
+    background-color: white; 
+    margin : 5px 5px 0 5px; 
+    padding :15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+.bredScrum div{
+    margin: 10px;
+}
+.bredScrum div span{
+    font-size: 15px;
+    margin: 0 0 0 10px;
+}
+.hideBrandTag, .hideColorTag, .hideSizeTag{
+    display:  none;
+}
+
+
+
+
+
+.tileDiv{
+    width: 25%;
+    position: relative;
+    padding-left: 0;
+    padding-right: 0;
+    padding: 5px;
+    
+}
+.productList{
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+.subTile{
+    border: .5px solid rgba(224, 222, 222, 0.5);
+    position: relative;
+    height: 450px;
+    background-color: white;
+    background-size:  contain;
+    background-repeat:  no-repeat;
+    background-position: center;
+}
+p{
+    margin: 0 0 0 0;
+}
+.heart{
+    color: gray;
+    font-size: 20px;
+    position: relative;
+    top : 5%;
+    left: 85%;
+}
+.overlay {
+    padding: 10px 0 0 20px;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    background-color:white;
+    overflow: hidden;
+    width: 100%;
+    height: 15%;
+    transition: .5s ease;
+  }
+  
+  .tileDiv:hover .overlay {
+    height: 24%;
+  }
+  .subTile:hover{
+    box-shadow: 1px 1px 15px gray;
+  }
+  .heart:hover{
+      color: red;
+  }
+  .colorDiv{
+      float: left;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%; 
+      border: 2px solid gray;
+      margin: 0 5px 0 5px;
+  }
+
+  .imgdiv{
+    padding-left: 0;
+    padding-right: 0;
+    padding: 30px;
+    height: 100vh; 
+    background-image: url(../images/landing.jpg); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+.searchdiv{
+    height: 100vh;
+    padding-left: 0;
+    padding-right: 0;
+    padding: 30px;
+}
+.search {
+    
+    font-size: 25px;
+    width: 550px;
+    height: 50px;
+    position: relative;
+    float: left;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.search input{
+    border-radius: 0;
+    position: absolute;
+    width: 400px;
+    float: Left;
+    height: 50px;
+    padding: 0 0 0 20px;
+    outline: orange
+}
+
+.btn {
+    border-radius: 0;
+    width: 150px;
+    height: 50px;
+    position: absolute;
+    right: 0;
+    background-color: orange;
+    border: none;
+}
+
+.search input:focus{
+    border-color: orange;
+}
+.signup{
+    background-color: black;
+    color: white;
+    top: 100px;
+    left: 65%;
+}
+.signup:hover{
+    color: white;
+    box-shadow: 5px 5px 5px gray;
+}
+
+@media screen and (max-width: 480px){
+    .headSection{
+        display:  none;
+    }
+    .subTile{
+        height: 350px;
+    }
+    .overlay{
+        height: 25%;
+    }
+    .imgdiv{
+        display: none;
+    }
+    .searchdiv{
+        background-image: url(../images/landing.jpg)
+    }
+    .search{
+        width: 300px;
+    }
+    .search input{
+        width: 200px
+    }
+    .search .btn{
+        width: 100px;
+    }
+    .signup{
+        width: 100px;
+    }
+    /* .subTile{
+        height: 50vh;
+        width: 50%;
+    } */
+    .tileDiv{
+        width: 50%;
+        padding: 1px;
+    }
+    .bredScrum{
+        margin: 1px 1px 0 1px;
+    }
+    .subTile:hover{
+        box-shadow: 0 0 0 gray;
+      }
+}
+
+
