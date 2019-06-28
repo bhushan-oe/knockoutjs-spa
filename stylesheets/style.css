@@ -1,0 +1,11 @@
+div#header{
+    width:100%;
+    height: 8vh;
+    background-color: #2874ef;
+    position: relative;
+}
+
+#main{
+    position: relative;
+    width: 100%;
+}

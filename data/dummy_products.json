@@ -1,0 +1,132 @@
+{
+  "items": [
+    {
+      "prodId": "1111",
+      "category": "mens clothing",
+      "brand": "Rope",
+      "name": "Women's Checkered Casual Spread Shirt",
+      "skus": [
+        {
+          "skuId": "1111_Blue_L",
+          "color": "Blue",
+          "imageurl": "http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/rope_bluejpeg.jpeg",
+          "size": "L",
+          "rating": 3.5,
+          "price": 498
+        },
+        {
+          "skuId": "1111_Blue_M",
+          "color": "Blue",
+          "imageurl": "http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/rope_bluejpeg.jpeg",
+          "size": "M",
+          "rating": 3.5,
+          "price": 498
+        },
+        {
+          "skuId": "1111_Red_XL",
+          "color": "Red",
+          "imageurl": "http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/rope_red.jpeg",
+          "size": "XL",
+          "rating": 3.5,
+          "price": 408
+        },
+        {
+          "skuId": "1111_Red_L",
+          "color": "Red",
+          "imageurl": "http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/rope_red.jpeg",
+          "size": "L",
+          "rating": 3.5,
+          "price": 408
+        },
+        {
+          "skuId": "1111_Black_L",
+          "color": "Black",
+          "imageurl": "http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/rope_black.jpeg",
+          "size": "L",
+          "rating": 3.5,
+          "price": 408
+        }
+      ]
+    },
+    {
+      "prodId": "1112",
+      "category": "mens clothing",
+      "brand": "Tripr",
+      "name": "Men Colorblocked Casual Shirt",
+      "skus": [
+        {
+          "skuId": "1112_BW_S",
+          "color": "Black",
+          "imageurl": "http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/Tripr.jpeg",
+          "size": "S",
+          "rating": 3.3,
+          "price": 538
+        },
+        {
+          "skuId": "1112_BW_M",
+          "color": "Black",
+          "imageurl": "http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/Tripr.jpeg",
+          "size": "M",
+          "rating": 3.3,
+          "price": 538
+        }
+      ]
+    },
+    {
+      "prodId": "1113",
+      "category": "mens clothing",
+      "brand": "Zombom",
+      "name": "Men's Solid Casual Spread Shirt",
+      "skus": [
+        {
+          "skuId": "1113_Black_38",
+          "color": "Black",
+          "imageurl": "http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/zombom_black.jpeg",
+          "size": "38",
+          "rating": 3.7,
+          "price": 696
+        },
+        {
+          "skuId": "1113_Black_40",
+          "color": "Black",
+          "imageurl": "http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/zombom_black.jpeg",
+          "size": "40",
+          "rating": 3.7,
+          "price": 696
+        },
+        {
+          "skuId": "1113_Red_38",
+          "color": "Red",
+          "imageurl": "http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/zombom_red.jpeg",
+          "size": "38",
+          "rating": 3.7,
+          "price": 676
+        },
+        {
+          "skuId": "1113_Red_40",
+          "color": "Red",
+          "imageurl": "http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/zombom_red.jpeg",
+          "size": "40",
+          "rating": 3.7,
+          "price": 676
+        },
+        {
+          "skuId": "1113_Blue_38",
+          "color": "Blue",
+          "imageurl": "http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/zombom_blue.jpeg",
+          "size": "38",
+          "rating": 3.7,
+          "price": 596
+        },
+        {
+          "skuId": "1113_Blue_40",
+          "color": "Blue",
+          "imageurl": "http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/zombom_blue.jpeg",
+          "size": "40",
+          "rating": 3.7,
+          "price": 596
+        }
+      ]
+    }
+  ]
+}

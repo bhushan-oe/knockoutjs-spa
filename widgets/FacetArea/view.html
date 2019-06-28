@@ -1,0 +1,24 @@
+<div class="col-sm-3">
+    <!-- <input type="text" id="filter-area" data-bind="textInput:filterA"></input> -->
+    <div class="card-effect">
+            <div class="facet">
+                    <div class="form-group">
+                            <label for="filter">Product name starts with :</label>
+                            <input type="text" data-bind="value: filter, valueUpdate: 'afterkeydown'" class="form-control" id="filter"/>
+                          </div>
+                
+            </div>
+        <div class="facet">
+            <label for="brand-facets">Brands:</label>
+            <ul class="list-group" data-bind="foreach: justBrands" id="brand-facets">
+                <li class="list-group-item" >
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input brand-checkbox" value="" data-bind="checked: $root.brandFilter, value: brand" ><span data-bind="text: brand"></span>
+                        </label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
