@@ -1,28 +1,17 @@
 <div id="products-listing-area" class="col-sm-9">
     <!-- <span id="effect-element" data-bind="text:effect()">test</span> -->
-    <div class="card-effect ">
-            <div class="container">
-        <div id="products-list" class="row" data-bind="foreach: filteredProducts">
-                
-                <div class=" col-sm-3">
-                    <div class="card">
-                        <div class="image-tile-wrapper card-img-top">
-                        <img alt="Card image" style="width:100%" data-bind="attr: { src: skus[0].imageurl}">
-                    </div>
-                        <div class="card-body">
-                          <strong> <p class="card-title" data-bind="text: name"></p></strong>
-                          <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
-                          <a href="#" class="btn btn-primary">See Profile</a>
-                        </div>
-                    </div>
-                      </div>
+    <div class="card-effect container">
+            <div id="products-list" class="row" data-bind="foreach: {data: filteredProducts, as: 'product' }">
 
-            <!-- Product Id :<span data-bind="text: prodId"></span>
+                <div class=" col-sm-3">
+                    <product-tile params="value: product"></product-tile>
+                </div>
+
+                <!-- Product Id :<span data-bind="text: prodId"></span>
              | Product Name :<span data-bind="text: name"></span>
              | First Sku Id :<span data-bind="text: skus[0].skuId"></span>
              | Brand :<span data-bind="text: brand"></span> -->
-            <br>
-        </div>
-    </div>
+                <br>
+            </div>
     </div>
 </div>
