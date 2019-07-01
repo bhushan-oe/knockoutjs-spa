@@ -1,0 +1,104 @@
+.header{
+    display: none;
+}
+
+.landing-page-height{
+    height: 100vh;
+    background-color: aliceblue;
+}
+
+.row-div{
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+.image{
+    background-image: url(../Images/landing.jpg);
+    background-size: cover;
+}
+
+.col-div{
+    padding: 0;
+    margin: 0;
+}
+
+.search{
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    right: 20%;
+}
+
+.search input{
+    padding: 10px;
+    width: 100%;
+    outline: 2px solid orangered;
+}
+
+.search-button{
+    background-color: orangered;
+    color: white;
+    padding: 12px;
+    width: 100%;
+    border-radius:1px;
+}
+
+.signupbtn{
+    background-color: black;
+    color: white;
+    padding: 5px;
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    outline: none;
+    border: none;
+}
+
+@media only screen and (max-width: 990px){
+    .image{
+        display: none;
+    }
+
+    .mobile{
+        padding: 0;
+        background-image: url(../Images/landing.jpg);
+        background-size: cover;
+    }
+
+    .search{
+        right: 10%;
+        height: 23%
+    }
+
+    .search input{
+        height: 25%;
+    }
+
+    .search-button{
+        font-size: xx-large;
+    }
+
+    .signupbtn{
+        height: 5%;
+        font-size: x-large;
+    }
+
+}
+
+@media only screen and (max-width: 400px){
+    .image{
+        display: none;
+    }
+
+    .mobile{
+        padding: 0;
+        background-image: url(../Images/landing.jpg);
+        background-size: cover;
+    }
+
+    .search{
+        right: 10%;
+        height: 17%
+    }
+}
