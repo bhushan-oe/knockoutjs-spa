@@ -12,7 +12,7 @@ ko.components.register('product-tile', {
             <p class="card-title" data-bind="text: productName"></p>\
         </strong>\
         Color : <div data-bind="foreach: {data: skus, as: \'sku\' }">\
-        <button class="sku-color" data-bind="style:{background-color:sku.color}></button>\
+        <p class="card-text" data-bind="text:sku.color"></p>\
     </div> \
         Size : <a href="#" class="btn btn-primary">See Profile</a>\
     </div>\
