@@ -1,21 +1,58 @@
+function filterfun(){
+    console.log("in filter");
+    if($(window).width() < 900)
+    {
+        $(".desk_view").css({"display":"block"});
+        $(".sort_view").css({"display":"none"});
+    }
+}
+
+function sortfun(){
+    console.log("in sort");
+        $(".desk_view").css({"display":"none"});
+        $(".sort_view").css({"display":"block"});
+}
+$('.check').click(function() {
+    console.log("this.value");
+    $('.check').not(this).prop('checked', false);
+});
+
 ;(function($){
 
 $(document).ready(function(){
-   
+    // ----------------------Code For Media Querry-------------------------------
+    // var viewportWidth1 = $(window).width();
+    //     if (viewportWidth1 < 900) {
+    //         console.log("In small window;");
+    //         $(".fascet").addClass("panel panel-primary");
+    //         $(".filter").addClass("panel-heading clickble");
+    //         $(".desk_view").addClass("panel-body");
+    //     }
+    //     if(viewportWidth1 > 900) {
+    //             $(".fascet").removeClass("panel panel-primary");
+    //             $(".filter").removeClass("panel-heading clickble");
+    //             $(".desk_view").removeClass("panel-body");
+    //     } 
     
-             $(window).resize(function () {
-                var viewportWidth = $(window).width();
-                if (viewportWidth > 600) {
-                    //             $(".view").removeClass("view view-portfolio").addClass("gallery-mobile");
-                    console.log("hello");
-                         }  
+    // $(window).resize(function () {
+    //     var viewportWidth = $(window).width();
+    //     if (viewportWidth > 900) {
+    //         $(".fascet").removeClass("panel panel-primary");
+    //         $(".filter").removeClass("panel-heading clickble");
+    //         $(".desk_view").removeClass("panel-body");
+    //      }  
+    //     if (viewportWidth < 900) {
+    //         // console.log("In small window;");
+    //         $(".fascet").addClass("panel panel-primary");
+    //         $(".filter").addClass("panel-heading clickble");
+    //         $(".desk_view").addClass("panel-body");
+    //     }
+    // });
+       
+    //------------------------------------------------checkBox Single Select-------------
+       
     
-                if (viewportWidth < 600) {
-                    //             $(".view").removeClass("view view-portfolio").addClass("gallery-mobile");
-                    console.log("hello111");
-                         }
-                 });
-            
+  //-------------------------------------Code For Fascets Collapsing -------------------------------         
 $(document).on('click', '.panel-heading.clickable', function(e){
     
     var $this = $(this);
@@ -30,6 +67,7 @@ $(document).on('click', '.panel-heading.clickable', function(e){
 		
 	}
 })
+//----------------------------------------------------------------------------------------
        
 function viewModel() {
     var self = this;
@@ -53,7 +91,9 @@ function pageViewModel() {
 //     var self = this;
 //     self.name = 'About';
 // }
+//-----------------------------------------------------------------------------------------------
 function productViewModel() {
+    //---------------------------------Observable and Observable Array declarations---------
     var self = this;
     self.Products=ko.observableArray();
     self.allProduct=ko.observableArray();
@@ -63,15 +103,37 @@ function productViewModel() {
     self.color_flag=ko.observable(false);
     self.size_flag= ko.observable(false);
     self.brand_flag= ko.observable(false);
-    self.fisrtRange =ko.observable(200);
-    self.SecondRange=ko.observable(700);
+    self.fisrtRange =ko.observable();
+    self.SecondRange=ko.observable();
     self.MinVal =ko.observable(200);
     self.MaxVal=ko.observable(700);
     self.color_select = ko.observableArray();
     self.size_select = ko.observableArray();
     self.brand_select = ko.observableArray();
     self.rating_select = ko.observableArray();
-    self.filterArray =ko.observableArray();
+    self.Pricefilter =ko.computed(function(){
+        if(self.size_select().length != 0 || self.brand_select().length != 0 || self.color_select().length != 0 || self.rating_select().length != 0 )
+        var clonedArr = $.extend(true, [], self.Products());
+        else
+        var clonedArr = $.extend(true, [], self.allProduct());
+
+        var temp =[];
+        for(var y=0; y<clonedArr.length;y++)
+        {
+            if(clonedArr[y].Sku[0].price <= self.SecondRange() && clonedArr[y].Sku[0].price >= self.fisrtRange())
+                temp.push(clonedArr[y]);
+        }
+        if(temp.length!=0){
+            self.Products(temp);
+        }
+        else
+        {
+           self.Products(self.allProduct());
+        }
+
+    });
+
+    //-------------------------------------------Sort functions--------------------------------
     self.SortByAsecnding = function(){
         $("#a1").css({"font-weight":"normal"});$("#a2").css({"font-weight":"bold"});$("#a3").css({"font-weight":"normal"});
         var clonedArr = $.extend(true, [], this.Products());
@@ -91,128 +153,77 @@ function productViewModel() {
         this.Products(clonedArr);
 
     };
-    self.applyRating = function(selectrating, filterArr){
-        var temp =[];
-        if (filterArr.length == 0 ){
-            for (var rating in selectrating){
-                for (var ratingPro in self.allProduct()){
-                    if (selectrating[rating],self<= allProduct()[ratingPro].rating){
-                        temp.push(self.allProduct()[ratingPro]);
+    //-----------------------------------------------Fascets Coding---------------------------------------
+    self.applyFilter = function(Fascets_Array){
+      
+        var clonedArr = $.extend(true, [], this.allProduct());
+        var temp=[];
+        for (var fascet in Fascets_Array){
+            for(var SelectedValue of Fascets_Array[fascet]){
+                for (var CurrentIndex in clonedArr){
+                    if(fascet=="size"){
+                        if ($.inArray(SelectedValue,clonedArr[CurrentIndex].size) != -1){
+                            temp.push(clonedArr[CurrentIndex]);
+                        }
+                    }
+                    if(fascet=="color"){
+                        if ($.inArray(SelectedValue,clonedArr[CurrentIndex].color) != -1){
+                            temp.push(clonedArr[CurrentIndex]);
+                        }
+                    }
+                    if(fascet=="brand"){
+                        if ($.inArray(SelectedValue,clonedArr[CurrentIndex].brand) != -1){
+                            temp.push(clonedArr[CurrentIndex]);
+                        }
+                    }
+                    if(fascet=="rating"){
+                        if (SelectedValue <= clonedArr[CurrentIndex].rating[0]){
+                            temp.push(clonedArr[CurrentIndex]);
+                        }
                     }
                 }
             }
-        return temp;
+            clonedArr=temp;
+            temp=[];
         }
-        else{
-            for (var rating in selectrating){
-                for (var ratingPro in filterArr){
-                    if (selectrating[rating],self<= allProduct()[ratingPro].rating){
-                        temp.push(filterArr[ratingPro]);
-                    }
-                }
-            }
-        return temp;
+        if(clonedArr.length!=0){
+            self.Products(clonedArr);
         }
-    }
+        else
+        {
+            $('input:checkbox').prop('checked', false);
+           alert("Serched item Not found");
+           self.Products(self.allProduct());
+           //self.size_select().length=0;self.color_select();self.brand_select();self.rating_select();
+        //$('input:checkbox').prop('checked', false);
 
-    self.applyBrand = function(selectbrand, filterArr){
-        var temp =[];
-        if (filterArr.length == 0 ){
-            for (var brand in selectbrand){
-                for (var brandPro in self.allProduct()){
-                    if ($.inArray(selectbrand[brand],self.allProduct()[brandPro].brand) != -1){
-                       temp.push(self.allProduct()[brandPro]);
-                    }
-                }
-            }
-            return temp;
         }
-        else{
-            for (var brand in selectbrand){
-                for (var brandPro in filterArr){
-                    if ($.inArray(selectbrand[brand], filterArr[brandPro].brand) != -1){
-                        temp.push(filterArr[brandPro]);
-                       
-                    }
-                }
-            }
-            return temp;
-        }
-    }
-    self.applyColor = function(selectcolor, filterArr){
-        var temp =[];
-        if (filterArr.length == 0){
-            for (var color in selectcolor){
-                for (var colorPro in self.allProduct()){
-                    if ($.inArray(selectcolor[color],self.allProduct()[colorPro].color) != -1){
-                        temp.push(self.allProduct()[colorPro]);
-                        console.log("in brand");
-                    }
-                }
-            }
-            return temp;
-        }
-        else{
-            for (var color in selectcolor){
-                for (var colorPro in filterArr){
-                    if ($.inArray(selectcolor[color], filterArr[colorPro].color) != -1){
-                        temp.push(filterArr[colorPro]);
-                    }
-                }
-            }
-            return temp;
-        }
-    }
-    self.applySize = function(selectsize, filterArr){
-        var temp = [];
-        if (filterArr.length == 0){
-            for (var size in selectsize){
-                for (var sizePro in self.allProduct()){
-                    if ($.inArray(selectsize[size],self.allProduct()[sizePro].size) != -1){
-                        temp.push(self.allProduct()[sizePro]);
-                    }
-                }
-            }
-            return temp;
-        }
-        else{
-            for (var size in selectsize){
-                for (var sizePro in filterArr){
-                    if ($.inArray(selectsize[size], filterArr[sizePro].size) != -1){
-                       temp.push(filterArr[sizePro]);
-                    }
-                }
-            }
-            return temp;
-        }
-    } 
-
+    };
+   
     self.All_Compute_observe = ko.computed(function(){
-       // console.log(self.size_select(),self.brand_select(),self.color_select());
-                var tempArr = [];
-               
+      console.log(self.size_select(),self.brand_select(),self.color_select());
+        var Fascets_Array =[];
                     if (self.size_select().length != 0){
-                        tempArr = self.applySize(self.size_select(),tempArr);
+                        Fascets_Array["size"]=self.size_select() ;
                     }
                     if (self.brand_select().length != 0){
-                        tempArr = self.applyBrand(self.brand_select(),tempArr);
+                        Fascets_Array["brand"]=self.brand_select();
                     }
                     if (self.color_select().length != 0){
-                        tempArr = self.applyColor(self.color_select(),tempArr);
+                        Fascets_Array["color"]=self.color_select();
                     }
-                    if (self.rating_select().length != 0){
-                    tempArr = self.applyRating(self.rating_select(),tempArr);
+                     if (self.rating_select().length != 0){
+                        Fascets_Array["rating"]=self.rating_select();
                     }
-                    self.filterArray(tempArr);
-                
-                    if (self.filterArray().length != 0){
-                        self.Products(self.filterArray());
-                    }
+                    if (!jQuery.isEmptyObject(Fascets_Array)){
+                        self.applyFilter(Fascets_Array);
+                    }   
                     else{
                         self.Products(self.allProduct());
                     }
            } );
-
+//-------------------------------------------------------------------Fascet Coding End----------------
+            //-----------------------------Use of flags to show fascet's less and more functionality--------
     self.brand_flag_fun = function (){
         if(this.brand_flag()==false)
             this.brand_flag(true);
@@ -232,6 +243,7 @@ function productViewModel() {
         else
             this.color_flag(false);
     }
+    //=------------------------ color click event in listing----------------------
     self.ColorClick = function (product,clr){
         var arr=[];
         var img;
@@ -252,11 +264,12 @@ function productViewModel() {
         var color_span =product.Sku[0].prodId+"heart";
         $("#"+color_span).toggleClass('fas fa-heart heart fas fa-heart redHeart');
     }
-
+    
     self.title = 'Product';
     self.productid = 1;
     self.skuid = 1;
 }
+//-----------------------------End of View model........................
 var vm = {
     Main: new viewModel(),
     Page: new pageViewModel(),
@@ -274,6 +287,7 @@ Sammy(function () {
             //     vm.Page.content(data.content);
             // })
         });
+//--------------------------------------PLP Page Array---------------------
         this.get('#About', function () {
             vm.Main.chosenPageId(this.params.page);     
             vm.Main.template("about-template");
@@ -286,7 +300,7 @@ Sammy(function () {
                 vm.Product.SecondRange(clonedArr[clonedArr.length-1].price);
                 vm.Product.MinVal(clonedArr[0].price);
                 vm.Product.MaxVal(clonedArr[clonedArr.length-1].price);
-
+            
                 $.each(data["items"], function(i, item) 
                 {
                     Data.push(item.prodId);
@@ -361,7 +375,7 @@ Sammy(function () {
                     vm.Product.size_observe(D_total_size);
                     vm.Product.color_observe(D_total_color);
                     vm.Product.brand_observe(D_total_brand);  
-                    console.log(vm.Product.allProduct());
+                  //  console.log(vm.Product.allProduct());
 
             });
             //vm.Page.name("About")
@@ -391,20 +405,7 @@ Sammy(function () {
         //     vm.Main.template("page-template") 
         // });
     }).run('#Home');
-//     $(window).load(function() {
-    
-//     var viewportWidth = $(window).width();
-//     if (viewportWidth < 600) {
-//             $(".view").removeClass("view view-portfolio").addClass("gallery-mobile");
-//     }
-    
-//     $(window).resize(function () {
-    
-//         if (viewportWidth < 600) {
-//             $(".view").removeClass("view view-portfolio").addClass("gallery-mobile");
-//         }
-//     });
-// });
+
 ko.applyBindings(vm);
 
 });
