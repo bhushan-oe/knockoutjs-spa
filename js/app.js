@@ -47,7 +47,7 @@
         self.selectedSize = ko.observable();
         self.selectedBrand = ko.observableArray();
         self.selectedColor = ko.observableArray();
-        self.selectedRating = ko.observableArray();
+        self.selectedRating = ko.observable();
         self.screenWidth = ko.observable($(window).width());         
         var bundleArray = [];
         var alljsondata = [];
@@ -251,7 +251,7 @@
         
         self.applyFacets = ko.computed(function(){
             var tryArray = [];
-
+            //console.log(self.selectedRating());
             //console.log(self.selectedMinPrice(), self.selectedMaxPrice(), self.selectedSize(), self.selectedBrand(), self.selectedColor(), self.selectedRating() )
             var minPrice = parseInt(self.selectedMinPrice());
             var maxPrice = parseInt(parseInt(self.selectedMaxPrice()) + parseInt(self.selectedMinPrice()));
@@ -321,9 +321,22 @@
             }else{
                 aftrColorArray = aftrBrandArray;
             }
-            
+            console.log(aftrColorArray)
+
+            if(self.selectedRating()){
+                $.each(aftrColorArray, function(ind, elem){
+                    //console.log(parseFloat(elem.rating) , parseInt(self.selectedRating()))
+                    if(parseFloat(elem.rating) > parseInt(self.selectedRating())){
+                        aftrRatingArray.push(elem);
+                    }
+                });
+            }else{
+                aftrRatingArray = aftrColorArray;
+            }
+            console.log(aftrRatingArray);
+
             $.each(bundleArray, function(ind, elem){
-                $.each(aftrColorArray, function(i, prod){
+                $.each(aftrRatingArray, function(i, prod){
                     if(elem.prodId == prod.prodId){
                         tryArray.push(elem);
                         return false;
@@ -331,7 +344,7 @@
                 })
             });
                         
-           //console.log(aftrColorArray)
+           
             //console.log(tryArray)
         self.jsonData(tryArray);
         });     
