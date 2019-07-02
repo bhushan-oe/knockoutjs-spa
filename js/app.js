@@ -4,6 +4,7 @@
         
         function viewModel() {
             var self = this;
+            self.searchData = ko.observable();
             self.chosenPageId = ko.observable();
             self.pages = ko.observableArray(["Home", "ProductList", "Product"]);
             self.template = ko.observable();
@@ -31,6 +32,7 @@
         self.title = 'Product';
         self.productid = 1;
         self.skuid = 1;
+        
         self.jsonData = ko.observableArray();
         self.sizeAll = ko.observableArray();
         self.colorAll = ko.observableArray();
@@ -42,7 +44,7 @@
         self.ratingFlag = ko.observable(false);
         self.selectedMinPrice = ko.observable(100);
         self.selectedMaxPrice = ko.observable(0);
-        self.selectedSize = ko.observableArray();
+        self.selectedSize = ko.observable();
         self.selectedBrand = ko.observableArray();
         self.selectedColor = ko.observableArray();
         self.selectedRating = ko.observableArray();
@@ -50,7 +52,6 @@
         var bundleArray = [];
         var alljsondata = [];
         var filteredArray = [];
-        console.log(self.screenWidth());
         //self.defaultImag = ko.observable('http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/pour-femme-original_1.jpeg');
         
         $.getJSON('http://demo2828034.mockable.io/search/shirts', function(data){
@@ -110,6 +111,7 @@
                 smplcolor = [];
                 smplsize = []
                 samplcolorurl = [];
+                smplprice = [];
                 for(y = 0; y < data["items"].length; y++){
                     
                     if(prodIdList[x] == data["items"][y].prodId){
@@ -118,7 +120,7 @@
                         smplsize.push(data["items"][y].size);
                         itemObject.rating = data["items"][y].rating;
                         itemObject.brand = data["items"][y].brand;
-                        itemObject.price.push(data["items"][y].price)
+                        smplprice.push(data["items"][y].price)
 
                         if(Array.isArray(data["items"][y].imageurl)){
                             samplcolorurl = data["items"][y].imageurl;    
@@ -136,6 +138,9 @@
                     $.each(samplcolorurl, function(i, el){
                         if($.inArray(el, itemObject.colorUrl) === -1) itemObject.colorUrl.push(el);
                     });
+                    $.each(smplprice, function(i, el){
+                        if($.inArray(el, itemObject.price) === -1) itemObject.price.push(el);
+                    });
 
                 }
                 bundleArray.push(itemObject);
@@ -151,6 +156,7 @@
 
     
         self.colorHover = function (data, event){
+            //console.log(data[0], data[1])
             $("#"+data[1].prodId).css('background-image', 'url('+ data[1].colorUrl[data[0]]+')');
 
             var colorSizes = [];
@@ -162,6 +168,10 @@
             var sizeId = data[1].prodId+'_size'
             // console.log(colorSizes.toString());
             $("#"+sizeId).text("Size : "+colorSizes.toString());
+
+            if(data[1].price[data[0]] != undefined){
+                $(".priceTag"+data[1].prodId).text(' '+data[1].price[data[0]]);
+            }
 
         }
 
@@ -235,7 +245,9 @@
             $(".filterDiv").css('display', 'none');
             // $(".bredScrum").css('display', 'block');
         }
-        
+        self.addToFavourite = function(abc){
+            $("#heart"+abc).css('color', 'red');
+        }
         
         self.applyFacets = ko.computed(function(){
             var tryArray = [];
@@ -261,25 +273,27 @@
             }else{
                 aftrpriceArray = alljsondata;
             }
-            console.log('aftrPrice'+aftrpriceArray);
+            //console.log('aftrPrice'+aftrpriceArray);
 
-            if(self.selectedSize().length != 0){
+            if(self.selectedSize()){
                 $.each(aftrpriceArray, function(ind, elem){
-                    //console.log(self.selectedSize().length)
-                    
-                    for(p = 0; p < self.selectedSize().length; p++){
-                        //console.log(self.selectedSize()[p]);
-                        if(elem.size == self.selectedSize()[p]){
-                            //console.log(self.selectedMinPrice(), self.selectedMaxPrice(), self.selectedSize(), self.selectedBrand(), self.selectedColor(), self.selectedRating() )
-                            aftrSizeArray.push(elem);
-                        }
+                     //console.log(self.selectedSize())
+                     if(elem.size == self.selectedSize()){
+                        aftrSizeArray.push(elem);
                     }
+                    // for(p = 0; p < self.selectedSize().length; p++){
+                        //console.log(self.selectedSize()[p]);
+                        //if(elem.size == self.selectedSize()[p]){
+                            //console.log(self.selectedMinPrice(), self.selectedMaxPrice(), self.selectedSize(), self.selectedBrand(), self.selectedColor(), self.selectedRating() )
+                            //aftrSizeArray.push(elem);
+                        //}
+                    // }
                 }); 
             }else{
-                //console.log(alljsondata);
+                // console.log(alljsondata);
                 aftrSizeArray = aftrpriceArray;
             }
-            console.log('AftrSiezArray : '+aftrSizeArray);  
+            //console.log('AftrSiezArray : '+aftrSizeArray);  
 
 
             if(self.selectedBrand().length != 0){
@@ -293,7 +307,7 @@
             }else{
                 aftrBrandArray = aftrSizeArray;
             }             
-            console.log('aftrBrandArray'+aftrBrandArray);
+            //console.log('aftrBrandArray'+aftrBrandArray);
         
 
             if(self.selectedColor().length != 0){
@@ -317,8 +331,8 @@
                 })
             });
                         
-            console.log(aftrColorArray)
-             console.log(tryArray)
+           //console.log(aftrColorArray)
+            //console.log(tryArray)
         self.jsonData(tryArray);
         });     
 
