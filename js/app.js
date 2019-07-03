@@ -2,15 +2,19 @@ var filterDiv = function(){
   
     if($(window).width() < 900)
     {
-        $(".hideMobilefilter").css({"display":"block"});
-        $(".hideMobilesortBy").css({"display":"none"});
+        $("#fl").toggleClass('hidefilter showfilter');
+        $("#sh").removeClass('showsortBy');
+        $("#sh").addClass('hidesortBy');
     }
 }
 
 var sortDiv = function(){
-        $(".hideMobilefilter").css({"display":"none"});
-        $(".hideMobilesortBy").css({"display":"block"});
-}
+        $("#sh").toggleClass('hidesortBy showsortBy');
+        $("#fl").removeClass('showfilter');
+        $("#fl").addClass('hidefilter');
+ }
+
+
 ;(function($){
     $(document).on('click', '.panel-heading.clickable', function(e){ 
         var $this = $(this); 
@@ -36,6 +40,7 @@ var sortDiv = function(){
             self.pages = ko.observableArray(["Home", "About", "Product"]);
             self.template = ko.observable();
             self.plp = "productListingPage";
+            self.searchText =ko.observable();
             self.goToPage = function (page){
                 location.hash = page;
             }
@@ -83,7 +88,7 @@ var sortDiv = function(){
                     self.productArray(self.allProduct()); 
                 } 
             });
-           
+// Sort By Asecnding and Desecnding                   
             self.SortByAsecnding = function(){
                 $("#a1").css({"font-weight":"normal"});
                 $("#a2").css({"font-weight":"bold"});
@@ -110,7 +115,7 @@ var sortDiv = function(){
         
             };
         
-
+// Apply Filters
             self.applyFilter = function(fascetsArray){
                 var clonedArr = $.extend(true, [], self.allProduct());
                 var temp=[];
@@ -164,8 +169,13 @@ var sortDiv = function(){
             };
 
             self.fascetsComputed = ko.computed(function() {
-               
                 console.log(self.selectSize(),self.selectBrand(),self.selectColor(),self.selectedRating());
+                if(self.selectSize().length > 1) { 
+                    self.selectSize().shift(); 
+                } 
+                if(self.selectedRating().length > 1) { 
+                    self.selectedRating().shift(); 
+                }
                     var fascetsArray =[];
                     if (self.selectSize().length != 0){
                         fascetsArray["size"]=self.selectSize() ;

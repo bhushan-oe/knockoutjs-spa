@@ -9,6 +9,9 @@
      background-color: #338DFF;
      padding: 10px 50px;
 }
+.mheader{
+    display: none;
+}
 
 .landing-page-height{
     height: 100vh;
@@ -22,6 +25,7 @@
     background-image: url(../images/landing.jpg);
     background-size: cover;  
 }
+
 
 .search {
     padding: 0;
@@ -82,14 +86,14 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    font-size: 2rem;
+    font-size: 20px;
     color: gray;
 }
 .redHeart{
     position: absolute;
     top: 10px;
     right: 10px;
-    font-size: 2rem;
+    font-size: 20px;
     color: red;
 }
 
@@ -156,7 +160,7 @@
     font-size: 15px; 
 }  
 .mainFont{
-    font-size: 2rem;
+    font-size: 20px;
 }
 .catgry > *{ 
     font-size: 15px; 
@@ -193,7 +197,12 @@
 .whiteBg:hover{
     box-shadow: 1px 1px 10px;
 }
-
+.hidefilterD{
+    display: block;
+}
+.hidesortByD{
+    display: block;
+}
 
 .slidecontainer { 
     width: 100%; 
@@ -233,7 +242,6 @@
     color:white; 
     display : flex; 
     justify-content : space-between;
-    padding: 0 250px; 
 }
  
 .searchbar {
@@ -255,6 +263,7 @@
 }
 .headerContent{
     padding: 0 15px;
+    text-align: center;
 }
 
 
@@ -303,19 +312,36 @@
         border-radius: 10px;
         padding: 0px 10px;
     }
-    .hideMobilefilter{
+    .hidefilter{
         display: none;
     }
-    .hideMobilesortBy{
+    .showfilter{
+        display: block;
+    }
+    .hidesortBy{
         display: none;
     }
-    .search_input{
-        width: 150px;
+    .showsortBy{
+        display: block;
     }
+
     .block{
         display: block;
         padding: 5px 15px;
         border-bottom: 1px solid black;
+    }
+    .mobileHeader{
+        color: white;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        padding: 5px 0;
+    }
+    .headerContent{
+        display: none;
+    }
+    .headerFont{
+        font-size: 30px;
     }
 }
 
@@ -332,6 +358,11 @@
         background-image: url(../images/landing.jpg);
         background-size: cover; 
     }
+    
+    
+    .headerdiv{
+        padding: 5px;
+    }
     .colordiv{
         display: block;
     }
@@ -347,19 +378,23 @@
         border-radius: 5px;
 
     }
-    .cartDiv{
-        display: none;
-    }
+    
     .searchbar {
         background-color: white;
         border-radius: 10px;
         padding: 0px 10px;
     }
-    .hideMobilefilter{
+    .hidefilter{
         display: none;
     }
-    .hideMobilesortBy{
+    .showfilter{
+        display: block;
+    }
+    .hidesortBy{
         display: none;
+    }
+    .showsortBy{
+        display: block;
     }
     .search_input{
         width: 150px;
@@ -372,6 +407,19 @@
     .inputPrice{
         width: 10vw;
     
+    }
+    .mobileHeader{
+        color: white;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        padding: 5px 0;
+    }
+    .headerContent{
+        display: none;
+    }
+    .headerFont{
+        font-size: 20px;
     }
     
 }
