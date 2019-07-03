@@ -71,28 +71,45 @@
 
     <!-- #region Product Listing Page-->
     <script type="text/html" id="product-listing-page">
-        <div class="row row-div" data-bind="foreach: $root.Product.productArray()">
-            <div class="col-lg-3 outer-div background">
-                <div class="wbackground">
-                    <div class="productImg" data-bind="{style: {'backgroundImage': 'url('+$data.sku[0].imageurl+')'}}">
-                        <i class="far fa-heart heart"></i>
+        <!-- <div class="col-lg-2"></div> -->
 
-                        <div class="overDiv">
-                            <!-- <span data-bind="text: $root.Product.num"></span> -->
-                            <div data-bind="text: $data.sku[0].brand"></div>
-                            <div data-bind="text: $data.sku[0].name"></div>
-                            <!-- <i class="fas fa-rupee=sign"></i> -->
-                            <b data-bind="{text: ' '+$data.sku[0].price, attr:{id: $data.prodId+'price'}}"></b>
-                            <div class="colordiv" data-bind="foreach: $data.color">
-                                <div class="color" data-bind="{style: {'backgroundColor': $data}, click: function(divColor){$root.Products.colorSelect($parent, divColor)}}"></div>
-                            </div>
-                            <div class="size">
-                                <span data-bind="{text: 'size: '+ $data.size, attr: {id: $data.prodId+'size'}}"></span>
+        
+        <div class="col-lg-10 col-div">
+            <!--#region Breadcrumbs-->     
+            <div class="row row-div">
+                <div id="pop" class="col-lg-12 breadcrumb">
+                    <b>Sort: &emsp; </b>
+                    <span data-bind = "click: function(){ $root.Product.SortByPopularity(); }">Popularity &emsp;</span>
+                    <span data-bind = "click: function() { $root.Product.SortByPrice(); }">Price &emsp;</span>
+                </div>
+            </div>
+            <!--#endregion-->
+            
+            <!-- #region Cards -->
+            <div class="row row-div" data-bind="foreach: $root.Product.productArray()">
+                <div class="col-lg-3 outer-div background">
+                    <div class="wbackground">
+                        <div class="prodImg" data-bind="{style: {'backgroundImage': 'url('+$data.sku[0].imageurl+')'}, attr: { id: $data.prodId }}">
+                            <i class="far fa-heart heart"></i>
+
+                            <div class="overDiv">
+                                <!-- <span data-bind="text: $root.Product.num"></span> -->
+                                <div data-bind="text: $data.sku[0].brand"></div>
+                                <div data-bind="text: $data.sku[0].name"></div>
+                                <!-- <i class="fas fa-rupee-sign"></i> -->
+                                <b data-bind="{text: '$ '+$data.sku[0].price, attr:{id: $data.prodId+'price'}}"></b>
+                                <div class="colordiv" data-bind="foreach: $data.color">
+                                    <span class="color" data-bind="{style: {'backgroundColor': $data}, click: function(divColor){$root.Product.colorSelect($parent, divColor)}}"></span>
+                                </div>
+                                <div class="size">
+                                    <span data-bind="{text: 'size: '+ $data.size, attr: {id: $data.prodId+'size'}}"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- #endregion -->
         </div>
     </script>
     <!-- #endregion -->

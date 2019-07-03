@@ -41,6 +41,29 @@
             // self.selectBrand = ko.observableArray();
             // self.filterArray = ko.observableArray();
             // self.selectedRating = ko.observableArray();
+
+            self.SortByPopularity = function (){
+                var clonedArr = $.extend(true, [], self.productArray());
+                clonedArr.sort((a,b) => (a.sku[0].rating > b.sku[0].rating) ? -1 : ((a.sku[0].rating < b.sku[0].rating) ? 1 : 0));
+                self.productArray(clonedArr);
+            }
+
+            //Color selection
+            self.colorSelect = function(product, color){
+                console.log(product,color);
+                var img, price, size = [];
+                for(var sku in product.sku){
+                    if(color == product.sku[sku].color){
+                        size.push(product.sku[sku].size);
+                        img = product.sku[sku].imageurl;
+                        price = product.sku[sku].price;
+                    }
+                }
+                console.log(product.prodId, img, size, price);
+                $("#"+product.prodId).css({'background-image': 'url('+img+')'});
+                $("#"+product.prodId+"size").text('size: '+size);
+                $('#'+product.prodId+"price").text('$ '+price);
+            }
         }
 
         var vm = {
