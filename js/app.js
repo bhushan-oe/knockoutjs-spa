@@ -1,57 +1,23 @@
-function filterfun(){
-    console.log("in filter");
+var filterfun = function(){
+  
     if($(window).width() < 900)
     {
-        $(".desk_view").css({"display":"block"});
-        $(".sort_view").css({"display":"none"});
+        $("#fil").toggleClass('hidefilter showfilter');
+        $("#sh").removeClass('showsortBy');
+        $("#sh").addClass('hidesortBy');
     }
 }
 
-function sortfun(){
-    console.log("in sort");
-        $(".desk_view").css({"display":"none"});
-        $(".sort_view").css({"display":"block"});
+var sortfun = function(){
+    $("#sh").toggleClass('hidesortBy showsortBy');
+    $("#fil").removeClass('showfilter');
+    $("#fil").addClass('hidefilter');
 }
-$('.check').click(function() {
-    console.log("this.value");
-    $('.check').not(this).prop('checked', false);
-});
-
 ;(function($){
 
 $(document).ready(function(){
-    // ----------------------Code For Media Querry-------------------------------
-    // var viewportWidth1 = $(window).width();
-    //     if (viewportWidth1 < 900) {
-    //         console.log("In small window;");
-    //         $(".fascet").addClass("panel panel-primary");
-    //         $(".filter").addClass("panel-heading clickble");
-    //         $(".desk_view").addClass("panel-body");
-    //     }
-    //     if(viewportWidth1 > 900) {
-    //             $(".fascet").removeClass("panel panel-primary");
-    //             $(".filter").removeClass("panel-heading clickble");
-    //             $(".desk_view").removeClass("panel-body");
-    //     } 
     
-    // $(window).resize(function () {
-    //     var viewportWidth = $(window).width();
-    //     if (viewportWidth > 900) {
-    //         $(".fascet").removeClass("panel panel-primary");
-    //         $(".filter").removeClass("panel-heading clickble");
-    //         $(".desk_view").removeClass("panel-body");
-    //      }  
-    //     if (viewportWidth < 900) {
-    //         // console.log("In small window;");
-    //         $(".fascet").addClass("panel panel-primary");
-    //         $(".filter").addClass("panel-heading clickble");
-    //         $(".desk_view").addClass("panel-body");
-    //     }
-    // });
-       
-    //------------------------------------------------checkBox Single Select-------------
-       
-    
+      
   //-------------------------------------Code For Fascets Collapsing -------------------------------         
 $(document).on('click', '.panel-heading.clickable', function(e){
     
@@ -74,6 +40,7 @@ function viewModel() {
     self.chosenPageId = ko.observable();
     self.pages = ko.observableArray(["Home", "About", "Product"]);
     self.template = ko.observable();
+    self.Search_value= ko.observable();
     self.demo = "About";
     self.goToPage = function (page){
         location.hash = page;
@@ -93,181 +60,198 @@ function pageViewModel() {
 // }
 //-----------------------------------------------------------------------------------------------
 function productViewModel() {
-    //---------------------------------Observable and Observable Array declarations---------
-    var self = this;
-    self.Products=ko.observableArray();
-    self.allProduct=ko.observableArray();
-    self.color_observe=ko.observableArray();
-    self.size_observe= ko.observableArray();
-    self.brand_observe= ko.observableArray();
-    self.color_flag=ko.observable(false);
-    self.size_flag= ko.observable(false);
-    self.brand_flag= ko.observable(false);
-    self.fisrtRange =ko.observable();
-    self.SecondRange=ko.observable();
-    self.MinVal =ko.observable(200);
-    self.MaxVal=ko.observable(700);
-    self.color_select = ko.observableArray();
-    self.size_select = ko.observableArray();
-    self.brand_select = ko.observableArray();
-    self.rating_select = ko.observableArray();
-    self.Pricefilter =ko.computed(function(){
-        if(self.size_select().length != 0 || self.brand_select().length != 0 || self.color_select().length != 0 || self.rating_select().length != 0 )
-        var clonedArr = $.extend(true, [], self.Products());
-        else
-        var clonedArr = $.extend(true, [], self.allProduct());
+            // console.log(vm.Main.Search_value())
+            //---------------------------------Observable and Observable Array declarations---------
+            var self = this;
+            self.Products=ko.observableArray();
+            self.allProduct=ko.observableArray();
+            self.color_observe=ko.observableArray();
+            self.size_observe= ko.observableArray();
+            self.brand_observe= ko.observableArray();
+            self.color_flag=ko.observable(false);
+            self.size_flag= ko.observable(false);
+            self.brand_flag= ko.observable(false);
+            self.fisrtRange =ko.observable();
+            self.SecondRange=ko.observable();
+            self.MinVal =ko.observable(200);
+            self.MaxVal=ko.observable(700);
+            self.color_select = ko.observableArray();
+            self.size_select = ko.observableArray();
+            self.brand_select = ko.observableArray();
+            self.rating_select = ko.observableArray();
+            self.Pricefilter =ko.computed(function(){
+                if(self.size_select().length != 0 || self.brand_select().length != 0 || self.color_select().length != 0 || self.rating_select().length != 0 )
+                var clonedArr = $.extend(true, [], self.Products());
+                else
+                var clonedArr = $.extend(true, [], self.allProduct());
 
-        var temp =[];
-        for(var y=0; y<clonedArr.length;y++)
-        {
-            if(clonedArr[y].Sku[0].price <= self.SecondRange() && clonedArr[y].Sku[0].price >= self.fisrtRange())
-                temp.push(clonedArr[y]);
-        }
-        if(temp.length!=0){
-            self.Products(temp);
-        }
-        else
-        {
-           self.Products(self.allProduct());
-        }
-
-    });
-
-    //-------------------------------------------Sort functions--------------------------------
-    self.SortByAsecnding = function(){
-        $("#a1").css({"font-weight":"normal"});$("#a2").css({"font-weight":"bold"});$("#a3").css({"font-weight":"normal"});
-        var clonedArr = $.extend(true, [], this.Products());
-        clonedArr.sort((a,b)=>(a.Sku[0].price <b.Sku[0].price)?-1:((a.Sku[0].price > b.Sku[0].price)? 1 : 0));
-        this.Products(clonedArr);
-    };
-    self.SortByDesecnding = function(){
-        $("#a1").css({"font-weight":"normal"});$("#a2").css({"font-weight":"normal"});$("#a3").css({"font-weight":"bold"});
-        var clonedArr = $.extend(true, [], this.Products());
-        clonedArr.sort((a,b)=>(a.Sku[0].price >b.Sku[0].price)?-1:((a.Sku[0].price < b.Sku[0].price)? 1 : 0));
-        this.Products(clonedArr);
-    };
-    self.SortByPopularity = function(){
-        $("#a1").css({"font-weight":"bold"});$("#a2").css({"font-weight":"normal"});$("#a3").css({"font-weight":"normal"});
-        var clonedArr = $.extend(true, [], this.Products());
-        clonedArr.sort((a,b)=>(a.Sku[0].rating >b.Sku[0].rating)?-1:((a.Sku[0].rating < b.Sku[0].rating)? 1 : 0));
-        this.Products(clonedArr);
-
-    };
-    //-----------------------------------------------Fascets Coding---------------------------------------
-    self.applyFilter = function(Fascets_Array){
-      
-        var clonedArr = $.extend(true, [], this.allProduct());
-        var temp=[];
-        for (var fascet in Fascets_Array){
-            for(var SelectedValue of Fascets_Array[fascet]){
-                for (var CurrentIndex in clonedArr){
-                    if(fascet=="size"){
-                        if ($.inArray(SelectedValue,clonedArr[CurrentIndex].size) != -1){
-                            temp.push(clonedArr[CurrentIndex]);
-                        }
-                    }
-                    if(fascet=="color"){
-                        if ($.inArray(SelectedValue,clonedArr[CurrentIndex].color) != -1){
-                            temp.push(clonedArr[CurrentIndex]);
-                        }
-                    }
-                    if(fascet=="brand"){
-                        if ($.inArray(SelectedValue,clonedArr[CurrentIndex].brand) != -1){
-                            temp.push(clonedArr[CurrentIndex]);
-                        }
-                    }
-                    if(fascet=="rating"){
-                        if (SelectedValue <= clonedArr[CurrentIndex].rating[0]){
-                            temp.push(clonedArr[CurrentIndex]);
-                        }
-                    }
+                var temp =[];
+                for(var y=0; y<clonedArr.length;y++)
+                {
+                    if(clonedArr[y].Sku[0].price <= self.SecondRange() && clonedArr[y].Sku[0].price >= self.fisrtRange())
+                        temp.push(clonedArr[y]);
                 }
-            }
-            clonedArr=temp;
-            temp=[];
-        }
-        if(clonedArr.length!=0){
-            self.Products(clonedArr);
-        }
-        else
-        {
-            $('input:checkbox').prop('checked', false);
-           alert("Serched item Not found");
-           self.Products(self.allProduct());
-           //self.size_select().length=0;self.color_select();self.brand_select();self.rating_select();
-        //$('input:checkbox').prop('checked', false);
+                if(temp.length!=0){
+                    self.Products(temp);
+                }
+                else
+                {
+                self.Products(self.allProduct());
+                }
 
-        }
-    };
-   
-    self.All_Compute_observe = ko.computed(function(){
-      console.log(self.size_select(),self.brand_select(),self.color_select());
-        var Fascets_Array =[];
-                    if (self.size_select().length != 0){
-                        Fascets_Array["size"]=self.size_select() ;
+            });
+
+            //-------------------------------------------Sort functions--------------------------------
+            self.SortByAsecnding = function(){
+                $(".a1").css({"font-weight":"normal"});$(".a2").css({"font-weight":"bold"});$(".a3").css({"font-weight":"normal"});
+                var clonedArr = $.extend(true, [], this.Products());
+                clonedArr.sort((a,b)=>(a.Sku[0].price <b.Sku[0].price)?-1:((a.Sku[0].price > b.Sku[0].price)? 1 : 0));
+                this.Products(clonedArr);
+            };
+            self.SortByDesecnding = function(){
+                $(".a2").css({"font-weight":"normal"});$(".a2").css({"font-weight":"normal"});$(".a3").css({"font-weight":"bold"});
+                var clonedArr = $.extend(true, [], this.Products());
+                clonedArr.sort((a,b)=>(a.Sku[0].price >b.Sku[0].price)?-1:((a.Sku[0].price < b.Sku[0].price)? 1 : 0));
+                this.Products(clonedArr);
+            };
+            self.SortByPopularity = function(){
+                $(".a1").css({"font-weight":"bold"});$(".a2").css({"font-weight":"normal"});$(".a3").css({"font-weight":"normal"});
+                var clonedArr = $.extend(true, [], this.Products());
+                clonedArr.sort((a,b)=>(a.Sku[0].rating >b.Sku[0].rating)?-1:((a.Sku[0].rating < b.Sku[0].rating)? 1 : 0));
+                this.Products(clonedArr);
+
+            };
+            //-----------------------------------------------Fascets Coding---------------------------------------
+            self.applyFilter = function(Fascets_Array){
+            
+                var clonedArr = $.extend(true, [], this.allProduct());
+                var temp=[];
+                for (var fascet in Fascets_Array){
+                    for(var SelectedValue of Fascets_Array[fascet]){
+                        for (var CurrentIndex in clonedArr){
+                            if(fascet=="size"){
+                                if ($.inArray(SelectedValue,clonedArr[CurrentIndex].size) != -1){
+                                    temp.push(clonedArr[CurrentIndex]);
+                                }
+                            }
+                            if(fascet=="color"){
+                                if ($.inArray(SelectedValue,clonedArr[CurrentIndex].color) != -1){
+                                    temp.push(clonedArr[CurrentIndex]);
+                                }
+                            }
+                            if(fascet=="brand"){
+                                if ($.inArray(SelectedValue,clonedArr[CurrentIndex].brand) != -1){
+                                    temp.push(clonedArr[CurrentIndex]);
+                                }
+                            }
+                            if(fascet=="rating"){
+                                if (SelectedValue <= clonedArr[CurrentIndex].rating[0]){
+                                    temp.push(clonedArr[CurrentIndex]);
+                                }
+                            }
+                        }
                     }
-                    if (self.brand_select().length != 0){
-                        Fascets_Array["brand"]=self.brand_select();
-                    }
-                    if (self.color_select().length != 0){
-                        Fascets_Array["color"]=self.color_select();
-                    }
-                     if (self.rating_select().length != 0){
-                        Fascets_Array["rating"]=self.rating_select();
-                    }
-                    if (!jQuery.isEmptyObject(Fascets_Array)){
-                        self.applyFilter(Fascets_Array);
-                    }   
-                    else{
-                        self.Products(self.allProduct());
-                    }
-           } );
-//-------------------------------------------------------------------Fascet Coding End----------------
-            //-----------------------------Use of flags to show fascet's less and more functionality--------
-    self.brand_flag_fun = function (){
-        if(this.brand_flag()==false)
-            this.brand_flag(true);
-        else
-            this.brand_flag(false);
-    
-    }
-    self.size_flag_fun = function (){
-        if(this.size_flag()==false)
-        this.size_flag(true);
-        else
-        this.size_flag(false);
-    }
-    self.color_flag_fun = function (){
-        if(this.color_flag()==false)
-            this.color_flag(true);
-        else
-            this.color_flag(false);
-    }
-    //=------------------------ color click event in listing----------------------
-    self.ColorClick = function (product,clr){
-        var arr=[];
-        var img;
+                    clonedArr=temp;
+                    temp=[];
+                    var another_ar =[];
+                    $.each(clonedArr, function(i, el)
+                    {
+                        if($.inArray(el, another_ar) === -1) another_ar.push(el);
+                    });
+                }
+                if(another_ar.length!=0){
+                    self.Products(another_ar);
+                }
+                else
+                {
+                    $('input:checkbox').prop('checked', false);
+                // alert("Serched item Not found");
+                self.Products(self.allProduct());
+                self.size_select().length=0;self.color_select().length=0;self.brand_select().length=0;self.rating_select().length=0;
+                //$('input:checkbox').prop('checked', false);
+
+                }
+            };
         
-        $.each(product.Sku, function(index, value){ 
-           
-            if(value.color == clr){
-                arr.push(value.size);
-                img=value.imageurl;
+            self.All_Compute_observe = ko.computed(function(){
+           // console.log(self.size_select(),self.brand_select(),self.color_select());
+                var Fascets_Array =[];
+                            if(self.size_select().length > 1)
+                            {
+                                self.size_select().shift();
+                            }
+                            if(self.rating_select().length > 1)
+                            {
+                                self.rating_select().shift();
+                            }
+                            if (self.size_select().length != 0){
+                                Fascets_Array["size"]=self.size_select() ;
+                            }
+                            if (self.brand_select().length != 0){
+                                Fascets_Array["brand"]=self.brand_select();
+                            }
+                            if (self.color_select().length != 0){
+                                Fascets_Array["color"]=self.color_select();
+                            }
+                            if (self.rating_select().length != 0){
+                                Fascets_Array["rating"]=self.rating_select();
+                            }
+                            if (!jQuery.isEmptyObject(Fascets_Array)){
+                                self.applyFilter(Fascets_Array);
+                            }   
+                            else{
+                                self.Products(self.allProduct());
+                            }
+                } );
+        //-------------------------------------------------------------------Fascet Coding End----------------
+                    //-----------------------------Use of flags to show fascet's less and more functionality--------
+            self.brand_flag_fun = function (){
+                if(this.brand_flag()==false)
+                    this.brand_flag(true);
+                else
+                    this.brand_flag(false);
+            
             }
-        });
-        var size=product.Sku[0].prodId+"_size";
-        $("#"+size).html("Size:"+arr+" ");
-        $("#"+product.Sku[0].prodId).attr("src",img);
-        console.log(arr);
-    }
-    self.changeColor = function(product){
-        var color_span =product.Sku[0].prodId+"heart";
-        $("#"+color_span).toggleClass('fas fa-heart heart fas fa-heart redHeart');
-    }
-    
-    self.title = 'Product';
-    self.productid = 1;
-    self.skuid = 1;
+            self.size_flag_fun = function (){
+                if(this.size_flag()==false)
+                this.size_flag(true);
+                else
+                this.size_flag(false);
+            }
+            self.color_flag_fun = function (){
+                if(this.color_flag()==false)
+                    this.color_flag(true);
+                else
+                    this.color_flag(false);
+            }
+            //=------------------------ color click event in listing----------------------
+            self.ColorClick = function (product,clr){
+                var arr=[];
+                var img;
+                var pri;
+                
+                $.each(product.Sku, function(index, value){           
+                    if(value.color == clr){
+                        arr.push(value.size);
+                        img=value.imageurl;
+                        pri= value.price;
+                    }
+                });
+                var size=product.Sku[0].prodId+"_size";
+                var pri_id =product.Sku[0].prodId+"_price"
+                $("#"+size).html("Size:"+arr+" ");
+                $("#"+pri_id).html(" "+pri);
+                $("#"+product.Sku[0].prodId).attr("src",img);
+                // console.log(arr);
+            }
+            self.changeColor = function(product){
+                var color_span =product.Sku[0].prodId+"heart";
+                $("#"+color_span).toggleClass('fas fa-heart heart fas fa-heart redHeart');
+            }
+            
+            self.title = 'Product';
+            self.productid = 1;
+            self.skuid = 1;
 }
 //-----------------------------End of View model........................
 var vm = {
@@ -278,7 +262,6 @@ var vm = {
 
 Sammy(function () {
         this.get('#Home', function () {
-            $(".navbar1").css({"display":"none"});
             vm.Main.chosenPageId(this.params.page);  
             vm.Main.template("page-template")
             vm.Page.name("Home")
@@ -372,6 +355,8 @@ Sammy(function () {
                     vm.Product.Products(unique_prod_arr); 
                     vm.Product.allProduct(unique_prod_arr); 
                     vm.Product.SortByPopularity(); 
+                    if($(window).width() < 900)
+                    vm.Product.SortByAsecnding();
                     vm.Product.size_observe(D_total_size);
                     vm.Product.color_observe(D_total_color);
                     vm.Product.brand_observe(D_total_brand);  

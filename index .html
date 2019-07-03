@@ -32,15 +32,7 @@
 <body>
 
 
-    <nav class="navbar1">
-            <div class="header">
-                    <div class="header_div"><input type="text" class="" placeholder="Search Something.." /><span id="search_div"class="header_div" data-bind="click: function(){$root.Main.goToPage($root.Main.demo);}"><i class="fas fa-search"></i></span></div>
-                    <!-- <div id="search_div"class="header_div"><span data-bind="click: function(){$root.Main.goToPage($root.Main.demo);}"><i class="fas fa-search"></i></span></div> -->
-                    <h4 class="header_div">Login</h4>&nbsp;&nbsp;
-                    <h4 id="more"class="header_div">More <i class="fas fa-angle-down"></i> </h4>
-                    <h4 id="cart" class="header_div"><i class="fas fa-shopping-cart"></i> Cart</h4>
-            </div>
-    </nav>
+    
 
 
     <div data-bind="template: { name: $root.Main.template }"></div>
@@ -54,7 +46,7 @@
                 <button class="btn1 btn-primary">Sign Up</button>
                 <div class="contain">
                     <div class="search">
-                        <input type="text" class="form-control input-sm" maxlength="64" placeholder="Search Something.." />
+                        <input type="text" class="form-control input-sm" maxlength="64" placeholder="Search Something.." data-bind="value :$root.Main.Search_value"/>
                         <button type="submit" class="btn btn-primary btn-sm" data-bind="click: function(){$root.Main.goToPage($root.Main.demo);}">Search</button>
                     </div>
                 </div>
@@ -66,18 +58,26 @@
     </script>
 
     <script type="text/html" id="about-template">
-      
+        <nav class="navbar1">
+                <div class="header">
+                        <div class="header_div"><input type="text" id="head_search" placeholder="Search Something.." data-bind="value :$root.Main.Search_value()"/><span id="search_div"class="header_div" data-bind="click: function(){$root.Main.goToPage($root.Main.demo);}"><i class="fas fa-search"></i></span></div>
+                        <!-- <div id="search_div"class="header_div"><span data-bind="click: function(){$root.Main.goToPage($root.Main.demo);}"><i class="fas fa-search"></i></span></div> -->
+                        <h4 class="header_div">Login</h4>&nbsp;&nbsp;
+                        <h4 id="more"class="header_div">More <i class="fas fa-angle-down"></i> </h4>
+                        <h4  class="header_div"><i id="cart"class="fas fa-shopping-cart"></i> Cart</h4>
+                </div>
+        </nav>
         <div class="col-lg-2 fascet product_listing_div">
                         <div class="filter col-lg-12" onClick='filterfun()'><i id="filter_logo"class="fas fa-filter"></i> Filters</div>
                         <div class="sort" onClick='sortfun()'>Sort  <i class="fas fa-sort-amount-down"></i></div>
-                        <div class="sort_view"> 
-                            <span id="a1" data-bind="click: function(){$root.Product.SortByPopularity();}">Popularity </span><br>
+                        <div id="sh" class="sort_view hidesortBy"> 
+                            <span class="a1" data-bind="click: function(){$root.Product.SortByPopularity();}">Popularity </span><br>
                             <hr>
-                            <span  id="a2" data-bind="click: function(){$root.Product.SortByAsecnding();}"> Price--Low to High </span><br>
+                            <span  class="a2" data-bind="click: function(){$root.Product.SortByAsecnding();}"> Price--Low to High </span><br>
                             <hr>
-                            <span id="a3" data-bind="click: function(){$root.Product.SortByDesecnding();}"> Price--High to Low </span>
+                            <span class="a3" data-bind="click: function(){$root.Product.SortByDesecnding();}"> Price--High to Low </span>
                         </div>
-                        <div class="desk_view">
+                        <div id="fil" class="desk_view hidefilter">
                             <div class="categories">
                                     <H5><b>CATEGORIES</b></H5>
                                 <p class="catgry"><i class="fas fa-chevron-left"></i> <span>Clothing</span></p>
@@ -104,7 +104,8 @@
                                 <div class="panel-body" >
                                     <div data-bind="foreach:$root.Product.size_observe">
                                         <div class="span_div" data-bind="visible: $root.Product.size_flag() ? $index() >= 0 : $index() < 5"> 
-                                            <input type="checkbox" data-bind="attr : {value : $data}, checked: $root.Product.size_select"> <span class ="span_data" data-bind="html:$data"></span>
+                                            <input type="checkbox" data-bind="attr : {value : $data , id: 'size_'+$data}, checked: $root.Product.size_select"> 
+                                            <label class ="span_data" data-bind="{text:$data, attr:{for:'size_'+$data}}"></label>
                                         </div>
                                     </div>
                                     <a class="panel_less" data-bind="text:$root.Product.size_flag() ? 'less':$root.Product.size_observe().length -5 +' more' ,click: function(){$root.Product.size_flag_fun();}"></a>
@@ -118,7 +119,8 @@
                                     <div class="panel-body">
                                         <div data-bind="foreach:$root.Product.brand_observe">
                                             <div class="span_div" data-bind="visible: $root.Product.brand_flag() ? $index() >= 0 : $index() < 5 "> 
-                                                <input type="checkbox" data-bind="attr : {value : $data} ,checked: $root.Product.brand_select"> <span class ="span_data" data-bind="html:$data"></span>
+                                                <input type="checkbox" data-bind="attr : {value : $data , id : 'brand_'+$data} ,checked: $root.Product.brand_select"> 
+                                                <label class ="span_data" data-bind="{html:$data , attr:{'for' : 'brand_'+$data}}"></label>
                                             </div>
                                         </div>
                                         <a class="panel_less" data-bind="text:$root.Product.brand_flag() ? 'less': $root.Product.brand_observe().length -5 +' more' ,click: function(){$root.Product.brand_flag_fun();}"></a>
@@ -132,7 +134,8 @@
                                     <div class="panel-body" >
                                         <div data-bind="foreach:$root.Product.color_observe">
                                             <div class="span_div" data-bind="visible: $root.Product.color_flag() ? $index() >= 0 : $index() < 5"> 
-                                                <input type="checkbox" data-bind="attr : {value : $data} ,checked: $root.Product.color_select"><div class="temp_div" data-bind="style : {backgroundColor : $data}"></div> <span class ="span_data" data-bind="html:$data"></span>
+                                                <input type="checkbox" data-bind="attr : {value : $data , id: 'color_'+$data} ,checked: $root.Product.color_select"><div class="temp_div" data-bind="style : {backgroundColor : $data}"></div> 
+                                                <label class ="span_data" data-bind="{html:$data , attr:{for:'color_'+$data}}"></label>
                                             </div>
                                         </div>
                                         <a class="panel_less" data-bind="text:$root.Product.color_flag() ? 'less':$root.Product.color_observe().length -5 +' more' ,click: function(){$root.Product.color_flag_fun();}"></a>
@@ -145,16 +148,20 @@
                                     </div>
                                     <div class="panel-body">
                                         <div class="span_div"> 
-                                            <input type="checkbox" class="check" value="4" data-bind="checked: $root.Product.rating_select"> <span class ="span_data">4 <i class="fas fa-star"></i> & Above</span>
+                                            <input type="checkbox" class="check"  value="4" id="Rating_4" data-bind="checked: $root.Product.rating_select"> 
+                                            <label class ="span_data" for="Rating_4" >4 <i class="fas fa-star"></i> & Above</label>
                                         </div>
                                         <div class="span_div"> 
-                                            <input type="checkbox"  class="check" value="3" data-bind="checked: $root.Product.rating_select"> <span class ="span_data">3 <i class="fas fa-star"></i> & Above</span>
+                                            <input type="checkbox"  class="check" value="3" id="Rating_3" data-bind="checked: $root.Product.rating_select">
+                                             <label class ="span_data" for="Rating_3">3 <i class="fas fa-star"></i> & Above</label>
                                         </div>
                                         <div class="span_div"> 
-                                            <input type="checkbox"  class="check" value="2" data-bind="checked: $root.Product.rating_select"> <span class ="span_data">2 <i class="fas fa-star"></i> & Above</span>
+                                            <input type="checkbox"  class="check"  value="2" id="Rating_2" data-bind="checked: $root.Product.rating_select">
+                                             <label class ="span_data" for="Rating_2">2 <i class="fas fa-star"></i> & Above</label>
                                         </div>
                                         <div class="span_div"> 
-                                            <input type="checkbox"  class="check" value="1" data-bind="checked: $root.Product.rating_select"> <span class ="span_data">1 <i class="fas fa-star"></i> & Above</span>
+                                            <input type="checkbox"  class="check"  value="1" id="Rating_1" data-bind="checked: $root.Product.rating_select"> 
+                                            <label class ="span_data" for="Rating_1">1 <i class="fas fa-star"></i> & Above</label>
                                         </div>
                                     </div>
                             </div>
@@ -166,9 +173,9 @@
                 <div class="col-lg-12 crump" data-bind="html:'<b>Shirts :</b> (showing - '+$root.Product.Products().length+ ' products)'"></div>
                 <div class="col-lg-12 crump">
                         <b>Sort by:</b>
-                        <span id="a1" data-bind="click: function(){$root.Product.SortByPopularity();}">Popularity </span>&nbsp
-                        <span  id="a2" data-bind="click: function(){$root.Product.SortByAsecnding();}"> Price--Low to High </span>&nbsp
-                        <span id="a3" data-bind="click: function(){$root.Product.SortByDesecnding();}"> Price--High to Low </span>
+                        <span class="a1" data-bind="click: function(){$root.Product.SortByPopularity();}">Popularity </span>&nbsp
+                        <span  class="a2" data-bind="click: function(){$root.Product.SortByAsecnding();}"> Price--Low to High </span>&nbsp
+                        <span class="a3" data-bind="click: function(){$root.Product.SortByDesecnding();}"> Price--High to Low </span>
                 </div>
             <div data-bind="foreach:$root.Product.Products"> 
                 <div class="col-lg-3 col-md-6 col-sm-12 temp">
@@ -182,7 +189,7 @@
                         <div class="product-content">
                             <h3 class="title" data-bind="text:$data.Sku[0].brand"></h3>
                             <h5 class="name" data-bind="text:$data.Sku[0].name"></h5>
-                            <i class="fas fa-rupee-sign"></i> <span class="title"data-bind="text:$data.Sku[0].price"></span>
+                            <i class="fas fa-rupee-sign"></i> <span class="title"data-bind="{text:$data.Sku[0].price ,attr:{id:$data.Sku[0].prodId+'_price'}}"></span>
                             <div class="color" data-bind="foreach:{ data: $data.color ,as:'clr'}">
                                     <div class="temp_div" data-bind="style:{backgroundColor:clr}, click: function(){$root.Product.ColorClick($parent,clr);}">
                                     </div>
