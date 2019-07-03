@@ -38,7 +38,7 @@
         self.colorAll = ko.observableArray();
         self.brandAll = ko.observableArray();
         self.ratingAll = ko.observableArray();
-        self.priceFlag = ko.observable(false);
+        self.sizeFlag = ko.observable(false);
         self.brandFlag = ko.observable(false);
         self.colorFlag = ko.observable(false);
         self.ratingFlag = ko.observable(false);
@@ -176,39 +176,43 @@
         }
 
         self.showAllSizeFilter = function(){
-            //console.log("showAllSizeFilter");
-            vm.Product.priceFlag(true);
+            // console.log("showAllSizeFilter");
+            vm.Product.sizeFlag(true);
             $("#showSizeTag").css('display', 'none');
             $("#hideSizeTag").css('display', 'inline')
         }
         self.showAllBrandFilter = function(){
             //console.log("showAllbrandFilter");
             vm.Product.brandFlag(true);
-            $("#showBrandTag").css('display', 'none')
+            $("#showBrandTag").css('display', 'none');
+            $("#hideBrandTag").css('display', 'inline')
         }
         self.showAllColorFilter = function(){
             //console.log("showAllcolorFilter");
             vm.Product.colorFlag(true);
             $("#showColorTag").css('display', 'none')
+            $("#hideColorTag").css('display', 'inline')
         }
 
         self.hideAllSizeFilter = function(){
-            //console.log("hideAllSizeFilter")
-            vm.Product.colorFlag(false);
-            $("#showSizeTag").css('display', 'none')
+            // console.log("hideAllSizeFilter")
+            vm.Product.sizeFlag(false);
+            $("#hideSizeTag").css('display', 'none')
+            $("#showSizeTag").css('display', 'inline');
+            
             
         }
         self.hideAllBrandFilter = function(){
             //console.log("hideAllBrandFilter")
-            vm.Product.colorFlag(false);
-            $("#showBrandTag").css('display', 'none')
-            $("#hideBrandTag").css('display', 'inline')
+            vm.Product.brandFlag(false);
+            $("#showBrandTag").css('display', 'inline')
+            $("#hideBrandTag").css('display', 'none')
         }
         self.hideAllColorFilter = function(){
             //console.log("hideAllColorFilter")
             vm.Product.colorFlag(false);
-            $("#showColorTag").css('display', 'none')
-            $("#hideColorTag").css('display', 'inline')
+            $("#showColorTag").css('display', 'inline')
+            $("#hideColorTag").css('display', 'none')
         }
         self.priceLowtoHigh = function(){
             $("#priceLtHSort").css('font-weight', 'bold');
@@ -247,6 +251,10 @@
         }
         self.addToFavourite = function(abc){
             $("#heart"+abc).css('color', 'red');
+        }
+
+        self.removeSize = function(){
+            self.selectedSize('');
         }
         
         self.applyFacets = ko.computed(function(){
@@ -321,7 +329,7 @@
             }else{
                 aftrColorArray = aftrBrandArray;
             }
-            console.log(aftrColorArray)
+            //console.log(aftrColorArray)
 
             if(self.selectedRating()){
                 $.each(aftrColorArray, function(ind, elem){
@@ -333,7 +341,7 @@
             }else{
                 aftrRatingArray = aftrColorArray;
             }
-            console.log(aftrRatingArray);
+            //console.log(aftrRatingArray);
 
             $.each(bundleArray, function(ind, elem){
                 $.each(aftrRatingArray, function(i, prod){
@@ -343,10 +351,14 @@
                     }
                 })
             });
-                        
-           
+            //console.log(tryArray.length)
+            // if(tryArray.length == 0){
+            //     $("#ListProduct").html("<h1 style='padding : 25px;'>oops.....<br> No product Found !</h1>");
+            // }
+                
+            self.jsonData(tryArray);
             //console.log(tryArray)
-        self.jsonData(tryArray);
+        
         });     
 
     }
