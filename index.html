@@ -25,6 +25,7 @@
 <body>
 
 
+    <!-- #region Navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light header">
         <a class="navbar-brand" href="#">Navbar</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -42,6 +43,7 @@
             </ul>
         </div>
     </nav>
+    <!-- #endregion -->
 
 
     <div data-bind="template: { name: $root.Main.template }"></div>
@@ -67,15 +69,33 @@
     </script>
     <!-- #endregion -->
 
+    <!-- #region Product Listing Page-->
     <script type="text/html" id="product-listing-page">
-        <div data-bind="with: Product"> 
-        <h3 data-bind="text: title"></h3>
-        <div data-bind="text: productid"></div>
-        <div data-bind="text: skuid"></div>
-        <button data-bind="click: function(){ $root.Main.goToProduct(productid) }">Details</button>
+        <div class="row row-div" data-bind="foreach: $root.Product.productArray()">
+            <div class="col-lg-3 outer-div background">
+                <div class="wbackground">
+                    <div class="productImg" data-bind="{style: {'backgroundImage': 'url('+$data.sku[0].imageurl+')'}}">
+                        <i class="far fa-heart heart"></i>
+
+                        <div class="overDiv">
+                            <!-- <span data-bind="text: $root.Product.num"></span> -->
+                            <div data-bind="text: $data.sku[0].brand"></div>
+                            <div data-bind="text: $data.sku[0].name"></div>
+                            <!-- <i class="fas fa-rupee=sign"></i> -->
+                            <b data-bind="{text: ' '+$data.sku[0].price, attr:{id: $data.prodId+'price'}}"></b>
+                            <div class="colordiv" data-bind="foreach: $data.color">
+                                <div class="color" data-bind="{style: {'backgroundColor': $data}, click: function(divColor){$root.Products.colorSelect($parent, divColor)}}"></div>
+                            </div>
+                            <div class="size">
+                                <span data-bind="{text: 'size: '+ $data.size, attr: {id: $data.prodId+'size'}}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </script>
-
+    <!-- #endregion -->
 
 
 
