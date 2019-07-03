@@ -283,11 +283,13 @@ p{
     display:  none;
 }
 .footer{
+    margin-top: 10px;
     color: white;
     text-align:  center;
     padding: 15px;
     background-color: #2874f0;
 }
+
 @media screen and (max-width: 1500px){
     #facetSection{
         margin-left: 0;
@@ -366,8 +368,12 @@ p{
         margin: 1px 1px 0 1px;
     }
     .subTile:hover{
-        box-shadow: 0 0 0 gray;
+        box-shadow: none;
       }
+    .subTile:focus{
+    outline-width: 0; 
+    outline: none;
+    }
 }
 
 
