@@ -258,6 +258,7 @@
         }
         
         self.applyFacets = ko.computed(function(){
+            $("#noProcuctsfound").css('display', 'none')
             var tryArray = [];
             //console.log(self.selectedRating());
             //console.log(self.selectedMinPrice(), self.selectedMaxPrice(), self.selectedSize(), self.selectedBrand(), self.selectedColor(), self.selectedRating() )
@@ -352,9 +353,10 @@
                 })
             });
             //console.log(tryArray.length)
-            // if(tryArray.length == 0){
-            //     $("#ListProduct").html("<h1 style='padding : 25px;'>oops.....<br> No product Found !</h1>");
-            // }
+            if(tryArray.length == 0){
+                $("#noProcuctsfound").css('display', 'block')
+                $("#noProcuctsfound").html("<h1 style='padding : 25px;'>oops.....<br> No product Found !</h1>");
+            }
                 
             self.jsonData(tryArray);
             //console.log(tryArray)
