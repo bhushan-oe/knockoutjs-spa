@@ -91,14 +91,7 @@ function productViewModel() {
                     if(clonedArr[y].Sku[0].price <= self.SecondRange() && clonedArr[y].Sku[0].price >= self.fisrtRange())
                         temp.push(clonedArr[y]);
                 }
-                if(temp.length!=0){
                     self.Products(temp);
-                }
-                else
-                {
-                self.Products(self.allProduct());
-                }
-
             });
 
             //-------------------------------------------Sort functions--------------------------------
@@ -159,18 +152,9 @@ function productViewModel() {
                         if($.inArray(el, another_ar) === -1) another_ar.push(el);
                     });
                 }
-                if(another_ar.length!=0){
+             
                     self.Products(another_ar);
-                }
-                else
-                {
-                    $('input:checkbox').prop('checked', false);
-                // alert("Serched item Not found");
-                self.Products(self.allProduct());
-                self.size_select().length=0;self.color_select().length=0;self.brand_select().length=0;self.rating_select().length=0;
-                //$('input:checkbox').prop('checked', false);
-
-                }
+               
             };
         
             self.All_Compute_observe = ko.computed(function(){

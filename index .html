@@ -88,8 +88,8 @@
                                 <div data-role="main" class="ui-content">
                                     <H5><b>PRICE</b></H5>
                                     <div data-role="rangeslider" class="slidecontainer slide">
-                                    <input type="range" class="slider" id="price-min" data-bind="value:$root.Product.fisrtRange , attr:{min:$root.Product.MinVal(),max:$root.Product.MaxVal()/2}">
-                                    <input type="range" class="slider" id="price-max" data-bind="value:$root.Product.SecondRange , attr:{min:$root.Product.MinVal(),max:$root.Product.MaxVal()}">
+                                    <input type="range" class="slider" id="price-min" data-bind="value:$root.Product.fisrtRange , attr:{min:$root.Product.MinVal(),max:$root.Product.MaxVal()}">
+                                    <input type="range" class="slider" id="price-max" data-bind="value:$root.Product.SecondRange , attr:{min:$root.Product.fisrtRange(),max:$root.Product.MaxVal()}">
                                     </div>
                                     <div>
                                         <b>Min Value:</b><div class="range_display" data-bind="text:$root.Product.fisrtRange()"></div><b>Max value:</b><div class="range_display" data-bind="text:$root.Product.SecondRange()"></div>
