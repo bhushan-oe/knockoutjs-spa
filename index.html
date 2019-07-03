@@ -122,7 +122,7 @@
                                 <span class="mainFont"><b>PRICE</b></span> 
                                 <div class="slidecontainer"> 
                                     <div style="display : flex"> 
-                                        <input type="range" class="slider" id="myRange1" data-bind="{value : $root.Products.selectedMinPrice, attr:{min:$root.Products.minPrice(),max:$root.Products.maxPrice()}}"> 
+                                        <input type="range" class="slider" id="myRange1" data-bind="{value : $root.Products.selectedMinPrice, attr:{min:$root.Products.minPrice(),max:$root.Products.selectedMaxPrice()}}"> 
 
                                         <input type="range" class="slider" id="myRange2" data-bind="{value : $root.Products.selectedMaxPrice, attr:{min:$root.Products.selectedMinPrice(),max:$root.Products.maxPrice()}}"> 
                                     </div> 
