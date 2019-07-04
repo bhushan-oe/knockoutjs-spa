@@ -71,45 +71,114 @@
 
     <!-- #region Product Listing Page-->
     <script type="text/html" id="product-listing-page">
-        <!-- <div class="col-lg-2"></div> -->
+        <div class="row row-div background">
+        <!--Filters-->
+            <div class="col-lg-2">
+                <div class="sidebar background shadow">
+                    <div class="row row-div">
+                        <div class="col-lg-12 col-lg-6 filters filtersDiv" onclick='filtersDiv()'>
+                            <span class="mainFont">
+                                <i class="fas fa-filter"></i>Filters</span>
+                        </div>
+                    </div>
+                    <div id="fl" class="row row-div">
+                        <div class="col-lg-12 filters col-div">
+                            <span>CATEGORIES</span>
+                            <div class="categories"><i class="fas fa-chevron-left"></i><span>Clothing</span></div>
+                            <div class="categories"><i class="fas fa-chevron-left"></i><span>Men's Clothing</span></div>
+                            <div class="categories"><i class="fas fa-chevron-left"></i><span><b>Shirts</b></span></div>
+                        </div>
 
-        
-        <div class="col-lg-10 col-div">
-            <!--#region Breadcrumbs-->     
-            <div class="row row-div">
-                <div id="pop" class="col-lg-12 breadcrumb">
-                    <b>Sort: &emsp; </b>
-                    <span data-bind = "click: function(){ $root.Product.SortByPopularity(); }">Popularity &emsp;</span>
-                    <span data-bind = "click: function() { $root.Product.SortByPrice(); }">Price &emsp;</span>
-                </div>
-            </div>
-            <!--#endregion-->
-            
-            <!-- #region Cards -->
-            <div class="row row-div" data-bind="foreach: $root.Product.productArray()">
-                <div class="col-lg-3 outer-div background">
-                    <div class="wbackground">
-                        <div class="prodImg" data-bind="{style: {'backgroundImage': 'url('+$data.sku[0].imageurl+')'}, attr: { id: $data.prodId }}">
-                            <i class="far fa-heart heart"></i>
-
-                            <div class="overDiv">
-                                <!-- <span data-bind="text: $root.Product.num"></span> -->
-                                <div data-bind="text: $data.sku[0].brand"></div>
-                                <div data-bind="text: $data.sku[0].name"></div>
-                                <!-- <i class="fas fa-rupee-sign"></i> -->
-                                <b data-bind="{text: '$ '+$data.sku[0].price, attr:{id: $data.prodId+'price'}}"></b>
-                                <div class="colordiv" data-bind="foreach: $data.color">
-                                    <span class="color" data-bind="{style: {'backgroundColor': $data}, click: function(divColor){$root.Product.colorSelect($parent, divColor)}}"></span>
-                                </div>
-                                <div class="size">
-                                    <span data-bind="{text: 'size: '+ $data.size, attr: {id: $data.prodId+'size'}}"></span>
-                                </div>
+                        <div class="col-lg-12 filters col-div">
+                            <span class="mainFont"><b>PRICE</b></span>
+                            <div class="sildecontainer"></div>
+                        </div>
+                        <div class="col-lg-12 panel panel-primary">
+                            <div class="panel-heading clickable">
+                                <span>BRANDS</span><span data-bind="text: $root.Product.selectBrand"></span>
+                                <span><i class="glyphicon glyphicon-chevron-down"></i></span>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="ul_div" data-bind="foreach: $root.Product.allBrand">
+                                    <li>
+                                        <input type="checkbox" data-bind="{attr: {value: $data, id: $data}, checked: $root.Product.selectBrand}">
+                                        <label class="span_data" data-bind="{text: $data, attr:{for: $data}}"></label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 filters col-div">
+                            <div class="panel-heading clickable">
+                                <span class="mainFont">COLORS</span><span data-bind="text: $root.Product.selectColor"></span>
+                                <span class="pull-right"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="ul_div" data-bind="foreach: $root.Product.allBrand">
+                                    <li>
+                                        <input type="checkbox" data-bind="{attr: {value: $data, id: $data}, checked: $root.Product.selectColor}">
+                                        <span class="span_data" data-bind="text: $data"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 panel panel-primary">
+                            <div class="panel-heading clickable">
+                                <span>CUSTOMER RATINGS</span><span data-bind="text:$root.Product.selectColor"></span>
+                                <span class="pull-right "><i class="glyphicon glyphicon-chevron-down"></i></span>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="ul_div"> 
+                                    <li><input type="checkbox" >4 * & above</li>
+                                    <li><input type="checkbox">3 * & above</li>
+                                    <li><input type="checkbox">2 * & above</li>
+                                    <li><input type="checkbox">1 * & above</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- #endregion -->
+
+            <!--#region Cards-->
+            <div class="col-lg-10 col-div">
+                <!--#region Breadcrumbs-->     
+                <div class="row row-div">
+                    <div id="pop" class="col-lg-12 breadcrumb">
+                        <b>Sort: &emsp; </b>
+                        <span data-bind = "click: function(){ $root.Product.SortByPopularity(); }">Popularity &emsp;</span>
+                        <span data-bind = "click: function() { $root.Product.SortDescending(); }">Price Descending &emsp;</span>
+                        <span data-bind="click: function() { $root.Product.SortByPrice(); }">Price Ascending</span>
+                    </div>
+                </div>
+                <!--#endregion-->
+                
+                <!-- #region Cards -->
+                <div class="row row-div" data-bind="foreach: $root.Product.productArray()">
+                    <div class="col-lg-3 outer-div background">
+                        <div class="wbackground">
+                            <div class="prodImg" data-bind="{style: {'backgroundImage': 'url('+$data.sku[0].imageurl+')'}, attr: { id: $data.prodId }}">
+                                <i class="far fa-heart heart"></i>
+
+                                <div class="overDiv">
+                                    <!-- <span data-bind="text: $root.Product.num"></span> -->
+                                    <div data-bind="text: $data.sku[0].brand"></div>
+                                    <div data-bind="text: $data.sku[0].name"></div>
+                                    <!-- <i class="fas fa-rupee-sign"></i> -->
+                                    <b data-bind="{text: '$ '+$data.sku[0].price, attr:{id: $data.prodId+'price'}}"></b>
+                                    <div class="colordiv" data-bind="foreach: $data.color">
+                                        <span class="color" data-bind="{style: {'backgroundColor': $data}, click: function(divColor){$root.Product.colorSelect($parent, divColor)}}"></span>
+                                    </div>
+                                    <div class="size">
+                                        <span data-bind="{text: 'size: '+ $data.size, attr: {id: $data.prodId+'size'}}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- #endregion -->
+            </div>
+        <!--#endregion-->
         </div>
     </script>
     <!-- #endregion -->

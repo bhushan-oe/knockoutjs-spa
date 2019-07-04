@@ -48,6 +48,18 @@
                 self.productArray(clonedArr);
             }
 
+            self.SortByPrice = function(){
+                var clonedArr = $.extend(true,[],self.productArray());
+                clonedArr.sort((a,b) => (a.sku[0].price > b.sku[0].price) ? -1 : ((a.sku[0].price < b.sku[0].price) ? 1 : 0));
+                self.productArray(clonedArr);
+            }
+
+            self.SortDescending = function(){
+                var clonedArr = $.extend(true,[],self.productArray());
+                clonedArr.sort((a,b) => (a.sku[0].price < b.sku[0].price) ? -1 : ((a.sku[0].price > b.sku[0].price) ? 1 : 0));
+                self.productArray(clonedArr);
+            }
+
             //Color selection
             self.colorSelect = function(product, color){
                 console.log(product,color);
@@ -167,7 +179,7 @@
                     // vm.Products.allProduct(newDataArray);
                     console.log(newDataArray, vm.Product.productArray());
                         vm.Product.productArray(newDataArray); 
-                        // vm.Products.SortByPopularity(); 
+                        vm.Product.SortByPopularity(); 
                     console.log(vm.Product.productArray()); 
                         // vm.Products.allSize(allsz);
                         // vm.Products.allBrand(allbr);
@@ -181,20 +193,20 @@
                 //vm.Page.name("About")
 
             });
-            this.get('#Product', function () {
-                vm.Main.chosenPageId(this.params.page);
-                vm.Main.template("product-template")
-                //vm.Page.name("About")
-                //fetch product details here
-            });
+            // this.get('#Product', function () {
+            //     vm.Main.chosenPageId(this.params.page);
+            //     vm.Main.template("product-template")
+            //     //vm.Page.name("About")
+            //     //fetch product details here
+            // });
 
-            this.get('#Product/:productid', function () {
-                vm.Main.chosenPageId("Product");
-                vm.Main.template("product-template")
-                //this.params.productid
-                //vm.Page.name("About")
-                //fetch product details here
-            });
+            // this.get('#Product/:productid', function () {
+            //     vm.Main.chosenPageId("Product");
+            //     vm.Main.template("product-template")
+            //     //this.params.productid
+            //     //vm.Page.name("About")
+            //     //fetch product details here
+            // });
 
             // this.get('#:page', function () {
             //     vm.Main.chosenPageId(this.params.page);     
