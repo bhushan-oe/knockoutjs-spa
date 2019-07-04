@@ -1,0 +1,50 @@
+/* Landing page styles */
+
+.mainSideContent{
+    background-color: skyblue;
+    height: 65vh;
+}
+.imageDiv{    
+    background-image: url("../images/landing.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 65vh;
+}
+.landingPage{
+    height: 100vh; 
+}
+.signUpDiv{
+    margin-right: 25px;
+    margin-top: 50px;
+}
+.signUpButton{    
+    color: white;
+    background-color: black;
+}
+.searchDiv{
+    width: 100%;
+    margin-top: 100px;      
+}
+.searchDivContainer{
+    width: 70%;
+    margin-right: 25px;
+}
+#searchButton{
+    color: white;
+    font-weight: bold;    
+}
+
+.searchButtonDiv, .searchButtonDiv:hover {
+    background-color: orange;
+}
+
+@media (max-width: 767.98px) {
+    .mainSideContent{
+     background-image: url("../images/landing.jpg");
+     background-size: cover;
+     background-repeat: no-repeat;
+    }
+    .imageDiv{
+        display: none;
+    } 
+ }
