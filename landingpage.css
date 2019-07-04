@@ -1,0 +1,453 @@
+body {
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    background-color: rgb(236, 243, 245);
+}
+
+.smallScreenMargin {
+    margin: 0;
+}
+hr {
+    margin: 0;
+    opacity: 0.4;
+}
+
+.landingpage_div {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.search_content {
+    padding-left: 0;
+    padding-right: 0;
+    height: 100vh;
+}
+
+.landing_image_div {
+    background-image: url("landing.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.sortByContent{
+    display: inline;
+}
+
+.filter {
+    font-size: 20px;
+    padding: 10px;
+}
+
+.signupButton {
+    background-color: black;
+    color: white;
+    float: right;
+    margin: 10%;
+    height: 3rem;
+    padding: 10px;
+    border-color: black;
+}
+
+.searchBar {
+    padding: 5px 0;
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.searchBar input {
+    height: 3rem;
+    border-radius: 1px;
+    border: 1px solid orange;
+}
+
+.btn {
+    height: 3rem;
+    position: absolute;
+    font-size: 15px;
+    right: 0;
+    border-radius: 1px;
+    padding: 15px 30px;
+    background-color: orange;
+    border: 1px solid orange;
+    bottom: 0.3rem;
+}
+
+.plpFilterContainer {
+    margin: 10px 0px 0px 10px;
+    background-color: white;
+}
+
+.plpDataContainer {
+    margin: 10px;
+    background-color: white;
+}
+
+.plpPageNavigationBarHomeFont {
+    font-size: 0.9rem;
+}
+
+.plpPageNavigationBarPadding {
+    padding: 1rem 3rem 1rem 3rem;
+}
+
+.plpPageNavigationBarPaddingadjust{
+    padding-top :0;
+}
+.sortBy{
+    display: inline;
+}
+
+.sortByHeading{
+    display: inline;
+    font-weight: bold;
+}
+
+.plpPageSortBy {
+    font-size: 15px;
+    border-bottom: black 1px;
+}
+
+.productContainer {
+    position: relative;
+    align-content: center;
+    overflow: hidden;
+    z-index: 1;
+    background-color: white;
+    height: 25rem;
+}
+
+.productImage {
+    padding: 10px;
+    position: relative;
+    height: 18rem;
+    background-color: white;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 20px 5px 20px 5px;
+}
+
+.productImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.heart{
+    color: rgb(194, 193, 193);
+    font-size: 20px;
+    position: relative;
+    top : 5%;
+    left: 85%;
+}
+
+.productContent {
+    padding: 10px 0 0 20px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    overflow: hidden;
+    width: 100%;
+    height: 20%;
+    transition: .5s ease;
+}
+
+.productImage a {
+    display: block
+}
+
+.productContainer:hover {
+    box-shadow: 4px 8px 8px 4px rgba(146, 146, 146, 0.2);
+}
+
+.productContainer:hover .productContent {
+    height: 40%;
+}
+
+.colorCircles {
+    height: 20px;
+    width: 20px;
+    margin: 0 3px 0 3px;
+    border-radius: 50%;
+    border: 1px solid gray;
+    float: left
+}
+
+.marginAdjust {
+    margin: 4px 3px 0 3px;
+}
+
+.name {
+    font-size: 15px;
+    margin: 2px;
+    transition: all .3s ease 0s
+}
+
+.spaNavbar {
+    position: relative;
+    margin-bottom: 5px;
+    height: 4rem;
+    background-color: blue;
+    display: flex;
+    flex-direction: row
+}
+
+.navbarContent {
+    position: absolute;
+    right: 0;
+    margin: auto;
+    top: 0.5rem;
+    left: 25vw;
+    color: white;
+}
+
+.navbarSearch {
+    display: inline;
+    color: blue;
+}
+
+.navbarSearch input[type=text] {
+    float: left;
+    padding: 5px;
+    border: none;
+    margin: 5px 0px 5px 5px;
+    font-size: 15px;
+    width: 35vw;
+}
+
+.searchIcon {
+    float: left;
+    background-color: white;
+    margin: 5px 5px 5px 0px;
+    padding: 5px;
+    font-size: 15px;
+}
+
+.navbarLinks {
+    float: right;
+    margin: 5px 80px 5px 0px;
+    padding: 5px;
+    font-size: 1rem;
+}
+
+.categoryFilter, .priceFilter {
+    padding: 10px 10px 0px 10px;
+}
+
+.categoryMargin {
+    margin-top: 1rem;
+    font-size: 15px;
+}
+
+.fontLight {
+    color: rgb(168, 172, 173) !important;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    background: blue;
+    outline: none;
+    margin-bottom: 10px;
+    height: 0.3rem;
+    border-radius: 0;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    border: 1px solid black;
+    background: white;
+    cursor: pointer;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+}
+
+.sizeFilterHead, .brandFilterHead, .colorFilterHead, .ratingFilterHead {
+    padding: 10px 10px 0px 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
+
+.moreHRMargin {
+    margin-top: 1rem;
+    opacity: 0.4;
+}
+
+.ratingDiv, .sizeDiv, .colorDiv, .brandDiv {
+    padding: 0.6rem;
+}
+
+.size {
+    clear: both;
+    font-weight: bold
+}
+
+.brandName {
+    display: block;
+}
+
+.skuName {
+    display: block;
+}
+
+.adjustRightPadding{
+    padding-right: 0;
+}
+
+.adjustLeftPadding{
+    padding-left: 0;
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .landingpage_div {
+        position: absolute;
+        padding-left: 0;
+        padding-right: 0;
+        background-image: url("landing.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+    }
+    .landing_image_div {
+        display: none;
+    }
+    .smallScreenMargin {
+        margin: 0;
+    }
+    .navbarContent{
+        display: none;
+    }
+    .plpFilterContainer{
+        margin: 0;
+    }
+    .adjustMobilePadding{
+        padding: 0;
+    }
+    .adjustMobileMargin{
+        margin: 0;
+    }
+    .plpFilterContainer{
+        position: absolute;
+        margin : 0;
+        width: 50%;
+        right: 0;
+    }
+    .hideout{
+        display: none;
+    }
+    .plpDataContainer{
+        margin: 0;
+    }
+    .plpPageSortBy{
+        background-color: white;
+        position: absolute;
+        margin : 0;
+        width: 50%;
+        left: 0;
+        z-index: 5;
+    }
+    .marginUpAdd{
+        position: absolute;
+        top: 3rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .landingpage_div {
+        position: absolute;
+        padding-left: 0;
+        padding-right: 0;
+        background-image: url("landing.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+    }
+    .landing_image_div {
+        display: none;
+    }
+    .smallScreenMargin {
+        margin: 0;
+    }
+    .navbarContent{
+        display: none;
+    }
+    .adjustMobilePadding{
+        padding: 0;
+    }
+    .adjustMobileMargin{
+        margin : 0;
+    }
+    .plpFilterContainer{
+        position: absolute;
+        margin : 0;
+        width: 50%;
+        right: 0;
+    }
+    .hideout{
+        display: none;
+    }
+    .plpDataContainer{
+        margin: 0;
+    }
+    .plpPageSortBy{
+        background-color: white;
+        position: absolute;
+        margin : 0;
+        width: 50%;
+        left: 0;
+        z-index: 5;
+        padding: 0;
+    }
+    .marginUpAdd{
+        position: absolute;
+        top: 3rem;
+    }
+
+    .sortByHeading {
+        display: block;
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        font-size: 20px;
+        font-weight: normal;
+        border: 1px solid rgb(212, 210, 210);
+        
+    }
+
+    .sortBy{
+        display: none;
+        width: 100vw;
+        z-index: 2;
+    }
+    .filter{
+        align-content: center;
+        text-align: center;
+        border: 1px solid rgb(212, 210, 210);
+    }
+
+    .filterCells{
+        display: none;
+        width:100%
+    }
+
+    .sortByHeading:hover .sortBy{
+        display: block;
+        width: 100vw;
+        z-index: 2;
+        
+    }
+
+    .sortByContent{
+        display: block;
+        background-color: white;
+    }
+
+}
