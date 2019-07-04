@@ -1,0 +1,441 @@
+.page {
+    height: 100vh;
+}
+
+.row-div {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+.images {
+    background-image: url(../images/landing.jpg);
+    background-size: cover;
+}
+
+.search {
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    right: 5%;
+}
+
+.search input {
+    padding: 10px;
+    width: 100%;
+    outline: 2px solid orange;
+}
+
+.col-div {
+    padding: 0;
+    margin: 0;
+}
+
+.btn {
+    background-color: orange;
+    color: white;
+    padding: 12px;
+    width: 100%;
+    border-radius: 1px;
+}
+
+.signbtn {
+    color: white;
+    background-color: black;
+    padding: 5px;
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    outline: none;
+    border: none;
+}
+
+.outer-div {
+    padding: 10px;
+}
+
+.productImg {
+    width: 100%;
+    height: 500px;
+    position: relative;
+    /* outline: 1px solid black; */
+    background-image: url();
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 5px 10px 18px #888888;
+}
+
+.overDiv {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    padding: 15px;
+}
+
+.color {
+    outline: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    display: inline-block;
+}
+
+.colorchk {
+    outline: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    display: inline-block;
+}
+
+.colordiv {
+    display: none;
+}
+
+.size {
+    display: none;
+}
+
+.productImg:hover .colordiv {
+    display: block;
+}
+
+.productImg:hover .size {
+    display: block;
+}
+
+.display {
+    float: right;
+    position: absolute;
+    /* left: 20%; */
+    right: 8%;
+    font-size: 20px;
+    color: gray;
+}
+
+.display:hover {
+    color: red;
+}
+
+.arrow {
+    padding-right: 10px;
+}
+
+#rangeBox {
+    /* carry complete  range box*/
+    width: 300px;
+    height: 100px;
+}
+
+#sliderBox {
+    position: relative;
+    top: 0%;
+    width: 300px;
+    /*2x width*/
+}
+
+#slider0to50 {
+    width: 150px;
+    /*1x width*/
+    position: absolute;
+    left: 0%;
+}
+
+#slider51to100 {
+    width: 150px;
+    /*1x width*/
+    position: absolute;
+    left: 50%;
+}
+
+#inputRange {
+    position: relative;
+    top: 50%;
+}
+
+#inputRange::after {
+    content: "";
+    clear: both;
+    display: block
+}
+
+#inputRange #min {
+    /* width: 40%;
+    float: left; */
+    margin-left: 9%;
+}
+
+#minPrice {
+    padding-left: 10px
+}
+
+#maxPrice {
+    padding-right: 10px;
+}
+
+#inputRange #max {
+    width: 23%;
+    /* float: right; */
+    margin-left: 9%;
+}
+
+#filters {
+    /* border: 1px solid gray; */
+    box-shadow: 5px 10px 18px #888888;
+    background: hsla(0, 0%, 100%, .3);
+    padding-left: 10px;
+}
+
+.multiselect {
+    width: 200px;
+}
+
+.selectBox {
+    position: relative;
+}
+
+.selectBox select {
+    width: 100%;
+    font-weight: bold;
+}
+
+.overSelect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+#checkboxes {
+    display: none;
+    border: 1px #dadada solid;
+}
+
+#checkboxes label {
+    display: block;
+}
+
+#checkboxes label:hover {
+    background-color: #1e90ff;
+}
+
+.arrow-dwn {
+    margin-left: 50%;
+}
+
+.header {
+    margin-left: 10%;
+}
+
+.slidecontainer {
+    width: 100%;
+}
+
+.inputPrice {
+    width: 20%;
+}
+
+.firstbox {
+    margin-left: 10%;
+}
+
+.secondbox {
+    margin-right: 10%;
+}
+
+.custom-height-slider {
+    height: 75px;
+}
+
+.dx-field>.dx-rangeslider {
+    flex: 1;
+}
+
+.slidecontainer {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 49%;
+    height: 5px;
+    border-radius: 5px;
+    background: wheat;
+    outline: none;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    margin-bottom: 10px;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 1px solid black;
+    background: white;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.headSection {
+    padding: 15px;
+    background-color: #2874f0;
+}
+
+.searchresult {
+    font-size: 25px;
+    width: 90%;
+    height: 50px;
+    position: relative;
+    float: left;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.searchresult input {
+    border-radius: 0;
+    position: absolute;
+    float: Left;
+    height: 50px;
+    padding: 0 0 0 20px;
+    outline: orange;
+}
+
+.btn {
+    border-radius: 0;
+    width: 150px;
+    height: 50px;
+    position: absolute;
+    right: 0;
+    background-color: orange;
+    border: none;
+}
+
+.search input:focus {
+    border-color: orange;
+}
+
+.footer {
+    background-color: #2874f0;
+    /* position: fixed; */
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    /* background-color: red; */
+    color: white;
+    text-align: center;
+}
+
+#bredScrum {
+    background-color: white;
+    margin: 5px 5px 0 5px;
+    padding: 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.mobHead {
+    display: none;
+}
+
+.mobiledisplay {
+    padding-top: 10px;
+}
+
+#collapse1 {
+    display: block;
+}
+
+.space {
+    padding: 4px;
+}
+
+.space1 {
+    padding-left: 19px;
+}
+
+
+/* mobile view */
+
+@media only screen and (max-width: 480px) {
+    .img-div {
+        display: none;
+    }
+    .response {
+        padding: 10px;
+        background-image: url(../images/landing.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    .images {
+        display: none;
+    }
+    .searchresult,
+    .filt-hide,
+    .dispheader,
+    .mobiledisplay {
+        display: none;
+    }
+    #collapse1 {
+        display: none;
+    }
+    .mobHead {
+        display: block;
+        background-color: #2874f0;
+        color: white;
+    }
+    .mobHead i {
+        padding: 25px 0 0 0;
+    }
+    .mobHead>* {
+        float: left;
+        padding: 15px;
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .searchresult {
+        display: none;
+    }
+    .searchresult,
+    .filt-hide,
+    .dispheader,
+    .collapse1,
+    .mobiledisplay {
+        display: none;
+    }
+    /* .sort {
+        display: block;
+    } */
+    .mobHead {
+        display: block;
+        background-color: #2874f0;
+        color: white;
+    }
+    .mobHead i {
+        padding: 25px 0 0 0;
+    }
+    .mobHead>* {
+        float: left;
+        padding: 15px;
+        font-size: 20px;
+    }
+}
