@@ -267,6 +267,13 @@
             }
         }
 
+
+        var checkWidth = function() {
+            var w = $(window);
+
+            return w;
+        }
+
         var vm = {
             Main: new viewModel(),
             Page: new pageViewModel(),
@@ -277,8 +284,18 @@
             rating: ko.observableArray([]),
             category: ko.observableArray([]),
             price: ko.observableArray([]),
-
+            checkWidth: ko.observable()
         };
+
+        var w = $(window);
+        w.resize(function() {
+            vm.checkWidth(w.width());
+        });
+
+        w.load(function() {
+            vm.checkWidth(w.width());
+        });
+
         Sammy(function() {
             this.get('#Home', function() {
                 $(".header").css("display", "none");

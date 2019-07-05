@@ -40,14 +40,14 @@
 
     <script type="text/html" id="searching-page">
         <div class="row row-div">
-            <div class="col-lg-7 col-sm-6 col-xs-12 page response">
+            <div class="col-lg-7 col-sm-12 col-xs-12 page response">
                 <button class="col-lg-1 col-3 signbtn" type="submit">Sign up</button>
                 <div class="row row-div search col-lg-6 col-10">
                     <div class="col-lg-8 col-div col-8"><input type="text" placeholder="Search Something" /></div>
-                    <div class="col-lg-4 col-div col-4"><button class="btn" type="submit" data-bind="click: function(){ $root.Main.goToPage($root.Main.plp) }">Search</button></div>
+                    <div class="col-lg-4 col-div col-4"><button class="btn width-100" type="submit" data-bind="click: function(){ $root.Main.goToPage($root.Main.plp) }">Search</button></div>
                 </div>
             </div>
-            <div class="col-lg-5 col-sm-6 col-xs-12 page images">
+            <div class="col-lg-5 col-sm-12 col-xs-12 page images">
 
             </div>
         </div>
@@ -83,7 +83,7 @@
 
             </div>
         </div>
-        <div class="row d-md-none">
+        <div class="row d-lg-none">
             <div class="filt" style="width:50%">
                 <div class="filterTitle" data-toggle="collapse" data-target="#filters">
                     <h3 style="margin-top : 0; margin-bottom : 0">Filters<i class="fa fa-filter filtrIcon"></i></h3>
@@ -99,7 +99,7 @@
 
         <div class="row row-div">
 
-            <div id="filters" class="col-lg-2 col-div">
+            <div id="filters" class="col-lg-2 col-div d-md-block collapse" data-bind="css: { 'd-md-block': checkWidth() > 768  }">
                 <h3 class="filt-hide">Filters</h3>
                 <hr>
                 <span class="space1">CATEGORY</span>
@@ -205,9 +205,8 @@
                 <hr>
             </div>
 
-
             <div class="col-lg-10 col-div">
-                <div id="bredScrum">
+                <div id="bredScrum" class="d-md-block collapse" data-bind="css: { 'd-md-block': checkWidth() > 768  }">
                     <div>
                         <b><span>Shirts</span></b><span data-bind="text: ' ( Showing - '+$root.Products.productArray().length+ ' products)' "></span>
                     </div>
