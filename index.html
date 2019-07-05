@@ -76,7 +76,7 @@
             <div class="col-lg-2">
                 <div class="sidebar background shadow">
                     <div class="row row-div">
-                        <div class="col-lg-12 col-lg-6 filters filtersDiv" onclick='filtersDiv()'>
+                        <div class="col-lg-12 col-lg-6 filters filtersDiv" onclick='filterDiv()'>
                             <span class="mainFont">
                                 <i class="fas fa-filter"></i>Filters</span>
                         </div>
@@ -93,9 +93,25 @@
                             <span class="mainFont"><b>PRICE</b></span>
                             <div class="sildecontainer"></div>
                         </div>
+
                         <div class="col-lg-12 panel panel-primary">
                             <div class="panel-heading clickable">
-                                <span>BRANDS</span><span data-bind="text: $root.Product.selectBrand"></span>
+                                <span>SIZE</span>
+                                <span><i class="glyphicon glyphicon-chevron-down"></i></span>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="ul_div" data-bind="foreach: $root.Product.allSize">
+                                    <li>
+                                        <input type="checkbox" data-bind="{attr: {value: $data, id: $data}, checked: $root.Product.selectSize }">
+                                        <label class="span_data" data-bind="{text: $data, attr:{for: $data}}"></label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 panel panel-primary">
+                            <div class="panel-heading clickable">
+                                <span>BRANDS</span>
                                 <span><i class="glyphicon glyphicon-chevron-down"></i></span>
                             </div>
                             <div class="panel-body">
@@ -107,31 +123,33 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-lg-12 filters col-div">
+
+                        <div class="col-lg-12 panel panel-primary">
                             <div class="panel-heading clickable">
-                                <span class="mainFont">COLORS</span><span data-bind="text: $root.Product.selectColor"></span>
+                                <span>COLORS</span>
                                 <span class="pull-right"><i class="glyphicon glyphicon-chevron-down"></i></span>
                             </div>
                             <div class="panel-body">
-                                <ul class="ul_div" data-bind="foreach: $root.Product.allBrand">
+                                <ul class="ul_div" data-bind="foreach: $root.Product.allColor">
                                     <li>
                                         <input type="checkbox" data-bind="{attr: {value: $data, id: $data}, checked: $root.Product.selectColor}">
-                                        <span class="span_data" data-bind="text: $data"></span>
+                                        <div class="color" data-bind="{style: { 'background-color': $data }}"></div>
+                                        <label class="span_data" data-bind="{text: $data, attr:{ for:$data }}"></label>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-lg-12 panel panel-primary">
                             <div class="panel-heading clickable">
-                                <span>CUSTOMER RATINGS</span><span data-bind="text:$root.Product.selectColor"></span>
+                                <span>CUSTOMER RATINGS</span>
                                 <span class="pull-right "><i class="glyphicon glyphicon-chevron-down"></i></span>
                             </div>
                             <div class="panel-body">
                                 <ul class="ul_div"> 
-                                    <li><input type="checkbox" >4 * & above</li>
-                                    <li><input type="checkbox">3 * & above</li>
-                                    <li><input type="checkbox">2 * & above</li>
-                                    <li><input type="checkbox">1 * & above</li>
+                                    <li><input type="checkbox" value="4" data-bind="{ checked: $root.Product.selectedRating, attr:{id:'rating4'}}">4 * & above</li>
+                                    <li><input type="checkbox" value="3" data-bind="{ checked: $root.Product.selectedRating, attr:{id:'rating3'}}">3 * & above</li>
+                                    <li><input type="checkbox" value="2" data-bind="{ checked: $root.Product.selectedRating, attr:{id:'rating2'}}">2 * & above</li>
+                                    <li><input type="checkbox" value="1" data-bind="{ checked: $root.Product.selectedRating, attr:{id:'rating1'}}">1 * & above</li>
                                 </ul>
                             </div>
                         </div>
