@@ -16,12 +16,49 @@
 
         <link rel = "stylesheet" type = "text/css" href = "css/style.css" />
         <style>
-            .productImg{
+            /*.productImg{
                 height: 225px;;
+            }*/
+            .card{
+                height: 425px;
+                overflow: hidden;
+            }
+            .imageEncloseDiv{
+                position: relative; 
+                height: 75%!important;              
+            }
+            .image{
+                height: 100%;
+            }
+
+                       
+            .card-body{
+                  
+                transition: transform 1s;
+                background-color: lightblue;
+            }
+
+            .card-body:hover {
+                transform: translateY(-50px);
+            }
+
+            .card-deck{
+                width: 100%;
+            }
+
+            .icon{
+                position: absolute;
+                right: 10px;
+                top: 10px;
+                color: grey;
+            }
+            .icon:hover{
+                cursor: pointer;
             }
             p.productContent{
                 margin-bottom: 2px;
             }
+            
             
             .dot {
                 height: 20px;
@@ -67,38 +104,27 @@
                 </div>
                 <div class="col-sm-10">
                     <div class="row">
-                            <div class="card col-sm-3">
-                                <img src="images/tshirt.jpeg" class="card-img-top productImg" alt="Product Image">
-                                <div class="card-body">
-                                    <p class="productContent">Rope</p>
-                                    <p class="productContent">Men's Checkered Casual</p>
-                                    <p class="productContent"><i class="fa fa-rupee-sign"></i> 498</p>
-                                    <span class="dot"></span>
-                                    <p class="productContent">Size: <span>L</span> <span>M</span></p>                
-                                </div>
-                            </div>
-                            <div class="card col-sm-3">
-                                    <img src="images/tshirt.jpeg" class="card-img-top productImg" alt="Product Image">
-                                    <div class="card-body">
-                                        <p class="productContent">Rope</p>
-                                        <p class="productContent">Men's Checkered Casual</p>
-                                        <p class="productContent"><i class="fa fa-rupee-sign"></i> 498</p>
-                                        <span class="dot"></span>
-                                        <p class="productContent">Size: <span>L</span> <span>M</span></p>                
+                            <div class="card-deck">                                                          
+                                    <div class="card col-sm-3">
+                                         <div class="imageEncloseDiv"> 
+                                            <img src="images/tshirt.jpeg" class="img-fluid image" alt="Product Image">
+                                            <i class="icon fas fa-heart fa-2x"></i>
+                                        </div>
+                                    
+                                        <div class="card-body">
+                                            <h5 class="productContent card-title">Rope</h5>
+                                            <p class="productContent card-subtitle mb-2 text-muted">Men's Checkered Casual</p>
+                                            <p class="productContent"><i class="fa fa-rupee-sign"></i> 498</p>
+                                            <span class="dot"></span>
+                                            <p class="productContent">Size: <span>L</span> <span>M</span></p>                
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card col-sm-3" >
-                                    <img src="images/tshirt.jpeg" class="card-img-top productImg" alt="Product Image">
-                                    <div class="card-body">
-                                        <p class="productContent">Rope</p>
-                                        <p class="productContent">Men's Checkered Casual</p>
-                                        <p class="productContent"><i class="fa fa-rupee-sign"></i> 498</p>
-                                        <span class="dot"></span>
-                                        <p class="productContent">Size: <span>L</span> <span>M</span></p>                
-                                    </div>
-                                </div>
+                               
                                 <div class="card col-sm-3">
-                                        <img src="images/tshirt.jpeg" class="card-img-top productImg" alt="Product Image">
+                                        <div class="imageEncloseDiv"> 
+                                                <img src="images/tshirt.jpeg" class="img-fluid image" alt="Product Image">
+                                                <i class="icon fas fa-heart fa-2x"></i>
+                                            </div>
                                         <div class="card-body">
                                             <p class="productContent">Rope</p>
                                             <p class="productContent">Men's Checkered Casual</p>
@@ -106,7 +132,35 @@
                                             <span class="dot"></span>
                                             <p class="productContent">Size: <span>L</span> <span>M</span></p>                
                                         </div>
+                                </div>
+                                <div class="card col-sm-3" >
+                                        <div class="imageEncloseDiv"> 
+                                                <img src="images/tshirt.jpeg" class="img-fluid image" alt="Product Image">
+                                                <i class="icon fas fa-heart fa-2x"></i>
+                                            </div>
+                                    <div class="card-body">
+                                        <h5 class="productContent card-title">Rope</h5>
+                                        <p class="productContent">Men's Checkered Casual</p>
+                                        <p class="productContent"><i class="fa fa-rupee-sign"></i> 498</p>
+                                        <span class="dot"></span>
+                                        <p class="productContent">Size: <span>L</span> <span>M</span></p>                
                                     </div>
+                                </div>
+                                <div class="card col-sm-3">
+                                        <div class="imageEncloseDiv"> 
+                                                <img src="images/tshirt.jpeg" class="img-fluid image" alt="Product Image">
+                                                <i class="icon fas fa-heart fa-2x"></i>
+                                            </div>
+                                    <div class="card-body">
+                                        <p class="productContent">Rope</p>
+                                        <p class="productContent">Men's Checkered Casual</p>
+                                        <p class="productContent"><i class="fa fa-rupee-sign"></i> 498</p>
+                                        <span class="dot"></span>
+                                        <p class="productContent">Size: <span>L</span> <span>M</span></p>                
+                                    </div>
+                                </div>
+                              
+                            </div>
                         </div> 
                 </div>
             </div>

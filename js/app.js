@@ -18,7 +18,7 @@
             return ko.utils.arrayGetDistinctValues(arr);
         }
 
-        var sortMethod = "Popularity";
+        var sortMethod = "popularity";
 
         function brandSort(brandA, brandB){
             var val = 0;
@@ -31,7 +31,7 @@
             brandA.setDefaultProductList();
             brandB.selectedProductList(sortedBrandB);
             brandB.setDefaultProductList();
-
+            console.log("*************** sorting method *********** "+sortMethod);
             switch(sortMethod) {
                 case "HighToLow":  
                     val =  HighToLowSort(brandAVal.price(), brandBVal.price());              
@@ -73,7 +73,15 @@
             
             self.golbalBrandList = ko.observableArray([]);
 
-            self.productBrandList = ko.observableArray();          
+            self.productBrandList = ko.observableArray();             
+            
+            /*self.totalProducts = ko.computed(function(){
+                var totalProducts = 0;
+                ko.utils.arrayForEach(self.productBrandList(), function(productBrand){ 
+                    totalProducts += productBrand.selectedProductList().length;
+                }); 
+                return totalProducts;
+            });*/
 
             self.brandList = ko.computed(function(){
                 var productBrandNames = ko.utils.arrayMap(self.golbalBrandList(), function(productBrand){
@@ -110,9 +118,16 @@
                 });            
                 return getUniqueRecords(sizes);
             });
-         
-            self.sortBy = function(method){                              
+            
+            self.sortingMethod = ko.observable("popularity");
+
+            self.sortBy = function(method){ 
+                if(sortMethod == method){
+                    return;
+                }                             
                 sortMethod = method;
+                self.sortingMethod(method);
+                console.log("in function call");
                 self.productBrandList(self.productBrandList().sort(brandSort));
                 //self.productBrandList(brandSort);              
             };
@@ -124,7 +139,7 @@
             self.selectedColor = ko.observable();
             self.selectedSizeList = ko.observableArray([]);
 
-            self.filterdCategory = function(category){
+            self.filterdCategory = function(category){               
                 self.selectedCategory(category);
                 self.filterdAction();
             }
@@ -329,6 +344,10 @@
             self.size = ko.observable();
             self.rating = ko.observable();
             self.price = ko.observable();
+            self.liked = ko.observable(false);
+            self.addFavourite = function(){
+                self.liked(true);
+            }
         }
         
         function productViewModel() {

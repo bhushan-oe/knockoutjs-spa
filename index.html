@@ -133,33 +133,42 @@
                             </div>
                             <div class="col-sm-10">
                                 <div class="row">
-                                    <p>Sort By <span class="sorting" data-bind="click: sortBy('popularity')">Popularity</span>
-                                        &nbsp; <span class="sorting" data-bind="click: sortBy('LowToHigh')">Price -- Low to High</span>
-                                        &nbsp; <span class="sorting" data-bind="click: sortBy('HighToLow')"> Price -- High to Low</span>
+                                    <p>Total number of products are: <span data-bind="text: productBrandList().length"></span></p>
+                                </div>
+                                <div class="row">                                        
+                                    <p>Sort By <span class="sorting" data-bind="click: function(){sortBy('popularity') }, css: { selectedSort: sortingMethod() == 'popularity' }">Popularity</span>
+                                        &nbsp; <span class="sorting" data-bind="click: function(){sortBy('LowToHigh') }, css: { selectedSort: sortingMethod() == 'LowToHigh' }">Price -- Low to High</span>
+                                        &nbsp; <span class="sorting" data-bind="click: function(){sortBy('HighToLow') }, css: { selectedSort: sortingMethod() == 'HighToLow' }"> Price -- High to Low</span>
                                      </p>
                                 </div>
-                                <div class="row" data-bind="foreach: { data: productBrandList, as: 'productBrand' }">  
-                                         <!-- data-bind="visible: productBrand.productList().length > 0"-->                   
-                                       <div class="card col-sm-12 col-md-6 col-lg-3">                                           
-                                            <div data-bind="with: productBrand.selectedProduct">
-                                                <img data-bind = "attr:{src: imageurl}" alt="Product Image" class="card-img-top productImg">
-                                            </div>
-                                            <div class="card-body">
-                                                <p data-bind="text: productBrand.brand" class="productContent"></p>                            
-                                                <p data-bind = "text: productBrand.name" class="productContent"></p>
-                                                <p class="productContent">Colors: &nbsp;<span class = "middle" data-bind = "foreach: {data : productBrand.colorList, as: 'color'}">                                   
-                                                    <span class="dot colorSpan" data-bind="style: { backgroundColor: color }, click: $parent.setProduct"></span>&nbsp;
-                                                </span>
-                                                </p>
-                                                <p class="productContent">Sizes: &nbsp;<span  data-bind = "foreach: {data : productBrand.sizeList, as: 'size'}">
-                                                    <span class="selected" data-bind="text: size"></span>&nbsp;                                  
-                                                </span> 
-                                                </p>                               
-                                                <div data-bind="with: productBrand.selectedProduct">
-                                                    <p class="productContent"><i class="fa fa-rupee-sign"></i> <span data-bind="text: price"></span></p>                               
+                                <div class="row" > 
+                                    <div class="card-deck" data-bind="foreach: { data: productBrandList, as: 'productBrand' }"> 
+                                        <div class="cardEncloseDiv col-sm-12 col-md-6 col-lg-3">                               
+                                         <!-- data-bind="visible: productBrand.productList().length > 0"-->                                                         
+                                            <div class="card border-info">                                           
+                                                <div class= "imageEncloseDiv" data-bind="with: productBrand.selectedProduct">
+                                                    <img data-bind = "attr:{src: imageurl}" alt="Product Image" class="img-fluid image">
+                                                    <i class="icon fas fa-heart fa-2x" data-bind = "click: addFavourite, style: { color: liked() == true ? 'red' : 'grey' }"></i>
                                                 </div>
-                                            </div>
-                                        </div>                                       
+                                                <div class="card-body">
+                                                    <h5 class="productContent card-title" data-bind="text: productBrand.brand"></h5>    
+                                                    <p class="productContent card-subtitle mb-2 text-muted text-truncate" data-bind = "text: productBrand.name, attr: { title: productBrand.name}"></p>                                              
+                                                    <div data-bind="with: productBrand.selectedProduct">
+                                                        <p class="productContent"><i class="fa fa-rupee-sign"></i> <span data-bind="text: price"></span></p>                               
+                                                    </div>
+                                                    <p class="productContent"><span class="card-subtitle mb-2">Colors: </span>&nbsp;<span class = "middle" data-bind = "foreach: {data : productBrand.colorList, as: 'color'}">                                   
+                                                        <span class="dot colorSpan" data-bind="style: { backgroundColor: color }, click: $parent.setProduct"></span>&nbsp;
+                                                    </span>
+                                                    </p>
+                                                    <p class="productContent"><span class="card-subtitle mb-2">Sizes: </span>&nbsp; <span  data-bind = "foreach: {data : productBrand.sizeList, as: 'size'}">
+                                                        <span class="selected" data-bind="text: size"></span>&nbsp;                                  
+                                                    </span> 
+                                                    </p>                               
+                                                    
+                                                </div>
+                                            </div> 
+                                        </div>                                      
+                                    </div>
                                 </div>
                                 <div class="row" data-bind="visible: productBrandList().length == 0">
                                     <h2>No records found according to given criterion</h2>
