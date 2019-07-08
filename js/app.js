@@ -54,6 +54,9 @@
             self.chosenBrand = ko.observableArray();
             self.chosenRating = ko.observableArray();
 
+            //forNoavailableproductsonfilter
+            self.areProductsAvailable = ko.observable(true);
+
             // filterchnagefunction : calculate products for each filter
             self.AllFiltersChange = ko.computed(function () {
                 var newPlpArray = [];
@@ -91,7 +94,7 @@
                         newPlpArray = self.applyRatingFilter(self.chosenRating(), self.ProductsWithoutFilter());
                 }
 
-                if (self.maxRange() > self.minRange()) {
+                if (parseInt(self.maxRange()) > parseInt(self.minRange())) {
                     if (newPlpArray.length != 0)
                         newPlpArray = self.applyPricing(newPlpArray);
                     else
@@ -104,8 +107,9 @@
                 });
 
                 // if filteres are applied but no product is available
-                if ((self.chosenSize().length != 0 || self.chosenBrand().length != 0 || self.chosenColor().length != 0 || self.chosenRating().length != 0) && removeduplicatedArray.length == 0) {
-                    alert("No Products for your applied filters");
+                self.areProductsAvailable(true);
+                if ((self.chosenSize().length != 0 || self.chosenBrand().length != 0 || self.chosenColor().length != 0 || self.chosenRating().length != 0) && newPlpArray.length == 0) {
+                     self.areProductsAvailable(false);
                 }
 
                 self.filteredPlpArray(removeduplicatedArray);
@@ -124,9 +128,12 @@
             // output products array having given min/max pricing
             self.applyPricing = function (arr) {
                 var priceArr = [];
-                for (var productWithSize in arr) {
-                    if ((arr[productWithSize].price >= self.minRange()) && (arr[productWithSize].price >= self.maxRange())) {
-                        priceArr.push(arr[productWithSize]);
+                for (var sku in arr) {
+
+                    for (var productWithSize in arr[sku]["Sku"]) {
+                        if ((arr[sku]["Sku"][productWithSize].price >= parseInt(self.minRange())) && (arr[sku]["Sku"][productWithSize].price <= parseInt(self.maxRange()))) {
+                            priceArr.push(arr[sku]);
+                        }
                     }
                 }
                 return priceArr;
@@ -197,9 +204,9 @@
                 $("#SortByPriceHighToLow").css({ "font-weight": "normal" });
                 $("#SortByPriceLowToHigh").css({ "font-weight": "bold" });
                 $("#SortByPopularity").css({ "font-weight": "normal" });
-                var lowtohighpricearr = $.extend(true, [], this.Products());
+                var lowtohighpricearr = $.extend(true, [], self.Products());
                 lowtohighpricearr.sort((a, b) => (a.Sku[0].price < b.Sku[0].price) ? -1 : ((a.Sku[0].price > b.Sku[0].price) ? 1 : 0));
-                this.Products(lowtohighpricearr);
+                self.Products(lowtohighpricearr);
             };
 
             // sort by high to low price function            
@@ -207,9 +214,9 @@
                 $("#SortByPriceHighToLow").css({ "font-weight": "bold" });
                 $("#SortByPriceLowToHigh").css({ "font-weight": "normal" });
                 $("#SortByPopularity").css({ "font-weight": "normal" });
-                var hightolowpricearr = $.extend(true, [], this.Products());
+                var hightolowpricearr = $.extend(true, [], self.Products());
                 hightolowpricearr.sort((a, b) => (a.Sku[0].price > b.Sku[0].price) ? -1 : ((a.Sku[0].price < b.Sku[0].price) ? 1 : 0));
-                this.Products(hightolowpricearr);
+                self.Products(hightolowpricearr);
             };
 
             // sort by popularity function
@@ -217,9 +224,9 @@
                 $("#SortByPriceHighToLow").css({ "font-weight": "normal" });
                 $("#SortByPriceLowToHigh").css({ "font-weight": "normal" });
                 $("#SortByPopularity").css({ "font-weight": "bold" });
-                var popularityarr = $.extend(true, [], this.Products());
+                var popularityarr = $.extend(true, [], self.Products());
                 popularityarr.sort((a, b) => (a.Sku[0].rating > b.Sku[0].rating) ? -1 : ((a.Sku[0].rating < b.Sku[0].rating) ? 1 : 0));
-                this.Products(popularityarr);
+                self.Products(popularityarr);
             };
 
             // for opening and closing panels of filters

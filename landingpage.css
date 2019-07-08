@@ -6,6 +6,7 @@ body {
 .smallScreenMargin {
     margin: 0;
 }
+
 hr {
     margin: 0;
     opacity: 0.4;
@@ -29,7 +30,11 @@ hr {
     height: 100vh;
 }
 
-.sortByContent{
+.sortByHideout {
+    display: none;
+}
+
+.sortByContent {
     display: inline;
 }
 
@@ -80,6 +85,10 @@ hr {
     background-color: white;
 }
 
+.filterIcon {
+    display: none;
+}
+
 .plpDataContainer {
     margin: 10px;
     background-color: white;
@@ -93,14 +102,15 @@ hr {
     padding: 1rem 3rem 1rem 3rem;
 }
 
-.plpPageNavigationBarPaddingadjust{
-    padding-top :0;
+.plpPageNavigationBarPaddingadjust {
+    padding-top: 0;
 }
-.sortBy{
+
+.sortBy {
     display: inline;
 }
 
-.sortByHeading{
+.sortByHeading {
     display: inline;
     font-weight: bold;
 }
@@ -117,6 +127,7 @@ hr {
     z-index: 1;
     background-color: white;
     height: 25rem;
+    margin: 10px 0px 10px 0px;
 }
 
 .productImage {
@@ -136,11 +147,11 @@ hr {
     object-fit: cover;
 }
 
-.heart{
+.heart {
     color: rgb(194, 193, 193);
     font-size: 20px;
     position: relative;
-    top : 5%;
+    top: 5%;
     left: 85%;
 }
 
@@ -186,6 +197,10 @@ hr {
     font-size: 15px;
     margin: 2px;
     transition: all .3s ease 0s
+}
+
+.spaNavbarMobile {
+    display: none;
 }
 
 .spaNavbar {
@@ -298,12 +313,21 @@ hr {
     display: block;
 }
 
-.adjustRightPadding{
+.adjustRightPadding {
     padding-right: 0;
 }
 
-.adjustLeftPadding{
+.adjustLeftPadding {
     padding-left: 0;
+}
+
+.noProductAvailable {
+    margin: 1rem;
+    padding: 2rem;
+    border: 1px solid;
+    border-style: dashed;
+    background-color: cornflowerblue;
+    color: white;
 }
 
 @media (min-width: 768px) and (max-width: 992px) {
@@ -316,47 +340,68 @@ hr {
         background-size: cover;
         height: 100vh;
     }
+    .smallScreenMargin {
+        margin-right: 0;
+        margin-left: 0;
+    }
     .landing_image_div {
         display: none;
     }
-    .smallScreenMargin {
-        margin: 0;
-    }
-    .navbarContent{
+    .spaNavbar {
         display: none;
     }
-    .plpFilterContainer{
-        margin: 0;
+    .spaNavbarMobile {
+        display: flex;
+        flex-direction: row;
+        background-color: blue;
+        color: white;
     }
-    .adjustMobilePadding{
+    .spaNavbarMobile>* {
+        width: 100%;
+        float: left;
+        padding: 15px;
+        font-size: 20px;
+    }
+    .adjustMobilePadding {
         padding: 0;
     }
-    .adjustMobileMargin{
+    .plpFilterContainer {
         margin: 0;
+        width: 100%;
     }
-    .plpFilterContainer{
-        position: absolute;
-        margin : 0;
+    .plpHeaderContainer {
+        display: flex;
+    }
+    .filter {
+        text-align: center;
         width: 50%;
-        right: 0;
+        border: 1px black;
     }
-    .hideout{
+    .filterIcon {
+        display: block;
+        float: left;
+        padding: 10px;
+    }
+    .sortByHideout {
+        display: block;
+    }
+    .hideout {
         display: none;
     }
-    .plpDataContainer{
+    .adjustLeftPadding {
+        padding-left: 0;
+    }
+    .adjustLeftPadding {
+        padding: 0;
+    }
+    .plpDataContainer {
         margin: 0;
     }
-    .plpPageSortBy{
-        background-color: white;
-        position: absolute;
-        margin : 0;
-        width: 50%;
-        left: 0;
-        z-index: 5;
+    .sortByContent {
+        display: block;
     }
-    .marginUpAdd{
-        position: absolute;
-        top: 3rem;
+    .productContent {
+        height: 30%;
     }
 }
 
@@ -370,84 +415,67 @@ hr {
         background-size: cover;
         height: 100vh;
     }
+    .smallScreenMargin {
+        margin-right: 0;
+        margin-left: 0;
+    }
     .landing_image_div {
         display: none;
     }
-    .smallScreenMargin {
-        margin: 0;
-    }
-    .navbarContent{
+    .spaNavbar {
         display: none;
     }
-    .adjustMobilePadding{
-        padding: 0;
+    .spaNavbarMobile {
+        display: flex;
+        flex-direction: row;
+        background-color: blue;
+        color: white;
     }
-    .adjustMobileMargin{
-        margin : 0;
-    }
-    .plpFilterContainer{
-        position: absolute;
-        margin : 0;
-        width: 50%;
-        right: 0;
-    }
-    .hideout{
-        display: none;
-    }
-    .plpDataContainer{
-        margin: 0;
-    }
-    .plpPageSortBy{
-        background-color: white;
-        position: absolute;
-        margin : 0;
-        width: 50%;
-        left: 0;
-        z-index: 5;
-        padding: 0;
-    }
-    .marginUpAdd{
-        position: absolute;
-        top: 3rem;
-    }
-
-    .sortByHeading {
-        display: block;
-        text-align: center;
-        padding-top: 10px;
-        padding-bottom: 10px;
+    .spaNavbarMobile>* {
+        width: 100%;
+        float: left;
+        padding: 15px;
         font-size: 20px;
-        font-weight: normal;
-        border: 1px solid rgb(212, 210, 210);
-        
     }
-
-    .sortBy{
-        display: none;
-        width: 100vw;
-        z-index: 2;
+    .adjustMobilePadding {
+        padding: 0;
     }
-    .filter{
-        align-content: center;
+    .plpFilterContainer {
+        margin: 0;
+        width: 100%;
+    }
+    .plpHeaderContainer {
+        display: flex;
+    }
+    .filter {
         text-align: center;
-        border: 1px solid rgb(212, 210, 210);
+        width: 50%;
+        border: 1px black;
     }
-
-    .filterCells{
+    .filterIcon {
+        display: block;
+        float: left;
+        padding: 10px;
+    }
+    .sortByHideout {
+        display: block;
+    }
+    .hideout {
         display: none;
-        width:100%
     }
-
-    .sortByHeading:hover .sortBy{
+    .adjustLeftPadding {
+        padding-left: 0;
+    }
+    .adjustLeftPadding {
+        padding: 0;
+    }
+    .plpDataContainer {
+        margin: 0;
+    }
+    .sortByContent {
         display: block;
-        width: 100vw;
-        z-index: 2;
-        
     }
-
-    .sortByContent{
-        display: block;
-        background-color: white;
+    .productContent {
+        height: 30%;
     }
-
 }

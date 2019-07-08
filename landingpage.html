@@ -49,6 +49,13 @@
 
 
     <script type="text/html" id="plp-template">
+        <nav class="smallScreenMargin spaNavbarMobile">
+            <i class="fas fa-arrow-left"></i>
+            <h4 class="">Shirts</h4>
+            <i class="fas fa-search"></i>
+            <i class="fas fa-shopping-cart"></i>
+            <h4 class="">Login</h4> 
+        </nav>
         <nav class="spaNavbar">
             <div class="navbarContent">
                 <div class="navbarSearch">
@@ -63,12 +70,19 @@
                 
             </div>
         </nav>
-        <div class="row smallScreenMargin adjustMobileMargin">
+        <div class="row smallScreenMargin">
             <div class="col-lg-2 adjustRightPadding adjustMobilePadding">
                 <div class="plpFilterContainer">
-                    <div class="filter">
-                        Filters
-                    </div><hr>
+                    <div class="plpHeaderContainer">
+                        <div class="filter sortByHideout" data-toggle="collapse" data-target=".sortByFilter">
+                            Sort
+                            <i class="fas fa-sort-amount-down filtrIcon"></i>
+                        </div><hr>
+                        <div class="filter" data-toggle="collapse" data-target=".filterCells">
+                            Filters
+                            <i class="fas fa-filter filterIcon"></i>
+                        </div><hr>
+                    </div>
                     <div class="filterCells"> 
                         <div class="categoryFilter">
                             <span>CATEGORIES</span>
@@ -98,7 +112,7 @@
                             <div data-bind="visible: $root.Product.showSizeFilter()">
                                 <div data-bind="foreach:$root.Product.distinctSizes">
                                     <div class="sizeDiv" data-bind="visible: $root.Product.size_flag() ? $index() >= 0 : $index() < 5"> 
-                                        &nbsp&nbsp<input type="checkbox" data-bind="attr : {value : $data}, checked: $root.Product.chosenSize">&nbsp&nbsp 
+                                        &nbsp&nbsp<input type="checkbox" data-bind="attr : {value : $data, id : $data}, checked: $root.Product.chosenSize">&nbsp&nbsp <label data-bind="text : $data, attr : {'for' : $data}">
                                         <span data-bind="html:$data"></span>
                                     </div>
                                 </div>
@@ -114,7 +128,7 @@
                             <div data-bind="visible: $root.Product.showBrandFilter()">
                                 <div data-bind="foreach:$root.Product.distinctBrands">
                                     <div class="brandDiv" data-bind="visible: $root.Product.brand_flag() ? $index() >= 0 : $index() < 5 "> 
-                                        &nbsp&nbsp<input type="checkbox" data-bind="attr : {value : $data} ,checked: $root.Product.chosenBrand">&nbsp&nbsp 
+                                        &nbsp&nbsp<input type="checkbox" data-bind="attr : {value : $data, id : $data} ,checked: $root.Product.chosenBrand">&nbsp&nbsp<label data-bind="text : $data, attr : {'for' : $data}"> 
                                         <span data-bind="html:$data"></span>
                                     </div>
                                 </div>
@@ -130,8 +144,8 @@
                             <div data-bind="visible: $root.Product.showColorFilter()">
                                 <div data-bind="foreach:$root.Product.distinctColors">
                                     <div class="colorDiv" data-bind="visible: $root.Product.color_flag() ? $index() >= 0 : $index() < 5"> 
-                                        &nbsp&nbsp<input type="checkbox" data-bind="attr : {value : $data} ,checked: $root.Product.chosenColor">&nbsp
-                                        <div class="colorCircles marginAdjust" data-bind="style : {backgroundColor : $data}"></div>&nbsp&nbsp 
+                                        &nbsp&nbsp<input type="checkbox" data-bind="attr : {value : $data, id : $data} ,checked: $root.Product.chosenColor">&nbsp
+                                        <div class="colorCircles marginAdjust" data-bind="style : {backgroundColor : $data}"></div>&nbsp&nbsp<label data-bind="text : $data, attr : {'for' : $data}"> 
                                         <span data-bind="html:$data"></span>
                                     </div>
                                 </div>
@@ -146,16 +160,16 @@
                             </div>
                             <div data-bind="visible: $root.Product.showRatingFilter()">
                                 <div class="ratingDiv"> 
-                                        &nbsp&nbsp<input type="checkbox" value="4" data-bind="checked: $root.Product.chosenRating"> &nbsp&nbsp<span>4 <i class="fas fa-star"></i> & Above</span>
+                                        &nbsp&nbsp<input type="checkbox" value="4" data-bind="checked: $root.Product.chosenRating, attr : {id : $data}"> &nbsp&nbsp<span><label data-bind="attr : {'for' : $data}">4 <i class="fas fa-star"></i> & Above</span></label>
                                 </div>
                                 <div class="ratingDiv"> 
-                                        &nbsp&nbsp<input type="checkbox" value="3" data-bind="checked: $root.Product.chosenRating">&nbsp&nbsp <span>3 <i class="fas fa-star"></i> & Above</span>
+                                        &nbsp&nbsp<input type="checkbox" value="3" data-bind="checked: $root.Product.chosenRating, attr : {id : $data}"> &nbsp&nbsp<span><label data-bind="attr : {'for' : $data}">3 <i class="fas fa-star"></i> & Above</span></label>
                                 </div>
                                 <div class="ratingDiv"> 
-                                        &nbsp&nbsp<input type="checkbox" value="2" data-bind="checked: $root.Product.chosenRating">&nbsp&nbsp <span>2 <i class="fas fa-star"></i> & Above</span>
+                                        &nbsp&nbsp<input type="checkbox" value="2" data-bind="checked: $root.Product.chosenRating, attr : {id : $data}"> &nbsp&nbsp<span><label data-bind="attr : {'for' : $data}">2 <i class="fas fa-star"></i> & Above</span></label>
                                 </div>
                                 <div class="ratingDiv"> 
-                                        &nbsp&nbsp<input type="checkbox" value="1" data-bind="checked: $root.Product.chosenRating">&nbsp&nbsp <span>1 <i class="fas fa-star"></i> & Above</span>
+                                        &nbsp&nbsp<input type="checkbox" value="1" data-bind="checked: $root.Product.chosenRating, attr : {id : $data}"> &nbsp&nbsp<span><label data-bind="attr : {'for' : $data}">1 <i class="fas fa-star"></i> & Above</span></label>
                                 </div>
                             </div>
                         </div><hr class="moreHRMargin">
@@ -163,26 +177,28 @@
                 </div>
             </div>
             
-            <div class="col-lg-10 adjustLeftPadding">
+            <div class="col-lg-10 adjustLeftPadding smallScreenMargin">
                 <div class="plpDataContainer">
-                    <div class="col-lg-12 fontLight plpPageNavigationBarHomeFont plpPageNavigationBarPadding hideout">
-                        Home &nbsp>&nbsp Clothing &nbsp>&nbsp Men's Clothing &nbsp>&nbsp Shirts
-                    </div>
-                    <div class="col-lg-12 plpPageNavigationBarPadding plpPageNavigationBarPaddingadjust hideout" 
-                        data-bind="html:'<b>Shirts &nbsp&nbsp</b> (showing 1 - '+$root.Product.Products().length+ ' products of '+$root.Product.Products().length+ ' products)'">
-                    </div>
-                    <div id="plpSort" class="col-lg-12 plpPageSortBy plpPageNavigationBarPadding plpPageNavigationBarPaddingadjust">
-                        <div class="sortByHeading">Sort by
+                    <div class="sortByFilter">
+                        <div class="col-lg-12 fontLight plpPageNavigationBarHomeFont plpPageNavigationBarPadding hideout">
+                            Home &nbsp>&nbsp Clothing &nbsp>&nbsp Men's Clothing &nbsp>&nbsp Shirts
+                        </div>
+                        <div class="col-lg-12 plpPageNavigationBarPadding plpPageNavigationBarPaddingadjust hideout" 
+                            data-bind="html:'<b>Shirts &nbsp&nbsp</b> (showing 1 - '+$root.Product.Products().length+ ' products of '+$root.Product.Products().length+ ' products)'">
+                        </div>
+                        <div id="plpSort" class="col-lg-12 plpPageSortBy plpPageNavigationBarPadding plpPageNavigationBarPaddingadjust">
+                            <div class="sortByHeading"><span class="hideout">Sort by</span>&nbsp&nbsp
 
-                        </div>&nbsp&nbsp
-                        <div class="sortBy">
-                            <div class="sortByContent"><span id="SortByPopularity" data-bind="click: function(){$root.Product.SortByPopularity();}">Popularity </div>&nbsp&nbsp
-                            <div class="sortByContent"><span id="SortByPriceLowToHigh" data-bind="click: function(){$root.Product.SortByPriceLowToHigh();}"> Price -- Low to High </span></div>&nbsp&nbsp
-                            <div class="sortByContent"><span id="SortByPriceHighToLow" data-bind="click: function(){$root.Product.SortByPriceHighToLow();}"> Price -- High to Low </span></div>&nbsp&nbsp
+                            </div>
+                            <div class="sortBy">
+                                <div class="sortByContent"><span id="SortByPopularity" data-bind="click: function(){$root.Product.SortByPopularity();}">Popularity </div>&nbsp&nbsp
+                                <div class="sortByContent"><span id="SortByPriceLowToHigh" data-bind="click: function(){$root.Product.SortByPriceLowToHigh();}"> Price -- Low to High </span></div>&nbsp&nbsp
+                                <div class="sortByContent"><span id="SortByPriceHighToLow" data-bind="click: function(){$root.Product.SortByPriceHighToLow();}"> Price -- High to Low </span></div>&nbsp&nbsp
+                            </div>
                         </div>
                     </div>
                     <hr>
-                    <div class="row marginUpAdd" data-bind="foreach:$root.Product.Products"> 
+                    <div class="row marginUpAdd" data-bind="foreach:$root.Product.Products, visible: $root.Product.areProductsAvailable()">
                         <div class="col-xs-12 col-lg-3 col-sm-6 ">
                             <div class="productContainer">
                                 <div class="productImage">
@@ -202,6 +218,13 @@
                                     <div class="size" data-bind="text:'Size:'+$data.size , attr:{id:$data.Sku[0].prodId+'_size'}"></div>    
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row marginUpAdd" data-bind="visible: !$root.Product.areProductsAvailable()">
+                        <div class="col-xs-12 col-lg-12 col-sm-12 ">
+                            <div class="noProductAvailable">
+                                <h4>Sorry !! No Product is available for your filters</h4>
+                            </div>   
                         </div>
                     </div>
                 </div> 
