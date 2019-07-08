@@ -31,7 +31,7 @@
             brandA.setDefaultProductList();
             brandB.selectedProductList(sortedBrandB);
             brandB.setDefaultProductList();
-            console.log("*************** sorting method *********** "+sortMethod);
+       
             switch(sortMethod) {
                 case "HighToLow":  
                     val =  HighToLowSort(brandAVal.price(), brandBVal.price());              
@@ -126,8 +126,7 @@
                     return;
                 }                             
                 sortMethod = method;
-                self.sortingMethod(method);
-                console.log("in function call");
+                self.sortingMethod(method);              
                 self.productBrandList(self.productBrandList().sort(brandSort));
                 //self.productBrandList(brandSort);              
             };
@@ -145,13 +144,8 @@
             }
 
             self.filterdAction = function(){
-                console.log("sizelist: "+self.selectedSizeList().length);
-                console.log("sizelist: "+self.selectedSizeList());
-                console.log("selectedCategory: "+self.selectedCategory());  
-                console.log("selectedColor: "+self.selectedColor());              
-
-               // console.log("list: "+self.selectedBrandList().length);
-                if(self.selectedBrandList().length == 0 && self.selectedCategory() == undefined && self.selectedColor() == undefined && self.selectedSizeList().length == 0)
+             
+                if(self.selectedBrandList().length == 0 && self.selectedCategory()  == undefined && self.selectedColor() == undefined && self.selectedSizeList().length == 0)
                 {          
                     ko.utils.arrayForEach(self.golbalBrandList(), function(productBrand) {
                         productBrand.setDefaultSelectedProductList();
@@ -160,31 +154,20 @@
                   //  self.productBrandList(self.golbalBrandList());    
                 }
                 else{                    
-                   console.log("brand list: "+self.selectedBrandList());
-                   console.log("selected Brand length: "+self.selectedBrandList().length);
+                   
                    var filteredProductbrandList = [];
                     if(!(self.selectedBrandList().length == 0 && self.selectedCategory() == undefined))
                     {
-                        filteredProductbrandList =  ko.utils.arrayFilter(self.golbalBrandList(), function(productBrand) {
-                          //  console.log("brand: "+productBrand.brand());
-                            //console.log("test: "+(self.selectedBrandList().length == 0 ? true : self.selectedBrandList.indexOf(productBrand.brand()) != -1) && (self.selectedCategory() == undefined ? true : self.selectedCategory() == productBrand.category())); 
-                           // console.log("test1: "+(self.selectedBrandList().length == 0 ? true : self.selectedBrandList.indexOf(productBrand.brand()) != -1));
-                           // console.log("test2: "+(self.selectedCategory() == undefined ? true : self.selectedCategory() == productBrand.category()));                
+                        filteredProductbrandList =  ko.utils.arrayFilter(self.golbalBrandList(), function(productBrand) {                         
                                  return (self.selectedBrandList().length == 0 ? true : self.selectedBrandList.indexOf(productBrand.brand()) != -1) && (self.selectedCategory() == undefined ? true : self.selectedCategory() == productBrand.category());                           
-                             }); // check for empty filteredProductbrandList not necessory
-                           //  self.productBrandList(filteredProductbrandList);
+                             }); 
                     }
                     else{
                         ko.utils.arrayForEach(self.golbalBrandList(), function(globalBrand) {
                             filteredProductbrandList.push(globalBrand);
-                        });
-                       // filteredProductbrandList = self.golbalBrandList();
-
-                        //self.productBrandList(self.golbalBrandList());
-                    }  
-                    
-                    console.log("filteredProductbrandList: "+filteredProductbrandList.length);
-                    
+                        });                       
+                    }                      
+                   
                    if(!(self.selectedSizeList().length == 0 && self.selectedColor() == undefined))
                     {
                        for(var i= 0; i < filteredProductbrandList.length; ++i)
@@ -223,9 +206,8 @@
                         });
                     }
 
-                    //self.productBrandList(filteredProductbrandList.sort(brandSort));
                     self.productBrandList(filteredProductbrandList.sort(brandSort));
-                  //  self.productBrandList(filteredProductbrandList);
+                  
                 }
                 return true;
             }
@@ -233,29 +215,19 @@
             self.filteredProduct = function productFilter(products)
             {             
                 var filteredProducts = ko.utils.arrayFilter(products, function(product) {                   
-                    //return (self.selectedSizeList().length == 0 ? true: self.selectedSizeList().indexOf(product.size()) != -1) && (self.selectedColor() == undefined ? true : self.selectedColor() == product.color());
+                   
                     return (self.selectedSizeList().length == 0 ? true: self.selectedSizeList().indexOf(product.size()) != -1) 
                             && (self.selectedColor() == undefined ? true : self.selectedColor() == product.color());
                            // && (self.minPrice()  == undefined || self.maxPrice() == undefined) ? true : (product.price() >= parseInt(self.minPrice()) && product.price() <= parseInt(self.maxPrice()));
-                });
-                console.log("filteredProducts length: "+filteredProducts.length);
-                //var sortingMethod = ratingSort;
-               // filteredProducts.sort(sortingMethod);
-                return filteredProducts;        
-               /* return filteredProducts.sorted(function (left, right) {
-                    console.log("in sorting");
-                    var leftRating = parseInt(left.rating());
-                    var rigthRating = parseInt(right.rating());
-                    return leftRating == rigthRating ? 0 : leftRating > rigthRating ? -1 : 1;
-                });*/
+                });               
+                return filteredProducts;  
+              
             }          
 
-            self.setDefaultBrandList = function(){
-                console.log("************** in brand sort ***************");
-                self.productBrandList(self.golbalBrandList().sort(brandSort));
-               // self.productBrandList(self.golbalBrandList());
+            self.setDefaultBrandList = function(){             
+                self.productBrandList(self.golbalBrandList().sort(brandSort));             
             }
-            //self.template = ko.observable('productListPage-template');
+         
             self.addProductBrand = function(productBrand){
                 self.golbalBrandList.push(productBrand);
             };
@@ -280,20 +252,14 @@
             self.addProduct = function(product){                
                 self.brandProductList.push(product);
                // self.productList.push(product); // need to  ..change productList should be set to computed
-            }; 
-
-            /*self.productList = ko.observableArray([]);
-            self.addProduct = function(product){                
-                self.productList.push(product);
-            };*/   
+            };              
 
             self.setDefaultSelectedProductList = function(){
                 self.selectedProductList(self.brandProductList());
                 self.setDefaultProductList();
             };
 
-            self.colorList = ko.computed(function(){
-                 console.log("colorList: "+ self.selectedProductList().length);
+            self.colorList = ko.computed(function(){               
                   var colors = ko.utils.arrayMap(self.selectedProductList(), function(product){
                       return product.color();
                   });
@@ -302,8 +268,8 @@
                   return distinctColors;
               });
 
-            self.setDefaultProductList = function(){   
-                console.log("in setDefaultProductList: ");             
+            self.setDefaultProductList = function(){  
+                  
                 var defaultProductList = ko.utils.arrayFilter(self.selectedProductList(), function(product) {              
                     return product.color() == self.colorList()[0];
                 });
@@ -445,81 +411,7 @@
                         vm.Main.template("productListPage-template");                       
                        
                        //$( "#slider-range" ).slider();
-                        //vm.ProductList.addProduct(productObj);
-                     
-                       /* var productBrandObj = new productBrand();
-                        productBrandObj.prodId("1111");
-                        productBrandObj.category("mens clothing");
-                        productBrandObj.name("Men's Checkered Casual Spread Shirt");
-                        productBrandObj.brand("Rope");
-
-                        var productObj = new Product();
-                        productObj.skuId("1111_Blue_L");
-                        productObj.color("Blue");
-                        productObj.size("L");
-                        productObj.rating("3.5");
-                        productObj.price("498");
-                        productObj.imageurl("http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/rope_bluejpeg.jpeg");
-
-                        var productObj2 = new Product();
-                        productObj2.skuId("1111_Blue_M");
-                        productObj2.color("Blue");
-                        productObj2.size("M");
-                        productObj2.rating("3.5");
-                        productObj2.price("498");
-                        productObj2.imageurl("http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/rope_bluejpeg.jpeg");
-
-                        var productObj3= new Product();
-                        productObj3.skuId("1111_Red_XL");
-                        productObj3.color("Red");
-                        productObj3.size("XL");
-                        productObj3.rating("3.5");
-                        productObj3.price("408");
-                        productObj3.imageurl("http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/rope_red.jpeg");
-
-                        productBrandObj.addProduct(productObj);
-                        productBrandObj.addProduct(productObj2);
-                        productBrandObj.addProduct(productObj3);                      
-
-                        // start 2nd product brand
-
-                        var productBrandObj2 = new productBrand();
-
-                        productBrandObj2.prodId("1113");
-                        productBrandObj2.category("mens clothing");
-                        productBrandObj2.name("Men's Checkered Casual Spread Shirt");
-                        productBrandObj2.brand("Zombom");
-
-                        var productObj3 = new Product();
-                        productObj3.skuId("1113_Black_40");
-                        productObj3.color("Black");
-                        productObj3.size("40");
-                        productObj3.rating("3.7");
-                        productObj3.price("696");
-                        productObj3.imageurl("http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/zombom_black.jpeg");
-
-                        var productObj4 = new Product();
-                        productObj4.skuId("1113_Red_38");
-                        productObj4.color("Red");
-                        productObj4.size("38");
-                        productObj4.rating("3.7");
-                        productObj4.price("676");
-                        productObj4.imageurl("http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/zombom_red.jpeg");
-
-                        productBrandObj2.addProduct(productObj3);
-                        productBrandObj2.addProduct(productObj4); 
-                        
-
-                        productBrandObj.setDefaultSelectedProductList();
-                       // productBrandObj.setDefaultProductList();                       
-                        productBrandObj2.setDefaultSelectedProductList();
-                      //  productBrandObj2.setDefaultProductList();
-                       
-                        
-                        vm.ProductList.addProductBrand(productBrandObj);
-                        vm.ProductList.addProductBrand(productBrandObj2);                        
-                        vm.ProductList.setDefaultBrandList();*/
-                                                 
+                        //vm.ProductList.addProduct(productObj);                                                 
                     });  
                                  
               });              

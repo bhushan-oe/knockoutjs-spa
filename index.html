@@ -26,7 +26,8 @@
         <link rel = "stylesheet" type = "text/css" href = "css/style.css" />
         <link rel = "stylesheet" type = "text/css" href = "css/cardStyle.css" />
         <link rel = "stylesheet" type = "text/css" href = "css/filterStyles.css" /> 
-        <link rel = "stylesheet" type = "text/css" href = "css/sortMenu.css" />       
+        <link rel = "stylesheet" type = "text/css" href = "css/sortMenu.css" /> 
+        <link rel = "stylesheet" type = "text/css" href = "css/header.css" />       
        
     </head>
     <body>
@@ -63,37 +64,65 @@
                 </div>               
             </script>
             <script type="text/html" id="productListPage-template">
-              
+                <div class="row header align-items-center">
+                    <!--<div class="col-lg-5 col-lg-offset-4 searchHeader input-group mb3">
+                        <input type="text" class="form-control" placeholder="Search for products, brands and more">
+                        <div class="input-group-append searchIcon">
+                            <i class="fa fa-search fa-2x"></i>
+                        </div>
+                    </div>    --> 
+                    <div class="input-group col-lg-5 offset-lg-3 searchHeader">
+                        <input type="text" class="form-control searchText" placeholder="Search for products, brands and more" aria-label="Search for products, brands and more" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                                <span class="input-group-text searchLogo" id="basic-addon2"><i class="fa fa-search"></i></span>
+                            <!--<span class="input-group-text" id="basic-addon2">@example.com</span>-->
+                        </div>
+                    </div>  
+                    <div class="col-lg-3 d-flex justify-content-around">
+                        <span class="headerMenu">Login</span>
+                        <span class="headerMenu">Menu <i class="fas fa-chevron-down"></i></span>
+                        <span class="headerMenu"><i class="fa fa-cart-plus fa-1x" aria-hidden="true"></i> Cart</span>
+                    </div>            
+                </div>
                 <div data-bind = "with: ProductList" class="row">
-                            <div class ="col-sm-2">                                 
-
-                                    <p><a class="btn btn-default" data-toggle="collapse" href="#collapseCategories" role="button" aria-expanded="false" aria-controls="collapseCategories">
-                                            Categories
-                                        </a>                        
+                            <div class ="col-sm-2"> 
+                                    <h5>Filters</h5>
+                                    <hr class="filterLine">
+                                    <p>
+                                        <div class="d-flex justify-content-between" data-toggle="collapse" href="#collapseCategories"  >
+                                            <span class="filterHeading">Categories</span>
+                                            <span class="filterIcon"><i class="fas fa-chevron-down"></i></span>
+                                        </div>                    
                                     </p>
-                                    <div class="collapse" id="collapseCategories">
+                                    <hr> 
+                                    <div class="collapse filterContent" id="collapseCategories">
                                         <ul class="list-group" data-bind="foreach: { data: categoryList, as: 'category' }">
                                             <li class="list-group-item" data-bind="text: category, click:$parent.filterdCategory"></li>                                                                       
                                         </ul>
-                                    </div>
-                
-                                    <p><a class="btn btn-default" data-toggle="collapse" href="#collapseBrands" role="button" aria-expanded="false" aria-controls="collapseBrands">
-                                            Brands
-                                        </a>                        
+                                    </div>                                   
+                                     <p>
+                                         <div class="d-flex justify-content-between" data-toggle="collapse" href="#collapseBrands"  >
+                                            <span class="filterHeading">Brands</span>
+                                            <span class="filterIcon"><i class="fas fa-chevron-down"></i></span>
+                                        </div> 
                                     </p>
-                                    <div class="collapse" id="collapseBrands"  data-bind="foreach: { data: brandList, as: 'brand' }">                                  
+                                    <hr>                      
+                                    <div class="collapse filterContent" id="collapseBrands"  data-bind="foreach: { data: brandList, as: 'brand' }">                                  
                                         <div class="form-check">
                                             <label class="form-check-label" >
                                                 <input type="checkbox" class="form-check-input" data-bind="{checkedValue: $data, checked: $parent.selectedBrandList, click: $parent.filterdAction}"><span data-bind="text: brand" ></span>
                                             </label>
                                         </div>                                                                            
-                                    </div> 
-                                   <p>
-                                        <a class="btn btn-default" data-toggle="collapse" href="#collapsePrice" role="button" aria-expanded="false" aria-controls="collapsePrice">
-                                            Price
-                                        </a> 
+                                    </div>                                
+                                     
+                                    <p>                                       
+                                        <div class="d-flex justify-content-between" data-toggle="collapse" href="#collapsePrice"  >
+                                            <span class="filterHeading">Price</span>
+                                            <span class="filterIcon"><i class="fas fa-chevron-down"></i></span>
+                                        </div>
                                     </p>
-                                    <div class="collapse" id="collapsePrice">
+                                    <hr> 
+                                    <div class="collapse filterContent" id="collapsePrice">
                                           <!--  <div class="sliderText">jQuery UI Price Range Slider</div>
                                         <div id="slider-range"></div> 
                                         <div style="margin:30px auto">
@@ -106,11 +135,14 @@
                                           <div data-bind="RangeSlider: { range: true,step: 1, values:[1960, 2013] }"></div>--> 
                                     </div>
 
-                                   <p><a class="btn btn-default" data-toggle="collapse" href="#collapseColors" role="button" aria-expanded="false" aria-controls="collapseColors">
-                                            Colors
-                                        </a>                        
-                                    </p>                        
-                                    <div class="collapse" id="collapseColors" data-bind="foreach: { data: colorList, as: 'color' }">
+                                   <p>
+                                        <div class="d-flex justify-content-between" data-toggle="collapse" href="#collapseColors"  >
+                                            <span class="filterHeading">Colors</span>
+                                            <span class="filterIcon"><i class="fas fa-chevron-down"></i></span>
+                                        </div>                                                               
+                                    </p> 
+                                    <hr>                        
+                                    <div class="collapse filterContent" id="collapseColors" data-bind="foreach: { data: colorList, as: 'color' }">
                                             <div class="form-check">
                                                 <label class="form-check-label" >
                                                     <!--<span class="dot" data-bind="style: { backgroundColor: color }"></span>-->
@@ -119,11 +151,14 @@
                                                 </label>
                                              </div>                                             
                                     </div>
-                                    <p><a class="btn btn-default" data-toggle="collapse" href="#collapseSizes" role="button" aria-expanded="false" aria-controls="collapseSizes">
-                                            Sizes
-                                        </a>                        
+                                    <p> 
+                                        <div class="d-flex justify-content-between" data-toggle="collapse" href="#collapseSizes"  >
+                                            <span class="filterHeading">Sizes</span>
+                                            <span class="filterIcon"><i class="fas fa-chevron-down"></i></span>
+                                        </div>                 
                                     </p>
-                                    <div class="collapse" id="collapseSizes" data-bind="foreach: { data: sizeList, as: 'size' }">
+                                    <hr> 
+                                    <div class="collapse filterContent" id="collapseSizes" data-bind="foreach: { data: sizeList, as: 'size' }">
                                         <div class="form-check">
                                             <label class="form-check-label" >
                                                 <input type="checkbox" class="form-check-input" data-bind="{checkedValue: $data, checked: $parent.selectedSizeList, click: $parent.filterdAction}"><span data-bind="text: size" ></span>
@@ -133,19 +168,22 @@
                             </div>
                             <div class="col-sm-10">
                                 <div class="row">
-                                    <p>Total number of products are: <span data-bind="text: productBrandList().length"></span></p>
+                                    <p class="text-muted">Home<i class="navIcon fas fa-chevron-right"></i><span>T-Shirts</span> <i class="navIcon fas fa-chevron-right"></i> <span data-bind= "text: selectedCategory() == undefined ? 'All Category' : selectedCategory"></span></p>
+                                </div>
+                                <div class="row">
+                                    <p><span class="headingTitle">Shirts:</span>(showing <b><span data-bind="text: productBrandList().length"></span></b> products).</p>
                                 </div>
                                 <div class="row">                                        
-                                    <p>Sort By <span class="sorting" data-bind="click: function(){sortBy('popularity') }, css: { selectedSort: sortingMethod() == 'popularity' }">Popularity</span>
-                                        &nbsp; <span class="sorting" data-bind="click: function(){sortBy('LowToHigh') }, css: { selectedSort: sortingMethod() == 'LowToHigh' }">Price -- Low to High</span>
-                                        &nbsp; <span class="sorting" data-bind="click: function(){sortBy('HighToLow') }, css: { selectedSort: sortingMethod() == 'HighToLow' }"> Price -- High to Low</span>
+                                    <p><span class="headingTitle">Sort By:</span> <span class="sorting" data-bind="click: function(){sortBy('popularity') }, css: { selectedSort: sortingMethod() == 'popularity' }">Popularity</span>
+                                        <span class="sorting" data-bind="click: function(){sortBy('LowToHigh') }, css: { selectedSort: sortingMethod() == 'LowToHigh' }">Price -- Low to High</span>
+                                        <span class="sorting" data-bind="click: function(){sortBy('HighToLow') }, css: { selectedSort: sortingMethod() == 'HighToLow' }"> Price -- High to Low</span>
                                      </p>
                                 </div>
                                 <div class="row" > 
                                     <div class="card-deck" data-bind="foreach: { data: productBrandList, as: 'productBrand' }"> 
                                         <div class="cardEncloseDiv col-sm-12 col-md-6 col-lg-3">                               
                                          <!-- data-bind="visible: productBrand.productList().length > 0"-->                                                         
-                                            <div class="card border-info">                                           
+                                            <div class="card shadow bg-white rounded border-default">                                           
                                                 <div class= "imageEncloseDiv" data-bind="with: productBrand.selectedProduct">
                                                     <img data-bind = "attr:{src: imageurl}" alt="Product Image" class="img-fluid image">
                                                     <i class="icon fas fa-heart fa-2x" data-bind = "click: addFavourite, style: { color: liked() == true ? 'red' : 'grey' }"></i>
