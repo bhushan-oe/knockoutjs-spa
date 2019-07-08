@@ -89,9 +89,18 @@
                             <div class="categories"><i class="fas fa-chevron-left"></i><span><b>Shirts</b></span></div>
                         </div>
 
-                        <div class="col-lg-12 filters col-div">
-                            <span class="mainFont"><b>PRICE</b></span>
-                            <div class="sildecontainer"></div>
+                        <div class="col-lg-12 filters col-div pad">
+                            <span>PRICE</span>
+                            <div class="sildecontainer">
+                                <div style="display: flex">
+                                    <input type="range" class="slider" id="Range1" data-bind="{ value: $root.Product.selectedMinPrice, attr:{ min: $root.Product.minPrice(), max: $root.Product.selectedMaxPrice()}}">
+                                    <input type="range" class="slider" id="Range2" data-bind="{ value: $root.Product.selectedMaxPrice, attr:{ min: $root.Product.selectedMinPrice(), max: $root.Product.maxPrice()}}">
+                                </div>
+                                <div style="display: flex; justify-content: space-between">
+                                    <input type="number" class="inputPrice" name="minPrice" data-bind="{value: $root.Product.selectedMinPrice, attr:{ min:$root.Product.minPrice(), max: $root.Product.maxPrice() }}">
+                                    <input type="number" class="inputPrice" name="maxPrice" data-bind="{ value: $root.Product.selectedMaxPrice, attr:{ min: $root.Product.minPrice(), max: $root.Product.maxPrice() }}">
+                                </div>
+                            </div>
                         </div>
 
                         <div class="col-lg-12 panel panel-primary">
@@ -164,8 +173,8 @@
                     <div id="pop" class="col-lg-12 breadcrumb">
                         <b>Sort: &emsp; </b>
                         <span data-bind = "click: function(){ $root.Product.SortByPopularity(); }">Popularity &emsp;</span>
-                        <span data-bind = "click: function() { $root.Product.SortDescending(); }">Price Descending &emsp;</span>
-                        <span data-bind="click: function() { $root.Product.SortByPrice(); }">Price Ascending</span>
+                        <span data-bind = "click: function() { $root.Product.SortDescending(); }">Price Ascending &emsp;</span>
+                        <span data-bind="click: function() { $root.Product.SortByAscending(); }">Price Descending</span>
                     </div>
                 </div>
                 <!--#endregion-->

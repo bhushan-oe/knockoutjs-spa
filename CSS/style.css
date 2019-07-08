@@ -184,6 +184,33 @@
     font-size: 17px;
 }
 
+.slidecontainer{
+    width: 100%;
+}
+
+.slider{
+    border-radius: 5px;
+    background: rgba(24, 61, 228, 0.863);
+    height: 5px;
+    outline: none;
+    transition: opacity .2s;
+    margin-bottom: 10px;
+    appearance: none;
+    width: 15px;
+    -webkit-appearance: none;
+}
+
+.slider::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    border-radius: 50%;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.inputprice{
+    width: 10vw;
+}
+
 @media only screen and (max-width: 990px){
     .image{
         display: none;

@@ -40,10 +40,10 @@
             self.productArray = ko.observableArray();
             self.allProduct = ko.observableArray();
             self.allSize = ko.observableArray();
-            // self.minPrice = ko.observableArray(100);
-            // self.maxPrice = ko.observableArray(200);
-            // self.selectedMinPrice = ko.observableArray(100);
-            // self.selectedMaxPrice = ko.observableArray(200);
+            self.minPrice = ko.observableArray();
+            self.maxPrice = ko.observableArray();
+            self.selectedMinPrice = ko.observableArray();
+            self.selectedMaxPrice = ko.observableArray();
             self.color_flag = ko.observable(false);
             self.brand_flag = ko.observable(false);
             self.size_flag = ko.observable(false);
@@ -55,13 +55,30 @@
             self.filterArray = ko.observableArray();
             self.selectedRating = ko.observableArray();
 
+            self.priceFilter = ko.computed(function(){
+                var tempArr, temp = [];
+                if(self.selectSize().length != 0 || self.selectBrand().length != 0 || self.selectColor().length != 0 || self.selectedRating().length != 0)
+                    tempArr = $.extend(true, [], self.productArray());
+                else
+                    tempArr = $.extend(true, [], self.allProduct());
+
+                for(var y in tempArr){
+                    if( tempArr[y].sku[0].price >= self.selectedMinPrice() && tempArr[y].sku[0].price <= self.selectedMaxPrice())
+                        temp.push(tempArr[y]);
+                }
+                if(temp.length != 0)
+                    self.productArray(temp);
+                else
+                    self.productArray(self.allProduct());
+            });
+            
             self.SortByPopularity = function (){
                 var clonedArr = $.extend(true, [], self.productArray());
                 clonedArr.sort((a,b) => (a.sku[0].rating > b.sku[0].rating) ? -1 : ((a.sku[0].rating < b.sku[0].rating) ? 1 : 0));
                 self.productArray(clonedArr);
             }
 
-            self.SortByPrice = function(){
+            self.SortByAscending = function(){
                 var clonedArr = $.extend(true,[],self.productArray());
                 clonedArr.sort((a,b) => (a.sku[0].price > b.sku[0].price) ? -1 : ((a.sku[0].price < b.sku[0].price) ? 1 : 0));
                 self.productArray(clonedArr);
@@ -74,33 +91,33 @@
             }
 
             //Applying Filters
-            self.applyFilter = function (fascetsArray) {
-            console.log("apply ", fascetsArray);
+            self.applyFilter = function (facetsArray) {
+            console.log("apply ", facetsArray);
                 var clonedArr = $.extend(true, [], self.allProduct());
                 var temp = [];
-                for (var fascet in fascetsArray) {
-                    console.log("apply ", fascet);
-                    for (var SelectedValue of fascetsArray[fascet]) {
-                        console.log("apply ", fascetsArray[fascet]);
+                for (var facet in facetsArray) {
+                    console.log("apply ", facet);
+                    for (var SelectedValue of facetsArray[facet]) {
+                        console.log("apply ", facetsArray[facet]);
                         for (var CurrentIndex in clonedArr) {
-                            if (fascet === "size") {
+                            if (facet === "size") {
                                 console.log("in IF", SelectedValue[0], clonedArr[CurrentIndex].size, $.inArray(SelectedValue[0], clonedArr[CurrentIndex].size));
                                 if ($.inArray(SelectedValue[0], clonedArr[CurrentIndex].size) != -1) {
                                     temp.push(clonedArr[CurrentIndex]);
                                    
                                 }
                             }
-                            if (fascet == "color") {
+                            if (facet == "color") {
                                 if ($.inArray(SelectedValue, clonedArr[CurrentIndex].color) != -1) {
                                     temp.push(clonedArr[CurrentIndex]);
                                 }
                             }
-                            if (fascet == "brand") {
+                            if (facet == "brand") {
                                 if ($.inArray(SelectedValue, clonedArr[CurrentIndex].brand) != -1) {
                                     temp.push(clonedArr[CurrentIndex]);
                                 }
                             }
-                            if (fascet == "rating") {
+                            if (facet == "rating") {
                                 if (SelectedValue <= clonedArr[CurrentIndex].rating[0]) {
                                     temp.push(clonedArr[CurrentIndex]);
                                 }
@@ -119,14 +136,13 @@
                     self.productArray(another_ar);
                 }
                 else {
-                    // $('input:checkbox').prop('checked', false);
-                    // alert("Serched item Not found");
-                    // self.productArray(self.allProduct());
-                    // self.selectSize().length = 0;
-                    // self.selectColor().length = 0;
-                    // self.selectBrand().length = 0;
-                    // self.selectedRating().length = 0;
-
+                    $('input:checkbox').prop('checked', false);
+                    alert("Serched item Not found");
+                    self.productArray(self.allProduct());
+                    self.selectSize().length = 0;
+                    self.selectColor().length = 0;
+                    self.selectBrand().length = 0;
+                    self.selectedRating().length = 0;
                 }
             };
 
@@ -134,31 +150,25 @@
             self.facetsComputed = ko.computed(function(){
                 
                 console.log(self.selectSize(), self.selectBrand(), self.selectColor(), self.selectedRating());
-                // if (self.selectSize().length > 1) {
-                //     self.selectSize().shift();
-                // }
-                // if (self.selectedRating().length > 1) {
-                //     self.selectedRating().shift();
-                // }
                 var temm =[];
-                var fascetsArray = [];
+                var facetsArray = [];
                 if (self.selectSize().length != 0) {
                     temm.push(self.selectSize());
-                    fascetsArray["size"] = temm;
+                    facetsArray["size"] = temm;
                 }
                 if (self.selectBrand().length != 0) {
-                    fascetsArray["brand"] = self.selectBrand();
+                    facetsArray["brand"] = self.selectBrand();
                 }
                 if (self.selectColor().length != 0) {
-                    fascetsArray["color"] = self.selectColor();
+                    facetsArray["color"] = self.selectColor();
                 }
                 if (self.selectedRating().length != 0) {
-                    fascetsArray["rating"] = self.selectedRating();
+                    facetsArray["rating"] = self.selectedRating();
                 }
              
-                if (!jQuery.isEmptyObject(fascetsArray)) {
+                if (!jQuery.isEmptyObject(facetsArray)) {
                     console.log("calling fun");
-                    self.applyFilter(fascetsArray);
+                    self.applyFilter(facetsArray);
                 }
                 else {
                     self.productArray(self.allProduct());
@@ -231,12 +241,12 @@
                 var allbr = [];
 
                 $.ajax({url: "http://demo2828034.mockable.io/search/shirts", success: function(result){
-                    // var clonedArr = result["items"];
-                    // clonedArr.sort((a,b)=>(a.price < b.price)?-1:((a.price > b.price)? 1:0));
-                    // vm.Products.minPrice(clonedArr[0].price);
-                    // vm.Products.maxPrice(clonedArr[clonedArr.length-1].price);
-                    // vm.Products.selectedMinPrice(vm.Products.minPrice());
-                    // vm.Products.selectedMaxPrice(vm.Products.maxPrice());
+                    var clonedArr = result["items"];
+                    clonedArr.sort((a,b)=>(a.price < b.price)?-1:((a.price > b.price)? 1:0));
+                    vm.Product.minPrice(clonedArr[0].price);
+                    vm.Product.maxPrice(clonedArr[clonedArr.length-1].price);
+                    vm.Product.selectedMinPrice(vm.Product.minPrice());
+                    vm.Product.selectedMaxPrice(vm.Product.maxPrice());
                     
                     for(var ob in result.items){
                         $.each(result.items, function(i, el){
@@ -300,8 +310,8 @@
                         });            
                         newDataArray.push({ 'prodId': productArrId, 'sku':dataArray[productArrId], 'color': newColorArr, 'size':newSizeArr, 'brand':newBrandArr, 'rating':newRatingArr})    
                     }
-                    // console.log(newDataArray, vm.Products.minPrice(), vm.Products.maxPrice(), vm.Products.selectedMinPrice(),vm.Products.selectedMaxPrice());
-                    // vm.Products.allProduct(newDataArray);
+                    console.log(newDataArray, vm.Product.minPrice(), vm.Product.maxPrice(), vm.Product.selectedMinPrice(),vm.Product.selectedMaxPrice());
+                    
                     
                     vm.Product.productArray(newDataArray); 
                     vm.Product.allProduct(newDataArray);
