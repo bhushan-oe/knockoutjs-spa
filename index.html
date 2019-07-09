@@ -18,37 +18,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+        integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
 
 </head>
 
 <body>
-
-
-    <!-- #region Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light header">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav" data-bind="foreach: Main.pages">
-                <li class="nav-item" data-bind="
-                    css: { active: $data == $root.Main.chosenPageId() },
-                    click: $root.Main.goToPage">
-                    <a class="nav-link" data-bind="text: $data">Features</a>
-                </li>
-
-            </ul>
-        </div>
-    </nav>
-    <!-- #endregion -->
-
-
     <div data-bind="template: { name: $root.Main.template }"></div>
-
-
 
     <!-- #region search Page Template-->
     <script type="text/html" id="landing-page">
@@ -71,6 +48,28 @@
 
     <!-- #region Product Listing Page-->
     <script type="text/html" id="product-listing-page">
+        <!--Header-->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-xs-12 headerdiv">
+                <div class="row headerContent">
+                    <div class="col-xs-2 col-lg-2"></div>
+                    <div class="col-xs-6 col-lg-6">
+                        <div class="d-flex">
+                            <div class="searchBar">
+                                <input type="text" class="searchText" placeholder="Search Something...">
+                                <a href="#" class="searchIcon"><i class="fas fa-search"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-lg-4 col-md-4 cart">
+                        <span class="headerFont">Login & Signup</span>
+                        <span class="headerFont">more <i class="fas fa-angle-down"></i></span>
+                        <span class="headerFont"> <i class="fas fa-shopping-cart"></i> Cart</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <div class="row row-div background">
         <!--Filters-->
             <div class="col-lg-2">
@@ -84,21 +83,24 @@
                     <div id="fl" class="row row-div">
                         <div class="col-lg-12 filters col-div">
                             <span>CATEGORIES</span>
-                            <div class="categories"><i class="fas fa-chevron-left"></i><span>Clothing</span></div>
-                            <div class="categories"><i class="fas fa-chevron-left"></i><span>Men's Clothing</span></div>
-                            <div class="categories"><i class="fas fa-chevron-left"></i><span><b>Shirts</b></span></div>
+                            <div class="categories"><i class="fas fa-chevron-left pad"></i><span>Clothing</span></div>
+                            <div class="categories"><i class="fas fa-chevron-left pad"></i><span>Men's Clothing</span></div>
+                            <div class="categories"><i class="fas fa-chevron-left pad"></i><span>Shirts</span></div>
                         </div>
+
+                        <hr>
 
                         <div class="col-lg-12 filters col-div pad">
                             <span>PRICE</span>
+                            <br><br>
                             <div class="sildecontainer">
                                 <div style="display: flex">
                                     <input type="range" class="slider" id="Range1" data-bind="{ value: $root.Product.selectedMinPrice, attr:{ min: $root.Product.minPrice(), max: $root.Product.selectedMaxPrice()}}">
                                     <input type="range" class="slider" id="Range2" data-bind="{ value: $root.Product.selectedMaxPrice, attr:{ min: $root.Product.selectedMinPrice(), max: $root.Product.maxPrice()}}">
                                 </div>
                                 <div style="display: flex; justify-content: space-between">
-                                    <input type="number" class="inputPrice" name="minPrice" data-bind="{value: $root.Product.selectedMinPrice, attr:{ min:$root.Product.minPrice(), max: $root.Product.maxPrice() }}">
-                                    <input type="number" class="inputPrice" name="maxPrice" data-bind="{ value: $root.Product.selectedMaxPrice, attr:{ min: $root.Product.minPrice(), max: $root.Product.maxPrice() }}">
+                                    <input type="number" name="minPrice" data-bind="{value: $root.Product.selectedMinPrice, attr:{ min:$root.Product.minPrice(), max: $root.Product.maxPrice() }}">
+                                    <input type="number" name="maxPrice" data-bind="{ value: $root.Product.selectedMaxPrice, attr:{ min: $root.Product.minPrice(), max: $root.Product.maxPrice() }}">
                                 </div>
                             </div>
                         </div>
