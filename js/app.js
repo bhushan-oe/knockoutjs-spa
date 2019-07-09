@@ -1,23 +1,7 @@
-var filterfun = function(){
-  
-    if($(window).width() < 900)
-    {
-        $("#fil").toggleClass('hidefilter showfilter');
-        $("#sh").removeClass('showsortBy');
-        $("#sh").addClass('hidesortBy');
-    }
-}
-
-var sortfun = function(){
-    $("#sh").toggleClass('hidesortBy showsortBy');
-    $("#fil").removeClass('showfilter');
-    $("#fil").addClass('hidefilter');
-}
 ;(function($){
 
 $(document).ready(function(){
-    
-      
+       
   //-------------------------------------Code For Fascets Collapsing -------------------------------         
 $(document).on('click', '.panel-heading.clickable', function(e){
     
@@ -33,8 +17,7 @@ $(document).on('click', '.panel-heading.clickable', function(e){
 		
 	}
 })
-//----------------------------------------------------------------------------------------
-       
+//----------------------------------------------------------------------------------------      
 function viewModel() {
     var self = this;
     self.chosenPageId = ko.observable();
@@ -60,37 +43,37 @@ function pageViewModel() {
 // }
 //-----------------------------------------------------------------------------------------------
 function productViewModel() {
-            // console.log(vm.Main.Search_value())
             //---------------------------------Observable and Observable Array declarations---------
             var self = this;
             self.Products=ko.observableArray();
             self.allProduct=ko.observableArray();
-            self.color_observe=ko.observableArray();
-            self.size_observe= ko.observableArray();
-            self.brand_observe= ko.observableArray();
-            self.color_flag=ko.observable(false);
-            self.size_flag= ko.observable(false);
-            self.brand_flag= ko.observable(false);
+            self.colorObserve=ko.observableArray();
+            self.sizeObserve= ko.observableArray();
+            self.brandObserve= ko.observableArray();
+            self.colorFlag=ko.observable(false);
+            self.sizeFlag= ko.observable(false);
+            self.brandFlag= ko.observable(false);
             self.fisrtRange =ko.observable();
             self.SecondRange=ko.observable();
             self.MinVal =ko.observable(200);
             self.MaxVal=ko.observable(700);
+            self.FascetLimit =ko.observable(5);
             self.color_select = ko.observableArray();
             self.size_select = ko.observableArray();
             self.brand_select = ko.observableArray();
             self.rating_select = ko.observableArray();
+            //-----------------------------------------Price Filter------------------------------------------------------------------
             self.Pricefilter =ko.computed(function(){
                 if(self.size_select().length != 0 || self.brand_select().length != 0 || self.color_select().length != 0 || self.rating_select().length != 0 )
                 var clonedArr = $.extend(true, [], self.Products());
                 else
                 var clonedArr = $.extend(true, [], self.allProduct());
-
                 var temp =[];
-                for(var y=0; y<clonedArr.length;y++)
-                {
-                    if(clonedArr[y].Sku[0].price <= self.SecondRange() && clonedArr[y].Sku[0].price >= self.fisrtRange())
-                        temp.push(clonedArr[y]);
-                }
+                
+                clonedArr.map(function(val){
+                    if(val.Sku[0].price <= self.SecondRange() && val.Sku[0].price >= self.fisrtRange())
+                        temp.push(val);
+                });
                     self.Products(temp);
             });
 
@@ -120,41 +103,39 @@ function productViewModel() {
                 var clonedArr = $.extend(true, [], this.allProduct());
                 var temp=[];
                 for (var fascet in Fascets_Array){
-                    for(var SelectedValue of Fascets_Array[fascet]){
-                        for (var CurrentIndex in clonedArr){
-                            if(fascet=="size"){
-                                if ($.inArray(SelectedValue,clonedArr[CurrentIndex].size) != -1){
-                                    temp.push(clonedArr[CurrentIndex]);
+                    Fascets_Array[fascet].map(function(SelectedValue){
+                        clonedArr.map(function(CurrentValue){
+                            if(fascet==="size"){
+                                if ($.inArray(SelectedValue,CurrentValue.size) != -1){
+                                    temp.push(CurrentValue);
                                 }
                             }
-                            if(fascet=="color"){
-                                if ($.inArray(SelectedValue,clonedArr[CurrentIndex].color) != -1){
-                                    temp.push(clonedArr[CurrentIndex]);
+                            if(fascet==="color"){
+                                if ($.inArray(SelectedValue,CurrentValue.color) != -1){
+                                    temp.push(CurrentValue);
                                 }
                             }
-                            if(fascet=="brand"){
-                                if ($.inArray(SelectedValue,clonedArr[CurrentIndex].brand) != -1){
-                                    temp.push(clonedArr[CurrentIndex]);
+                            if(fascet==="brand"){
+                                if ($.inArray(SelectedValue,CurrentValue.brand) != -1){
+                                    temp.push(CurrentValue);
                                 }
                             }
-                            if(fascet=="rating"){
-                                if (SelectedValue <= clonedArr[CurrentIndex].rating[0]){
-                                    temp.push(clonedArr[CurrentIndex]);
+                            if(fascet==="rating"){
+                                if (SelectedValue <= CurrentValue.rating[0]){
+                                    temp.push(CurrentValue);
                                 }
                             }
-                        }
-                    }
+                        });
+                    });
                     clonedArr=temp;
                     temp=[];
-                    var another_ar =[];
-                    $.each(clonedArr, function(i, el)
-                    {
-                        if($.inArray(el, another_ar) === -1) another_ar.push(el);
-                    });
                 }
-             
+                var another_ar =[];
+                clonedArr.map(function(el)
+                {
+                    if($.inArray(el, another_ar) === -1) another_ar.push(el);
+                });
                     self.Products(another_ar);
-               
             };
         
             self.All_Compute_observe = ko.computed(function(){
@@ -189,24 +170,23 @@ function productViewModel() {
                 } );
         //-------------------------------------------------------------------Fascet Coding End----------------
                     //-----------------------------Use of flags to show fascet's less and more functionality--------
-            self.brand_flag_fun = function (){
-                if(this.brand_flag()==false)
-                    this.brand_flag(true);
+            self.brandFlagFun = function (){
+                if(this.brandFlag()==false)
+                    this.brandFlag(true);
                 else
-                    this.brand_flag(false);
-            
+                    this.brandFlag(false);    
             }
-            self.size_flag_fun = function (){
-                if(this.size_flag()==false)
-                this.size_flag(true);
+            self.sizeFlagFun = function (){
+                if(this.sizeFlag()==false)
+                    this.sizeFlag(true);
                 else
-                this.size_flag(false);
+                    this.sizeFlag(false);
             }
-            self.color_flag_fun = function (){
-                if(this.color_flag()==false)
-                    this.color_flag(true);
+            self.colorFlagFun = function (){
+                if(this.colorFlag()==false)
+                    this.colorFlag(true);
                 else
-                    this.color_flag(false);
+                    this.colorFlag(false);
             }
             //=------------------------ color click event in listing----------------------
             self.ColorClick = function (product,clr){
@@ -259,94 +239,74 @@ Sammy(function () {
             vm.Main.chosenPageId(this.params.page);     
             vm.Main.template("about-template");
             $.getJSON('http://demo2828034.mockable.io/search/shirts', function(data) {
-                 var unique_prod_arr =[];
-                var Data=[];
+                var unique_prod_arr =[];
+                var totalSize =[];
+                var totalColor =[];
+                var totalBrand =[];
+               
                 var clonedArr = data["items"];
-               clonedArr.sort((a,b)=>(a.price <b.price)?-1:((a.price > b.price)? 1 : 0));
+                clonedArr.sort((a,b)=>(a.price <b.price)?-1:((a.price > b.price)? 1 : 0));
                 vm.Product.fisrtRange(clonedArr[0].price);
                 vm.Product.SecondRange(clonedArr[clonedArr.length-1].price);
                 vm.Product.MinVal(clonedArr[0].price);
                 vm.Product.MaxVal(clonedArr[clonedArr.length-1].price);
-            
-                $.each(data["items"], function(i, item) 
-                {
-                    Data.push(item.prodId);
-                });
 
-                var distinct_product =[];
-                $.each(Data, function(i, el){
-                       if($.inArray(el, distinct_product) === -1) distinct_product.push(el);
-                 });
-                    var total_size =[];
-                    var D_total_size=[];
-                    var total_color =[];
-                    var D_total_color=[];
-                    var total_brand =[];
-                    var D_total_brand=[];
-            
-                for(var j=0; j < distinct_product.length; j++)
-                    {
-                        var sample_arr =[];
-                        var C_sample_arr =[];var D_color_arr=[];
-                        var S_sample_arr =[];var D_size_arr=[];
-                        var B_sample_arr =[];var D_brand_arr=[];
-                        var R_sample_arr =[];var D_rating_arr=[];
-                        var prod_id_val= distinct_product[j];
-                        $.each(data["items"], function(i, item)
-                        {
-                            if(prod_id_val==item.prodId)
+                data["items"].map(function(v){
+                        if(val = unique_prod_arr.find( existingVal=>existingVal.id === v.prodId))
                             {
-                                sample_arr.push(item);
-                                C_sample_arr.push(item.color);
-                                $.each(C_sample_arr, function(i, el)
+                                val.Sku.push(v);
+                                if($.inArray(v.color, val.color) === -1) 
                                 {
-                                    if($.inArray(el, D_color_arr) === -1) D_color_arr.push(el);
-                                });
-                                S_sample_arr.push(item.size);
-                                $.each(S_sample_arr, function(i, el)
+                                    val.color.push(v.color);
+                                }
+                                if($.inArray(v.size, val.size) === -1) 
                                 {
-                                    if($.inArray(el, D_size_arr) === -1) D_size_arr.push(el);
-                                });
-                                B_sample_arr.push(item.brand);
-                                $.each(B_sample_arr, function(i, el)
+                                    val.size.push(v.size);
+                                }
+                                if($.inArray(v.brand, val.brand) === -1) 
                                 {
-                                    if($.inArray(el, D_brand_arr) === -1) D_brand_arr.push(el);
-                                });
-                                R_sample_arr.push(item.rating);
-                                $.each(R_sample_arr, function(i, el)
+                                    val.brand.push(v.brand);
+                                }
+                                if($.inArray(v.rating, val.rating) === -1) 
                                 {
-                                    if($.inArray(el, D_rating_arr) === -1) D_rating_arr.push(el);
-                                });
+                                    val.rating.push(v.rating);
+                                }     
                             }
-                                total_color.push(item.color);
-                                $.each(total_color, function(i, el)
-                                {
-                                    if($.inArray(el, D_total_color) === -1) D_total_color.push(el);
-                                });
-                                total_size.push(item.size);
-                                $.each(total_size, function(i, el)
-                                {
-                                    if($.inArray(el, D_total_size) === -1) D_total_size.push(el);
-                                });
-                                total_brand.push(item.brand);
-                                $.each(total_brand, function(i, el)
-                                {
-                                    if($.inArray(el, D_total_brand) === -1) D_total_brand.push(el);
-                                });
+                            else{
+                                var SkuArray=[];
+                                SkuArray.push(v);
+                                var colorArray=[];
+                                colorArray.push(v.color);
+                                var sizeArray =[];
+                                sizeArray.push(v.size);
+                                var brandArray =[];
+                                brandArray.push(v.brand);
+                                var ratingArray =[];
+                                ratingArray.push(v.rating);
+                                unique_prod_arr.push({"id":v.prodId,"Sku":SkuArray,"color":colorArray,"size":sizeArray,"brand":brandArray,"rating":ratingArray}) ;
+                            }
+                            if($.inArray(v.size, totalSize) === -1) 
+                            {
+                                totalSize.push(v.size);
+                            }
+                            if($.inArray(v.color, totalColor) === -1) 
+                            {
+                                totalColor.push(v.color);
+                            }
+                            if($.inArray(v.brand, totalBrand) === -1) 
+                            {
+                                totalBrand.push(v.brand);
+                            }
                         });
-                        unique_prod_arr.push({"id ":prod_id_val,"Sku":sample_arr,"color":D_color_arr,"size":D_size_arr,"brand":D_brand_arr,"rating":D_rating_arr}) ;                   
-                    }
                     vm.Product.Products(unique_prod_arr); 
                     vm.Product.allProduct(unique_prod_arr); 
                     vm.Product.SortByPopularity(); 
                     if($(window).width() < 900)
                     vm.Product.SortByAsecnding();
-                    vm.Product.size_observe(D_total_size);
-                    vm.Product.color_observe(D_total_color);
-                    vm.Product.brand_observe(D_total_brand);  
-                  //  console.log(vm.Product.allProduct());
-
-            });
+                    vm.Product.sizeObserve(totalSize);
+                    vm.Product.colorObserve(totalColor);
+                    vm.Product.brandObserve(totalBrand);  
+                });
             //vm.Page.name("About")
             // $.get('./server/about.json',function(data){
             //     vm.Page.name(data.title);
@@ -380,3 +340,15 @@ ko.applyBindings(vm);
 });
 
 })(jQuery);
+var filterfun = function(){
+    if($(window).width() < 900)
+    {
+        $("#viewFilter").toggleClass('hidefilter showfilter');
+        $("#viewSort").removeClass('showsortBy').addClass('hidesortBy');
+    }
+}
+
+var sortfun = function(){
+        $("#viewSort").toggleClass('hidesortBy showsortBy');
+        $("#viewFilter").removeClass('showfilter').addClass('hidefilter');
+}

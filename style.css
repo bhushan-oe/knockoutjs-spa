@@ -9,6 +9,10 @@ body
    background-color: white; 
    box-shadow: 1px 1px 5px #828282
 }
+.landing_content
+{
+    height:100vh;
+}
 .crump
 {
     font-size: 17px;
@@ -19,6 +23,10 @@ body
 {
     margin-left:75px;
     margin-right: 5px;
+}
+.a1,.a2,.a3
+{
+    margin:0 10px;
 }
 
 .land_img
@@ -52,7 +60,6 @@ body
 {
     margin-top:50vh;
 }
-
 .search {
     padding: 5px 0;
     width: 90%;
@@ -102,7 +109,7 @@ body
     font-size:  15px;
     margin: 0;
 }
-.navbar1
+.navbaar
 {
     position: relative;
     margin-bottom: 5px;
@@ -237,7 +244,10 @@ input[type=range] {
 .span_div i{
     font-size: 13px; 
 }
-#filter_logo{display: none;}
+#filter_logo
+{
+    display: none;
+}
 .range_display
 {
     border: 1px solid black;
@@ -314,16 +324,16 @@ a:not([href]):not([tabindex])
     .landing_content{position: absolute; padding-left: 0; padding-right: 0; background-image: url("land.png");background-repeat: no-repeat;background-size: cover;height:100vh;}
     .land_img{position: unset; padding-left: 0; padding-right: 0;display:none;}
     .search{ width:80vw; margin: auto}
-   .product_listing_div{margin:0;padding: 5px;}
-   .slidecontainer{width:100%;}
-   #cart{display: inline-block;}
-   #more {display: none;}
-   #filter_logo{display: inline;}
-   .header{left: 50%;}
-   .header_div{margin : 5px;}
-   .sort , .filter{ border:1px solid gray;display:block;margin:0; width:49.5%; display:inline-block;}
-   .crump{display:none;}
-   
+    .product_listing_div{margin:0;padding: 5px;}
+    .slidecontainer{width:100%;}
+    #cart{display: inline-block;}
+    #more {display: none;}
+    #filter_logo{display: inline;}
+    .header{left: 50%;}
+    .header_div{margin : 5px;}
+    .sort , .filter{ border:1px solid gray;display:block;margin:0; width:49.5%; display:inline-block;}
+    .crump{display:none;}
+    
 }
 @media only screen and (max-width: 900px) and (min-width: 700px)
 {
