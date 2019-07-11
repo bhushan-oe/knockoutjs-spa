@@ -1,45 +1,25 @@
-var filterDiv = function(){
-    if($(window).width() < 900)
-    {
-        $("#fl").toggleClass('hidefilter showfilter');
-        $("#sh").removeClass('showsortBy');
-        $("#sh").addClass('hidesortBy');
-    }
-}
-
-var sortDiv = function(){
-        $("#sh").toggleClass('hidesortBy showsortBy');
-        $("#fl").removeClass('showfilter');
-        $("#fl").addClass('hidefilter');
- }
-
-
 ;(function($){
-    $(document).on('click', '.panel-heading.clickable', function(e){ 
-        var $this = $(this); 
-        if(!$this.hasClass('panel-collapsed')) { 
-            $this.parents('.panel').find('.panel-body').slideDown(); 
-            $this.addClass('panel-collapsed'); 
-            $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up'); 
-        } 
-        else { 
-            $this.parents('.panel').find('.panel-body').slideUp(); 
-            $this.removeClass('panel-collapsed'); 
-            $this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down'); 
-        } 
-    })
-    
-    
     $(document).ready(function(){
-       
-
+        $(document).on('click', '.panel-heading.clickable', function(e){ 
+            var $this = $(this); 
+            if(!$this.hasClass('panel-collapsed')) { 
+                $this.parents('.panel').find('.panel-body').slideDown(); 
+                $this.addClass('panel-collapsed'); 
+                $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up'); 
+            } 
+            else { 
+                $this.parents('.panel').find('.panel-body').slideUp(); 
+                $this.removeClass('panel-collapsed'); 
+                $this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down'); 
+            } 
+        })
         function viewModel() {
             var self = this;
             self.chosenPageId = ko.observable();
-            self.pages = ko.observableArray(["Home", "About", "Product"]);
             self.template = ko.observable();
             self.plp = "productListingPage";
             self.searchText =ko.observable();
+
             self.goToPage = function (page){
                 location.hash = page;
             }
@@ -52,33 +32,37 @@ var sortDiv = function(){
             self.name = ko.observable('Home');
             self.content = ko.observable('Home default content')
         }
-
         function productsViewModel() {
             var self = this;            
             self.productArray = ko.observableArray();
             self.allProduct = ko.observableArray();
             self.allSize = ko.observableArray();
-            self.minPrice = ko.observable(100);
-            self.maxPrice = ko.observable(200);
-            self.selectedMinPrice = ko.observable(100);
-            self.selectedMaxPrice = ko.observable(200); 
+            self.minPrice = ko.observable();
+            self.maxPrice = ko.observable();
+            self.selectedMinPrice = ko.observable();
+            self.selectedMaxPrice = ko.observable(); 
             self.allColor = ko.observableArray();
             self.allBrand = ko.observableArray();
+            self.allCategory = ko.observableArray();
+            self.allRating = ko.observableArray();
             self.selectSize = ko.observableArray();
             self.selectColor = ko.observableArray();
             self.selectBrand = ko.observableArray();
             self.selectedRating = ko.observableArray();
+            self.currentSelctedSortBy = ko.observable('popularity');
             
             self.pricefilter =ko.computed(function(){ 
                 if(self.selectSize().length != 0 || self.selectBrand().length != 0 || self.selectColor().length != 0 || self.selectedRating().length != 0 ) 
                     var tempArr = $.extend(true, [], self.productArray());
                 else 
-                var tempArr = $.extend(true, [], self.allProduct()); 
-                var temp =[]; 
-                for(var y in  tempArr) { 
-                    if(tempArr[y].sku[0].price >= self.selectedMinPrice() && tempArr[y].sku[0].price <= self.selectedMaxPrice())
-                     temp.push(tempArr[y]); 
-                }
+                var tempArr = $.extend(true, [], self.allProduct());
+
+                var temp =[];
+                tempArr.map(function(ob){
+                    if(ob.sku[0].price >= self.selectedMinPrice() && ob.sku[0].price <= self.selectedMaxPrice())
+                     temp.push(ob); 
+                }); 
+
                 if(temp.length!=0){
                     self.productArray(temp); 
                 } 
@@ -86,88 +70,95 @@ var sortDiv = function(){
                     self.productArray(self.allProduct()); 
                 } 
             });
-// Sort By Asecnding and Desecnding                   
-            self.SortByAsecnding = function(){
-                $("#a1").css({"font-weight":"normal"});
-                $("#a2").css({"font-weight":"bold"});
-                $("#a3").css({"font-weight":"normal"});               
-                self.productArray.sort((a,b)=>(a.sku[0].price <b.sku[0].price)?-1:((a.sku[0].price > b.sku[0].price)? 1 : 0));
-            };
 
-            self.SortByDesecnding = function(){
-                $("#a1").css({"font-weight":"normal"});
-                $("#a2").css({"font-weight":"normal"});
-                $("#a3").css({"font-weight":"bold"});
-                 self.productArray.sort((a,b)=>(a.sku[0].price >b.sku[0].price)?-1:((a.sku[0].price < b.sku[0].price)? 1 : 0));
-            };
+            self.sortDiv = function(){
+                $("#sh").toggleClass('hideDiv showDiv');
+                $("#fl").removeClass('showDiv');
+                $("#fl").addClass('hideDiv');
+            }
 
-            self.SortByPopularity = function(){
-                $("#a1").css({"font-weight":"bold"});
+            self.filterDiv = function(){
+                if($(window).width() < 900)
+                {
+                    $("#fl").toggleClass('hideDiv showDiv');
+                    $("#sh").removeClass('showDiv');
+                    $("#sh").addClass('hideDiv');
+                }
+            }
+            
+// Sort By Asecnding and Desecnding 
+            self.sortBy = function(value){
+                $("#a1").css({"font-weight":"normal"});
                 $("#a2").css({"font-weight":"normal"});
                 $("#a3").css({"font-weight":"normal"});
-                self.productArray.sort((a,b)=>(a.sku[0].rating >b.sku[0].rating)?-1:((a.sku[0].rating < b.sku[0].rating)? 1 : 0));               
-        
-            };
-        
+                if(value === "asecnding"){
+                    $("#a2").css({"font-weight":"bold"});
+                    self.currentSelctedSortBy('asecnding');              
+                    self.productArray.sort((a,b)=>(a.sku[0].price <b.sku[0].price)?-1:((a.sku[0].price > b.sku[0].price)? 1 : 0));
+                }
+                if(value === "desecnding"){
+                    self.currentSelctedSortBy('desecnding');
+                    $("#a3").css({"font-weight":"bold"});
+                     self.productArray.sort((a,b)=>(a.sku[0].price >b.sku[0].price)?-1:((a.sku[0].price < b.sku[0].price)? 1 : 0));
+                }
+                if(value === "popularity"){
+                    self.currentSelctedSortBy('popularity');
+                    $("#a1").css({"font-weight":"bold"});
+                    self.productArray.sort((a,b)=>(a.sku[0].rating >b.sku[0].rating)?-1:((a.sku[0].rating < b.sku[0].rating)? 1 : 0));
+                }
+            }
+
 // Apply Filters
             self.applyFilter = function(filterArray){
                 var clonedArr = $.extend(true, [], self.allProduct());
-                console.log('cloned arr',clonedArr);
                 var temp=[]; 
-                console.log(filterArray);       
-             filterArray.map(function(a,b){console.log(a,b)});
-
-                for (var fascet in filterArray){
-                    for(var SelectedValue of filterArray[fascet]){
-                        for (var CurrentIndex in clonedArr){
-                            if(fascet=="size"){
-                                if ($.inArray(SelectedValue,clonedArr[CurrentIndex].size) != -1){
-                                    temp.push(clonedArr[CurrentIndex]);
+                
+                for (var filter in filterArray){
+                    filterArray[filter].map(function(SelectedValue){
+                        clonedArr.map(function(product){
+                            if(filter=="size"){
+                                if ($.inArray(SelectedValue,product.size) != -1){
+                                    if(!temp.find(p => p.prodId == product.prodId))
+                                    temp.push(product);
                                 }
                             }
-                            if(fascet=="color"){
-                                if ($.inArray(SelectedValue,clonedArr[CurrentIndex].color) != -1){
-                                    temp.push(clonedArr[CurrentIndex]);
+                            if(filter=="color"){
+                                if ($.inArray(SelectedValue,product.color) != -1){
+                                    if(!temp.find(p => p.prodId == product.prodId))
+                                    temp.push(product);
                                 }
                             }
-                            if(fascet=="brand"){
-                                if ($.inArray(SelectedValue,clonedArr[CurrentIndex].brand) != -1){
-                                    temp.push(clonedArr[CurrentIndex]);
+                            if(filter=="brand"){
+                                if ($.inArray(SelectedValue,product.brand) != -1){
+                                    if(!temp.find(p => p.prodId == product.prodId))
+                                    temp.push(product);
                                 }
                             }
-                            if(fascet=="rating"){
-                                if (SelectedValue <= clonedArr[CurrentIndex].rating[0]){
-                                    temp.push(clonedArr[CurrentIndex]);
+                            if(filter=="rating"){
+                                if (SelectedValue <= product.rating[0]){
+                                    if(!temp.find(p => p.prodId == product.prodId))
+                                    temp.push(product);
                                 }
                             }
-                        }
-                    }
+                        });
+                    });                    
                     clonedArr=temp;
                     temp=[];
+                } 
+                if(clonedArr.length!=0){ 
+                    self.productArray(clonedArr); 
                 }
-                var another_ar =[];
-                $.each(clonedArr, function(i, el) { 
-                    if($.inArray(el, another_ar) === -1) 
-                    another_ar.push(el); 
-                }); 
-                if(another_ar.length!=0){ 
-                    self.productArray(another_ar); 
-                }
-                else
-                {
+                else{
                     $('input:checkbox').prop('checked', false);
                     alert("Serched item Not found");
                     self.productArray(self.allProduct());
                     self.selectSize('');
                     self.selectColor('');
                     self.selectBrand('');
-                    self.selectedRating('');
-              
+                    self.selectedRating('');             
                 }
             };
-
             self.fascetsComputed = ko.computed(function() {
-                console.log(self.selectSize(),self.selectBrand(),self.selectColor(),self.selectedRating());
                 if(self.selectSize().length > 1) { 
                     self.selectSize().shift(); 
                 } 
@@ -193,125 +184,114 @@ var sortDiv = function(){
                     else{
                         self.productArray(self.allProduct());
                     }
-
-               
+                    self.sortBy(self.currentSelctedSortBy());              
            });
 
-
         //color select 
-            self.colorSelect = function(product,color){
+            self.skuSelect = function(product,color){
                 console.log(product,color);
                 var size = [];
                 var img;
                 var price;
-                for(var sku in product.sku){
-                    if(color == product.sku[sku].color){
-                        size.push(product.sku[sku].size);
-                        img = product.sku[sku].imageurl;
-                        price =product.sku[sku].price;
+                product.sku.map(function(ob){
+                    if (color === ob.color){
+                        size.push(ob.size);
+                        img = ob.imageurl;
+                        price =ob.price;
                     }
-                }
-                console.log(product.prodId, img,size, price);
+                });
                 $("#"+product.prodId).css('background-image', 'url('+ img+')');
                 $("#"+product.prodId+"size").text('size :'+size);
                 $("#"+product.prodId+"price").text(' '+price);
             }
-
         // Add Product to wishlist 
             self.addToWishList = function(product){
                 $("#"+product.prodId+"heart").toggleClass('far fa-heart heart fas fa-heart redHeart');
             }        
-        }
-        
-
+        }       
         var vm = {
             Main: new viewModel(),
             Page: new pageViewModel(),
             Products: new productsViewModel()
         };
+        var setAllProducts = function(items){
+            var dataArray = [];
+            vm.Products.minPrice(items[0].price);
+            vm.Products.maxPrice(items[0].price);
+            items.map(function(ob){ 
+                if(pr = dataArray.find(p => p.prodId == ob.prodId)){
+                    pr.sku.push(ob);
+                    if($.inArray(ob.color, pr.color) === -1){
+                        pr.color.push(ob.color);
+                    }
+                    if($.inArray(ob.size, pr.size) === -1){
+                        pr.size.push(ob.size);
+                    }
+                    if($.inArray(ob.brand, pr.brand) === -1){
+                        pr.brand.push(ob.brand);
+                    }
+                    if($.inArray(ob.rating, pr.rating) === -1){
+                        pr.rating.push(ob.rating);
+                    }
+                }
+                else{
+                    dataArray.push({'prodId':ob.prodId, 
+                                    'sku':[ob],
+                                    'color':[ob.color],
+                                    'size': [ob.size], 
+                                    'brand': [ob.brand], 
+                                    'rating':[ob.rating]
+                                });
+                } 
+                if($.inArray(ob.brand, vm.Products.allBrand()) === -1) 
+                    vm.Products.allBrand.push(ob.brand); //find all unique Brands
+
+                if($.inArray(ob.size, vm.Products.allSize()) === -1) 
+                    vm.Products.allSize.push(ob.size); //find all unique Size
+
+                if($.inArray(ob.color, vm.Products.allColor()) === -1) 
+                    vm.Products.allColor.push(ob.color); //find all unique color
+                    
+                if($.inArray(ob.category, vm.Products.allCategory()) === -1) 
+                    vm.Products.allCategory.push(ob.category); //find all unique category
+                    
+                if($.inArray(parseInt(ob.rating),vm.Products.allRating()) === -1)
+                    vm.Products.allRating.push(parseInt(ob.rating)); //find rating
+                    
+                if(ob.price < vm.Products.minPrice())
+                    vm.Products.minPrice(ob.price); //find minimum price 
+                    
+                if(ob.price > vm.Products.maxPrice())
+                    vm.Products.maxPrice(ob.price); //find maximum price        
+             }); 
+             console.log(dataArray);                                            
+                vm.Products.selectedMinPrice(vm.Products.minPrice());
+                vm.Products.selectedMaxPrice(vm.Products.maxPrice());
+                return dataArray;
+        }
 
         Sammy(function () {
                 this.get('#Home', function () {
-                    $(".header").css("display","none");
-                    console.log("HOMEPAGE",this.params.page);
                     vm.Main.chosenPageId(this.params.page);     
                     vm.Main.template("landing-page");
                     vm.Page.name("Home");
                 });
-
                 this.get('#productListingPage', function () {
-                    var dataArray = [];
-                    var allsz = [];
-                    var allcl = [];
-                    var allbr = [];
-
                     $.ajax({url: "http://demo2828034.mockable.io/search/shirts", success: function(result){
-                        var clonedArr = result["items"];
-                        clonedArr.sort((a,b)=>(a.price <b.price)?-1:((a.price > b.price)? 1 : 0));
-                         vm.Products.minPrice(clonedArr[0].price);
-                         vm.Products.maxPrice(clonedArr[clonedArr.length-1].price);
-                         vm.Products.selectedMinPrice(vm.Products.minPrice());
-                         vm.Products.selectedMaxPrice(vm.Products.maxPrice());
-
-                        result.items.map(function(ob){ 
-                            if(pr = dataArray.find(p => p.prodId == ob.prodId)){
-                                pr.sku.push(ob);
-                                if($.inArray(ob.color, pr.color) === -1){
-                                    pr.color.push(ob.color);
-                                }
-                                if($.inArray(ob.size, pr.size) === -1){
-                                    pr.size.push(ob.size);
-                                }
-                                if($.inArray(ob.brand, pr.brand) === -1){
-                                    pr.brand.push(ob.brand);
-                                }
-                                if($.inArray(ob.rating, pr.rating) === -1){
-                                    pr.rating.push(ob.rating);
-                                }
-                            }
-                            else{
-                                var skuArr = [];
-                                var colorTempArr = [];
-                                var sizeTempArr = [];
-                                var brandTempArr = [];
-                                var ratingTempArr =[];
-                                skuArr.push(ob);
-                                dataArray.push({'prodId':ob.prodId , 'sku':skuArr,'color':colorTempArr,'size': sizeTempArr, 'brand': brandTempArr, 'rating':ratingTempArr});
-
-                            } 
-
-                            if($.inArray(ob.brand, allbr) === -1) 
-                                allbr.push(ob.brand);
-
-                            if($.inArray(ob.size, allsz) === -1) 
-                                allsz.push(ob.size);
-
-                            if($.inArray(ob.color, allcl) === -1) 
-                                allcl.push(ob.color);
-                         }); 
-
+                        var dataArray = setAllProducts(result.items);
                             vm.Products.allProduct(dataArray);
                             vm.Products.productArray(dataArray); 
-                            vm.Products.SortByPopularity();                         
-                            vm.Products.allSize(allsz);
-                            vm.Products.allBrand(allbr);
-                            vm.Products.allColor(allcl);  
-                            
+                            vm.Products.sortBy('popularity');    
                         },
-
                         error(err){
                         console.log("error",err);
                         }
-                    }); 
-                    
-                    $(".header").css("display","block");
+                    });                    
                     vm.Main.chosenPageId(this.params.page);     
                     vm.Main.template("productListingPage")
-                    vm.Page.name("productListingPage");
-                    
+                    vm.Page.name("productListingPage");                    
                 });
             }).run('#Home');
         ko.applyBindings(vm);
     });
-
 })(jQuery);
