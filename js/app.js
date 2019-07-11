@@ -30,6 +30,9 @@ var sortDiv = function () {
 
     $(document).ready(function () {
 
+        
+
+
         function viewModel() {
             var self = this;
             self.chosenPageId = ko.observable();
@@ -56,10 +59,10 @@ var sortDiv = function () {
             self.productArray = ko.observableArray();
             self.allProduct = ko.observableArray();
             self.allSize = ko.observableArray();
-            self.minPrice = ko.observableArray();
-            self.maxPrice = ko.observableArray();
-            self.selectedMinPrice = ko.observableArray();
-            self.selectedMaxPrice = ko.observableArray();
+            self.minPrice = ko.observable(50);
+            self.maxPrice = ko.observable(700);
+            self.selectedMinPrice = ko.observable();
+            self.selectedMaxPrice = ko.observable();
             self.color_flag = ko.observable(false);
             self.brand_flag = ko.observable(false);
             self.size_flag = ko.observable(false);
@@ -157,7 +160,6 @@ var sortDiv = function () {
                     self.productArray(another_ar);
                 }
                 else {
-                    $('input:checkbox').prop('checked', false);
                     alert("Serched item Not found");
                     self.productArray(self.allProduct());
                     self.selectSize('');
@@ -267,6 +269,24 @@ var sortDiv = function () {
                 var allbr = [];
                 var allCategory = [];
 
+                setTimeout(function () {
+                    console.log(vm.Product.selectedMinPrice())
+                    $("#slider-range").slider({
+                        range: true,
+                        min: vm.Product.minPrice(),
+                        max: vm.Product.maxPrice(),
+                        values: [vm.Product.selectedMinPrice(), vm.Product.selectedMaxPrice()],
+                        slide: function (event, ui) {
+                            $("#amount").val("Min: $" + ui.values[0] + "      Max: $" + ui.values[1]);
+                            vm.Product.selectedMinPrice(ui.values[0]);
+                            vm.Product.selectedMaxPrice(ui.values[1]);
+                        }
+                    });
+
+                    $("#amount").val("Min: $" + $("#slider-range").slider("values", 0) +
+                        "      Max: $" + $("#slider-range").slider("values", 1));
+                }, 1000);
+
                 $.ajax({url: "http://demo2828034.mockable.io/search/shirts", success: function(result){
                     var clonedArr = result["items"];
                     clonedArr.sort((a,b)=>(a.price < b.price)?-1:((a.price > b.price)? 1:0));
@@ -274,9 +294,9 @@ var sortDiv = function () {
                     vm.Product.maxPrice(clonedArr[clonedArr.length-1].price);
                     vm.Product.selectedMinPrice(vm.Product.minPrice());
                     vm.Product.selectedMaxPrice(vm.Product.maxPrice());
-                    
+                    console.log(vm.Product.selectedMinPrice(), "...", vm.Product.minPrice());
                     result.items.map(function (ob){
-                        console.log(ob);
+                        
                         if(pr = dataArray.find(p => p.prodId == ob.prodId)){
                             pr.sku.push(ob);
                             if($.inArray(ob.color, pr.color) === -1)
@@ -312,7 +332,7 @@ var sortDiv = function () {
                         if($.inArray(ob.category, allCategory) === -1)
                             allCategory.push(ob.category);
                     });
-                    console.log(allCategory);
+       
                     
                     vm.Product.productArray(dataArray); 
                     vm.Product.allProduct(dataArray);
@@ -332,6 +352,7 @@ var sortDiv = function () {
             });
         }).run('#Home');
         ko.applyBindings(vm);
+       
 
     });
 
