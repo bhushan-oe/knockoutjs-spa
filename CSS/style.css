@@ -19,7 +19,10 @@
 }
 
 .headerFont{
-    font-size: 20px;
+    font-size: 17px;
+    padding: 5%;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
 }
 
 .image{
@@ -42,11 +45,11 @@
 .search input{
     padding: 10px;
     width: 100%;
-    outline: 2px solid orangered;
+    outline: 2px solid orange;
 }
 
 .search-button{
-    background-color: orangered;
+    background-color: orange;
     color: white;
     padding: 12px;
     width: 100%;
@@ -92,6 +95,13 @@
     border-radius: 10px;
     padding: 4px 10px;
     width: 100%;
+}
+
+.sortPointer{
+    cursor: pointer;
+}
+
+.space{
     display: flex;
     justify-content: space-between;
 }
@@ -100,23 +110,13 @@
     background-color: rgb(231, 229, 229);
 }
 
-.wbackground{
+.whiteBackground{
     border-radius: 5px;
     background-color: white;
 }
 
-.wbackground:hover{
+.whiteBackground:hover{
     box-shadow: 1px 1px 10px;
-}
-
-.prodImg{
-    width: 100%;
-    height: 400px;
-    position: relative;
-    background-image: url();
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
 }
 
 .breadcrumb{
@@ -131,8 +131,30 @@
     padding: 15px;
 }
 
+.size{
+    display: none;
+}
+
 .colordiv{
     display: none;
+}
+
+.prodImg{
+    width: 100%;
+    height: 400px;
+    position: relative;
+    background-image: url();
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.prodImg:hover .colordiv{
+    display: block;
+}
+
+.prodImg:hover .size{
+    display: block;
 }
 
 .color{
@@ -146,18 +168,6 @@
 
 .color:hover{
     border: 2px solid blue;
-}
-
-.size{
-    display: none;
-}
-
-.prodImg:hover .colordiv{
-    display: block;
-}
-
-.prodImg:hover .size{
-    display: block;
 }
 
 .sidebar{
@@ -180,6 +190,18 @@
 
 .mainFont{
     font-size: 2vh;
+}
+
+.hide{
+    display: none;
+}
+
+.hidefilterD{
+    display: block;
+}
+
+.hideSortByD{
+    display: block;
 }
 
 .categories{
@@ -207,12 +229,12 @@
 }
 
 .panel-body{
-    display: none;
+    display: scroll;
     height: 250px;
     overflow: auto;
 }
 
-.ul_div{
+.ul-div{
     padding: 5px;
     list-style: none;
 }
@@ -258,15 +280,55 @@
     cursor: pointer;
 }
 
+.sortByMobile{
+    display: none;
+}
+
+.hearts{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;    
+}
+
+.redheart{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: red;
+}
+
 @media only screen and (max-width: 990px){
+    
     .image{
         display: none;
+    }
+
+    .mainFont{
+        padding-left: 10vw;
     }
 
     .mobile{
         padding: 0;
         background-image: url(../Images/landing.jpg);
         background-size: cover;
+    }
+
+    .show{
+        display: block;
+    }
+
+    .colorDiv{
+        display: block;
+    }
+
+    .sortByMobile{
+        display: block;
+    }
+
+    .hide{
+        display: none;
     }
 
     .search{
@@ -287,21 +349,83 @@
         font-size: x-large;
     }
 
-}
+    .size{
+        display: block;
+    }
 
-@media only screen and (max-width: 400px){
-    .image{
+    .filtersDiv{
+        border: 1px solid black;
+    }
+
+    .hidefilter{
         display: none;
     }
 
-    .mobile{
-        padding: 0;
-        background-image: url(../Images/landing.jpg);
-        background-size: cover;
+    .showfilter{
+        display: block;
     }
 
+    .hideSortBy{
+        display: none;
+    }
+
+    .howSortBy{
+        display: block;
+    }
+
+    .searchBar{
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        padding: 0px 10px;
+    }
+
+    .sortPointer{
+        display: block;
+        padding: 5px 15px;
+        
+    }
+
+    .inputPrice{
+        width: 10vh;
+    }
+
+    .mobileHeader{
+        color: rgb(231, 229, 229);
+        width: 100%;
+        padding: 5px 0;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .headerContent{
+        display: none;
+    }
+
+    .headerFont{
+        font-size: 30px;
+    }
+
+}
+
+@media only screen and (max-width: 400px){
+
     .search{
-        right: 10%;
         height: 17%
+    }
+
+    .headerdiv{
+        padding: 5px;
+    }
+
+    .hidefilter{
+        display: none;
+    }
+
+    .headerFont{
+        font-size: 20px;
+    }
+
+    .mainFont{
+        padding-left: 5vw;
     }
 }
