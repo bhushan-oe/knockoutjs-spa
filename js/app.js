@@ -116,7 +116,17 @@
                         sizes.push(currentProduct.size());
                     });                    
                 });            
-                return getUniqueRecords(sizes);
+                return getUniqueRecords(sizes);                          
+            });
+
+            self.ratingList = ko.computed(function(){
+                var ratings = [];
+                ko.utils.arrayForEach(self.golbalBrandList(), function(productBrand){                    
+                    ko.utils.arrayForEach(productBrand.brandProductList(), function(currentProduct){                                          
+                        ratings.push(currentProduct.rating());
+                    });                    
+                });            
+                return getUniqueRecords(ratings);
             });
             
             self.sortingMethod = ko.observable("popularity");
@@ -127,16 +137,19 @@
                 }                             
                 sortMethod = method;
                 self.sortingMethod(method);              
-                self.productBrandList(self.productBrandList().sort(brandSort));
-                //self.productBrandList(brandSort);              
+                self.productBrandList(self.productBrandList().sort(brandSort));            
             };
 
             self.selectedBrandList = ko.observableArray([]);
             self.selectedCategory = ko.observable();
-            self.minPrice = ko.observable();
-            self.maxPrice = ko.observable();
+            self.minPriceVal = 0;
+            self.maxPriceVal = 1000;
+            self.minPrice = ko.observable(self.minPriceVal);
+            self.maxPrice = ko.observable(self.maxPriceVal);
             self.selectedColor = ko.observable();
             self.selectedSizeList = ko.observableArray([]);
+            self.selectedRatingList = ko.observableArray([]);
+
 
             self.filterdCategory = function(category){               
                 self.selectedCategory(category);
@@ -144,14 +157,14 @@
             }
 
             self.filterdAction = function(){
-             
-                if(self.selectedBrandList().length == 0 && self.selectedCategory()  == undefined && self.selectedColor() == undefined && self.selectedSizeList().length == 0)
-                {          
+               // console.log("min price: "+self.minPrice());
+               // console.log("max price: "+self.maxPrice());
+                if(self.selectedBrandList().length == 0 && self.selectedCategory()  == undefined && self.selectedColor() == undefined && self.selectedSizeList().length == 0 && self.selectedRatingList().length == 0 && self.minPrice() == self.minPriceVal && self.maxPrice() == self.maxPriceVal){          
                     ko.utils.arrayForEach(self.golbalBrandList(), function(productBrand) {
                         productBrand.setDefaultSelectedProductList();
                     });
-                    self.productBrandList(self.golbalBrandList().sort(brandSort));
-                  //  self.productBrandList(self.golbalBrandList());    
+
+                    self.productBrandList(self.golbalBrandList().sort(brandSort));                     
                 }
                 else{                    
                    
@@ -168,7 +181,7 @@
                         });                       
                     }                      
                    
-                   if(!(self.selectedSizeList().length == 0 && self.selectedColor() == undefined))
+                   if(!(self.selectedSizeList().length == 0 && self.selectedColor() == undefined && self.selectedRatingList().length == 0 && self.minPrice() == self.minPriceVal && self.maxPrice() == self.maxPriceVal))
                     {
                        for(var i= 0; i < filteredProductbrandList.length; ++i)
                         {
@@ -217,11 +230,11 @@
                 var filteredProducts = ko.utils.arrayFilter(products, function(product) {                   
                    
                     return (self.selectedSizeList().length == 0 ? true: self.selectedSizeList().indexOf(product.size()) != -1) 
-                            && (self.selectedColor() == undefined ? true : self.selectedColor() == product.color());
-                           // && (self.minPrice()  == undefined || self.maxPrice() == undefined) ? true : (product.price() >= parseInt(self.minPrice()) && product.price() <= parseInt(self.maxPrice()));
+                            && (self.selectedColor() == undefined ? true : self.selectedColor() == product.color())
+                            && (self.selectedRatingList().length == 0 ? true: self.selectedRatingList().indexOf(product.rating()) != -1)
+                            && (self.minPrice()  == undefined || self.maxPrice() == undefined) ? true : (product.price() >= parseInt(self.minPrice()) && product.price() <= parseInt(self.maxPrice()));
                 });               
-                return filteredProducts;  
-              
+                return filteredProducts;             
             }          
 
             self.setDefaultBrandList = function(){             
@@ -274,22 +287,18 @@
                     return product.color() == self.colorList()[0];
                 });
                 self.productList(defaultProductList);
-            };
-
-           
-            self.selectedColor = ko.observable(); // need to be checked
+            };       
 
             self.sizeList = ko.computed(function() {         
                 
                 var sizes = ko.utils.arrayMap(self.productList(), function(product){
                     return product.size();
-                });              
+                });
                // console.log("sizes: "+sizes.length);   
                 return sizes;
             }); 
 
-            self.selectedProduct = ko.computed(function(){
-                console.log("in selectedProduct: "+self.productList()[0]);
+            self.selectedProduct = ko.computed(function(){               
                 return self.productList()[0];
             });
             

@@ -1,3 +1,6 @@
+.paddingLeft{
+    padding: 0% 2%;    
+}
 .cardEncloseDiv{
     margin-bottom: 2%;
     padding: 0px;
@@ -19,12 +22,12 @@
     height: 425px;
     overflow: hidden;
 }
+.card:hover > .card-body{
+    transform: translateY(-60px);
+}
 .card-body{                  
     transition: transform 0.5s;
     background-color: white;
-}
-.card-body:hover {
-    transform: translateY(-60px);
 }
 
 p.productContent{
@@ -58,4 +61,10 @@ span.selected:first-child {
 }
 .icon:hover{
     cursor: pointer;
+}
+
+@media (max-width: 576px) { 
+.paddingLeft{
+    padding: 0% 5%;    
+    }
 }

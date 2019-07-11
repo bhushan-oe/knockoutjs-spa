@@ -14,4 +14,37 @@
     padding-left: 10%;
 }
 
+.toggleIcon{
+    display: none;
+}
+
+@media (max-width: 576px) {    
+    .toggleIcon{
+        display: block;
+    }
+    .toggleFilters{
+        display: none;
+    }    
+
+ }
+
 /* color #007bff*/
+
+.starter-section {
+    padding: 40px 15px;
+    text-align: center;
+}
+.slider {
+    margin-top: 30px;
+}
+.slider-track-high {
+    background: red;
+}
+
+.slider-track-low {
+    background: green;
+}
+
+.slider-selection {
+    background: yellow;
+}
