@@ -127,6 +127,94 @@
           "price": 596
         }
       ]
+    },
+    {
+      "prodId": "1114",
+      "category": "mens clothing",
+      "brand": "Dennis Lingo",
+      "name": "Men Checkered Casual Slim Shirt",
+      "skus": [
+        {
+          "skuId": "1114_Blue_M",
+          "color": "Blue",
+          "imageurl": "http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/Denis_lingo_blue.jpeg",
+          "size": "M",
+          "rating": 3.3,
+          "price": 649
+        },
+        {
+          "skuId": "1114_Orange_M",
+          "color": "Orange",
+          "imageurl": "http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/Denis_lingo_orange.jpeg",
+          "size": "M",
+          "rating": 3.3,
+          "price": 649
+        },
+        {
+          "skuId": "1114_Blue_L",
+          "color": "Blue",
+          "imageurl": "http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/Denis_lingo_blue.jpeg",
+          "size": "L",
+          "rating": 3.3,
+          "price": 649
+        },
+        {
+          "skuId": "1114_Orange_L",
+          "color": "Orange",
+          "imageurl": "http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/Denis_lingo_orange.jpeg",
+          "size": "L",
+          "rating": 3.3,
+          "price": 649
+        }
+      ]
+    },
+    {
+      "prodId": "1115",
+      "category": "mens clothing",
+      "brand": "FINIVO FASHION",
+      "name": "Men Solid Casual Spread Shirt",
+      "skus": [
+        {
+          "skuId": "1115_Black_38",
+          "color": "Black",
+          "imageurl": "http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/Finivo_Black.jpeg",
+          "size": "38",
+          "rating": 4,
+          "price": 580
+        },
+        {
+          "skuId": "1115_Black_40",
+          "color": "Black",
+          "imageurl": "http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/Finivo_Black.jpeg",
+          "size": "40",
+          "rating": 4,
+          "price": 580
+        },
+        {
+          "skuId": "1115_DarkBlue_38",
+          "color": "DarkBlue",
+          "imageurl": "http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/Finivo_Darkblue.jpeg",
+          "size": "38",
+          "rating": 4,
+          "price": 580
+        },
+        {
+          "skuId": "1115_DarkBlue_40",
+          "color": "DarkBlue",
+          "imageurl": "http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/Finivo_Darkblue.jpeg",
+          "size": "40",
+          "rating": 4,
+          "price": 580
+        },
+        {
+          "skuId": "1115_Maroon_38",
+          "color": "Maroon",
+          "imageurl": "http://monitoring-1878379754.us-west-2.elb.amazonaws.com/Photos/Finivo_maroon.jpeg",
+          "size": "38",
+          "rating": 4,
+          "price": 580
+        }
+      ]
     }
   ]
 }

@@ -21,3 +21,51 @@
 .card-body:hover{
     transform: translate3d(0px, 0px, 0px);
 } */
+
+.color-circle{
+    width:25px;
+    height: 25px;
+    border-radius: 20px;
+    display: inline-block;
+}
+.topnav {
+    overflow: hidden;
+    /* background-color: #f1f1f1; */
+  }
+  
+  .topnav a ,.topnav label{
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    border-bottom: 3px solid transparent;
+  }
+  
+  .topnav a:hover {
+    border-bottom: 3px solid #2874ef;
+  }
+  
+  .topnav a.active {
+    border-bottom: 3px solid #2874ef;
+  }
+
+/* .card:hover .card-body .product-info{
+    position: absolute;
+    -webkit-animation: myfirst 1s 1; 
+    -webkit-animation-direction: alternate; 
+    animation: myfirst 2s 1;
+}
+
+  /* Safari 4.0 - 8.0 */
+ /* @-webkit-keyframes myfirst {
+    0%   {bottom: 0px;}
+    100% {bottom: 50px;}
+  }
+  
+  @keyframes myfirst {
+    0%   {bottom: 0px;}
+    100% {bottom: 50px;}
+  } */

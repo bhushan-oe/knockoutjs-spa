@@ -5,7 +5,8 @@ var routing = function(){
         this.element_selector = '#main';
         this.get('#/', function (context, next) {
             context.app.swap('');
-            $('#main').empty();
+            $('#main').empty();        
+
             loadWidget("LandingPageWidget", $('#main'));
         });
 
@@ -13,12 +14,22 @@ var routing = function(){
             context.app.swap('');
             $('#main').empty();
             self.element_selector = '#products-listing-area';
-            //var products = api.getProducts.call(this, context);
-            var products = api.loadDummyProducts.call(this, context);
+            var products;
+            api.loadProducts.call(this, context, function(p) {
+                console.log('products from callback ==> ', p, api);
+                api.products = p;
+                // products = p.items;
+                loadWidget("ProductListingPageWidget", $('#main'));
+            });
+            // var products = api.getProducts();
+            // console.log('PRODDDD ==> ', products);
+            
+            // var products = api.loadDummyProducts.call(this, context);
             next();
         }, function (context, next) {
             console.log("loading products to DOM");
-            loadWidget("ProductListingPageWidget", $('#main'));
+
+            // loadWidget("ProductListingPageWidget", $('#main'));
             next();
         });
         

@@ -1,16 +1,18 @@
-<div id="products-listing-area" class="col-sm-9">
+<div id="products-listing-area" class="col-sm-12 col-lg-9 col-xs-12">
     <!-- <span id="effect-element" data-bind="text:effect()">test</span> -->
     <div class="card-effect container">
+                <div class="row topnav">
+                        <label class=" col-sm-3" >Sort By</label>
+                        <a class="active col-sm-2 sortByFilter" data-bind="click: sortByRelevence" >Relevence</a>
+                        <a class=" col-sm-2 sortByFilter" data-bind="click: sortByPriceLowToHigh" >Price - Low to High</a>
+                        <a class=" col-sm-2 sortByFilter" data-bind="click : sortByPriceHighToLow">Price - High to Low</a>
+                        <a class=" col-sm-2 sortByFilter" data-bind="click : sortByPopularity">Popularity</a>
+                      </div>
             <div id="products-list" class="row" data-bind="foreach: {data: filteredProducts, as: 'product' }">
 
-                <div class=" col-sm-3">
-                    <product-tile params="value: product"></product-tile>
+                <div class="col-sm-6 col-xs-12 col-lg-3">
+                    <product-tile params="value:product"></product-tile>
                 </div>
-
-                <!-- Product Id :<span data-bind="text: prodId"></span>
-             | Product Name :<span data-bind="text: name"></span>
-             | First Sku Id :<span data-bind="text: skus[0].skuId"></span>
-             | Brand :<span data-bind="text: brand"></span> -->
                 <br>
             </div>
     </div>

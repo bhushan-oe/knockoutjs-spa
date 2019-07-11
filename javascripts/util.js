@@ -6,11 +6,11 @@ The following function load the widget from the widget directory.
 @param parentElement - The element to which the widget would be added to.
 */
 function loadWidget(widgetName, parentElement) {
-    console.log("loading widget ", widgetName);
+    // console.log("loading widget ", widgetName);
     let widgetDirectory = "./widgets/" + widgetName;
     $.get(widgetDirectory + "/view.html", function(data) {
         parentElement.append(data);
-        console.log("-->Successfuly loading view.html for " + widgetName);
+        // console.log("-->Successfuly loading view.html for " + widgetName);
     });
     $("<link/>", {
         rel: "stylesheet",
@@ -19,7 +19,7 @@ function loadWidget(widgetName, parentElement) {
      }).appendTo(parentElement);
 
     require([widgetDirectory + "/behaviour.js"], function (foo) {
-        console.log("-->Successfuly loaded behaviour.js for " + widgetName);
+        // console.log("-->Successfuly loaded behaviour.js for " + widgetName);
     });
 }
 
@@ -29,13 +29,13 @@ The function binds the element with the passed id to the viewModel.
 */
 function performLateBinding(viewModel, id) {
     var element = document.getElementById(id);
-    console.log('element for binding : ', element);
+    // console.log('element for binding : ', element);
     ko.applyBindings(viewModel, element);
 }
 
 function performLateBindingByClass(viewModel, className) {
     var elements = document.getElementsByClassName(className);
-    console.log('element for binding : ', elements);
+    // console.log('element for binding : ', elements);
     $.each(elements,function(i, element){
         ko.applyBindings(viewModel, element);
     });
@@ -45,7 +45,7 @@ function performLateBindingByClass(viewModel, className) {
 var stringStartsWith = function (string, startsWith) {          
     string = string || "";
     if (startsWith.length > string.length || startsWith.length == 0)
-        return false;
+        return true;
     return string.substring(0, startsWith.length) === startsWith;
 };
 
@@ -57,3 +57,21 @@ var isArrayContains = function(element, arr){
         return true;
     }
 };
+
+var isArrayContainsForFilter = function(element, arr){
+    var index = $.inArray(element, arr);
+    if(arr.length == 0) return true;
+    if(index < 0){
+        return false;
+    }else{
+        return true;
+    }
+};
+
+var isInPriceRange = function(minPrice, maxPrice, priceFilter){
+    if(maxPrice <= priceFilter){
+        return true;
+    }else{
+        return false;
+    }
+}

@@ -1,4 +1,4 @@
-<div class="col-sm-3">
+<div class="col-sm-12 col-lg-3 col-xs-12">
     <!-- <input type="text" id="filter-area" data-bind="textInput:filterA"></input> -->
     <div class="card-effect">
             <div class="facet">
@@ -8,13 +8,50 @@
                           </div>
                 
             </div>
-        <div class="facet">
-            <label for="brand-facets">Brands:</label>
+            <div class="facet" >
+                <button class="accordion" >Categories:</button>
+                <ul class="list-group" data-bind="foreach: justCategories" id="category-facets">
+                    <li class="list-group-item" >
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input category-checkbox" value="" data-bind="checked: $parent.categoryFilters, value: category" ><span data-bind="text: category"></span>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+        <div class="facet" >
+            <button class="accordion" >Brands:</button>
             <ul class="list-group" data-bind="foreach: justBrands" id="brand-facets">
                 <li class="list-group-item" >
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input brand-checkbox" value="" data-bind="checked: $root.brandFilter, value: brand" ><span data-bind="text: brand"></span>
+                            <input type="checkbox" class="form-check-input brand-checkbox" value="" data-bind="checked: $parent.brandFilters, value: brand" ><span data-bind="text: brand"></span>
+                        </label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="facet" >
+            <button class="accordion" >Colors:</button>
+            <ul class="list-group" data-bind="foreach: justColors ,as: color" id="color-facets">
+                <li class="list-group-item" >
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input color-checkbox" value="" data-bind="checked: $parent.colorFilters, value: $data"><span data-bind="text: $data"></span>
+                        </label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="facet" >
+            <label for="price-facets">Price:</label>
+            <ul class="list-group" id="price-facets">
+                <li class="list-group-item" >
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input id="price-facet" type="range" class="form-check-input price-slider" value="" data-bind="value: priceFilter,attr: { max: maxPriceRange(), value : maxPriceRange()}, valueUpdate: 'input'" />
                         </label>
                     </div>
                 </li>
