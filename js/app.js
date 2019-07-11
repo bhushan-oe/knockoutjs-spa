@@ -4,7 +4,7 @@
     $(document).ready(function() {
         function viewModel() {
             var self = this;
-            self.SearchCategory = ko.observable('');
+            self.searchCategory = ko.observable('');
 
             self.chosenPageId = ko.observable();
             self.template = ko.observable();
@@ -260,7 +260,7 @@
             this.get('#Home', function() {
                 $(".header").css("display", "none");
                 vm.Main.chosenPageId(this.params.page);
-                vm.Main.template("searching-page");
+                vm.Main.template("searchingPage");
                 vm.Page.name("Home");
             });
 

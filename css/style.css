@@ -6,7 +6,7 @@
     width: 100% !important;
 }
 
-.row-div {
+.rowDiv {
     margin: 0;
     padding: 0;
     background-color: #ffffff;
@@ -30,7 +30,7 @@
     outline: 2px solid #FFA500;
 }
 
-.col-div {
+.colDiv {
     padding: 0;
     margin: 0;
 }
@@ -54,7 +54,7 @@
     border: none;
 }
 
-.outer-div {
+.outerDiv {
     padding: 10px;
 }
 
@@ -87,6 +87,7 @@
     width: 20px;
     border-radius: 100%;
     display: inline-block;
+    border: 1px solid #888888;
 }
 
 .colorchk {
@@ -95,6 +96,7 @@
     width: 20px;
     border-radius: 100%;
     display: inline-block;
+    border: 1px solid #888888;
 }
 
 .colordiv,
@@ -166,7 +168,7 @@
     height: 75px;
 }
 
-.slidecontainer {
+.slideContainer {
     width: 100%;
 }
 
@@ -206,12 +208,12 @@
     margin-right: 0;
 }
 
-.headerblue {
+.headerBlue {
     padding: 15px;
     background-color: #2874f0;
 }
 
-.searchresult {
+.searchResult {
     font-size: 25px;
     width: 90%;
     height: 50px;
@@ -222,7 +224,7 @@
     transform: translate(-50%, -50%);
 }
 
-.searchresult input {
+.searchResult input {
     border-radius: 0;
     position: absolute;
     float: Left;
@@ -254,19 +256,15 @@
     text-align: center;
 }
 
-#bredcrum {
+#sortOrder {
     background-color: #ffffff;
     margin: 5px 5px 0 5px;
     padding: 15px;
     border-bottom: 1px solid #f0f0f0;
 }
 
-.mobiledisplay {
+.mobileDisplay {
     padding-top: 10px;
-}
-
-#collapse1 {
-    display: block;
 }
 
 .space {
@@ -294,7 +292,7 @@
 }
 
 .sort,
-.filt {
+.filter {
     width: 50%;
 }
 
@@ -329,13 +327,7 @@
         background-size: cover;
         background-repeat: no-repeat;
     }
-    .searchresult,
-    .filt-hide,
-    .dispheader,
-    .mobiledisplay,
-    .img-div,
-    #collapse1,
-    .images {
+    .hide {
         display: none;
     }
     .mobHeader {
@@ -363,13 +355,7 @@
         background-size: cover;
         background-repeat: no-repeat;
     }
-    .searchresult,
-    .filt-hide,
-    .dispheader,
-    .collapse1,
-    .mobiledisplay,
-    .img-div,
-    .images {
+    .hide {
         display: none;
     }
     .mobHeader {

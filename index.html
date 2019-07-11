@@ -21,16 +21,16 @@
     <div data-bind="template: { name: $root.Main.template }"></div>
 
     <!--starts landing page -->
-    <script type="text/html" id="searching-page">
-        <div class="row row-div">
+    <script type="text/html" id="searchingPage">
+        <div class="row rowDiv">
             <div class="col-lg-7 col-sm-12 col-xs-12 page response">
                 <button class="col-lg-1 col-3 signbtn" type="submit">Sign up</button>
-                <div class="row row-div search col-lg-6 col-10">
-                    <div class="col-lg-8 col-div col-8"><input type="text" placeholder="Search" data-bind="textInput: $root.Main.SearchCategory" /></div>
-                    <div class="col-lg-4 col-div col-4"><button class="btn width-100" type="submit" data-bind="click: function(){ $root.Main.goToPage($root.Main.plp) }">Search</button></div>
+                <div class="row rowDiv search col-lg-6 col-10">
+                    <div class="col-lg-8 colDiv col-8"><input type="text" placeholder="search" data-bind="textInput: $root.Main.searchCategory" /></div>
+                    <div class="col-lg-4 colDiv col-4"><button class="btn width-100" type="submit" data-bind="click: function(){ $root.Main.goToPage($root.Main.plp) }">Search</button></div>
                 </div>
             </div>
-            <div class="col-lg-5 col-sm-12 col-xs-12 page images">
+            <div class="col-lg-5 col-sm-12 col-xs-12 page images hide">
 
             </div>
         </div>
@@ -40,7 +40,7 @@
     <script type="text/html" id="plppage">
         <!--starts header  functionality -->
 
-        <div class="headerblue row">
+        <div class="headerBlue row">
             <div class="col-12 col-6 mobHeader">
                 <i class="fa fa-arrow-left col-2"></i>
                 <h4 class="col-4">Shirts</h4>
@@ -50,20 +50,20 @@
             </div>
             <div class="col-lg-2"></div>
             <div class="col-lg-6">
-                <div class="searchresult">
-                    <input type="text" class="form-control input-lg" maxlength="64" placeholder="Search" data-bind="textInput: $root.Main.SearchCategory" />
+                <div class="searchResult hide">
+                    <input type="text" class="form-control input-lg" maxlength="64" placeholder="search" data-bind="textInput: $root.Main.searchCategory" />
                     <button type="submit" class="btn  btn-lg">Search</button>
                 </div>
             </div>
             <div class="col-lg-4 dispFlex arrangeHeader">
                 <div>
-                    <h4 class="mobiledisplay">Login & signup</h4>
+                    <h4 class="mobileDisplay hide">Login & signup</h4>
                 </div>
                 <div>
-                    <h4 class="mobiledisplay">More<i class="fa fa-angle-down paddingLeft"></i></h4>
+                    <h4 class="mobileDisplay hide">More<i class="fa fa-angle-down paddingLeft"></i></h4>
                 </div>
                 <div>
-                    <h4 class="mobiledisplay"><i class="fa fa-shopping-cart paddingRight"></i>Cart</h4>
+                    <h4 class="mobileDisplay hide"><i class="fa fa-shopping-cart paddingRight"></i>Cart</h4>
                 </div>
 
             </div>
@@ -71,24 +71,24 @@
         <!--end header  functionality -->
 
         <div class="row d-lg-none">
-            <div class="filt">
+            <div class="filter">
                 <div class="filterTitle" data-toggle="collapse" data-target="#filters">
                     <h3>Filters<i class="fa fa-filter filtrIcon"></i></h3>
                 </div>
 
             </div>
             <div class="sort">
-                <div class="filterTitle" data-toggle="collapse" data-target="#bredcrum">
+                <div class="filterTitle" data-toggle="collapse" data-target="#sortOrder">
                     <h3 class="filterStyle">Sort<i class="fa fa-sort-amount-asc"></i></h3>
                 </div>
             </div>
         </div>
 
-        <div class="row row-div">
+        <div class="row rowDiv">
             <!--starts filters page -->
 
-            <div id="filters" class="col-lg-2 col-div d-md-block collapse" data-bind="css: { 'd-md-block': checkWidth() > 768  }">
-                <h3 class="filt-hide">Filters</h3>
+            <div id="filters" class="col-lg-2 colDiv d-md-block collapse" data-bind="css: { 'd-md-block': checkWidth() > 768  }">
+                <h3 class="hide">Filters</h3>
                 <hr>
                 <span class="paddingLeft">CATEGORY</span>
 
@@ -102,7 +102,7 @@
                 <hr>
                 <span class="paddingLeft">PRICE</span>
 
-                <div class="slidecontainer">
+                <div class="slideContainer">
                     <div class="dispFlex">
                         <input type="range" min="100" max="800" value="100" class="slider" id="minRange" data-bind="value  : $root.Products.selectedMinPrice">
                         <input type="range" min="100" max="800" value="0" class="slider" id="maxRange" data-bind="value : $root.Products.selectedMaxPrice">
@@ -115,8 +115,8 @@
 
                 <hr>
 
-                <div class="panel panel-default ">
-                    <div class="panel-heading clickable">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
                         <p class="panel-title header" data-toggle="collapse" data-target="#collapseOne">
                             BRAND<span class="pull-right arrArrange"><i class="fa fa-angle-down"></i></span>
                         </p>
@@ -210,10 +210,10 @@
             </div>
             <!--end filters functionality -->
 
-            <div class="col-lg-10 col-div ">
+            <div class="col-lg-10 colDiv">
                 <!--starts sorting functionality -->
 
-                <div id="bredcrum" class="d-md-block collapse" data-bind="css: { 'd-md-block': checkWidth()> 768 }">
+                <div id="sortOrder" class="d-md-block collapse" data-bind="css: { 'd-md-block': checkWidth()> 768 }">
                     <div>
                         <b><span>Shirts</span></b><span data-bind="text: ' ( Showing - '+$root.Products.productArray().length+ ' products)'"></span>
                     </div>
@@ -228,8 +228,8 @@
 
                 <!--starts display card functionality -->
 
-                <div class="row row-div" data-bind="foreach: $root.Products.productArray">
-                    <div class="col-lg-3 col-sm-6 outer-div ">
+                <div class="row rowDiv" data-bind="foreach: $root.Products.productArray">
+                    <div class="col-lg-3 col-sm-6 outerDiv ">
 
                         <div class="productImg" data-bind="style: { 'backgroundImage': 'url('+$data.skuId[0].imageurl+ ')'}, attr :{id : $data.prodId}">
                             <div>
@@ -239,7 +239,7 @@
                                 <div data-bind="text:$data.skuId[0].brand"></div>
                                 <div data-bind="text:$data.skuId[0].name"></div>
                                 <b data-bind="{text: $data.skuId[0].price , attr:{id : $data.prodId+ 'price'}}"></b>
-                                <div class="colordiv" data-bind="foreach:$data.color">
+                                <div class="colordiv hide" data-bind="foreach:$data.color">
                                     <div class="color" data-bind="style: { 'backgroundColor': $data}, click : function(){ $root.Products.DispcolorSize($parent, $data)} "></div>
                                 </div>
                                 <div class="size">
