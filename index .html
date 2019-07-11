@@ -1,0 +1,217 @@
+<html>
+
+<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPA - Single Page Application</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js" type="text/javascript"></script>
+    <script src="js/sammy.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div data-bind="template: { name: $root.Main.template }"></div>
+    <!-- home/static page template-->
+    <script type="text/html" id="page-template">
+        <div class="landing-div col-lg-12">
+            <div class="col-lg-6 col-sm-12 landing-content">
+                <button class="btn1 btn-primary">Sign Up</button>
+                <div class="contain">
+                    <div class="search">
+                        <input type="text" class="form-control input-sm" maxlength="64" placeholder="Search Something.." data-bind="value :$root.Main.Search_value"/>
+                        <button type="submit" class="btn btn-primary btn-sm" data-bind="click: function(){$root.Main.goToPage($root.Main.demo);}">Search</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12 land-img">
+                
+            </div>
+        </div> 
+    </script>
+
+    <script type="text/html" id="about-template">
+        <div class="navbaar row">
+                <div class="col-lg-12 header">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-5 d-flex">
+                        <div class="searchbar">
+                            <span></span>
+                            <input type="text" class="search_input" placeholder="Search Something.." data-bind="value :$root.Main.Search_value()">
+                            <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-4 d-flex justifyContent">
+                        <div><a class="NoneDecoration" href=""> Login</a></div>
+                        <div><a class="NoneDecoration" href=""> More <span class="fas fa-angle-down"></span></a></div>
+                        <div><a class="NoneDecoration" href=""><span id="cart"class="fas fa-shopping-cart"></span> Cart</a></div>
+                    </div>
+                </div>
+        </div>
+        <div class="mobileheader">
+                <div><a class="NoneDecoration" href=""><i class="fas fa-arrow-left"></i></a></div>
+                <div><a class="NoneDecoration" href=""> Shirts</a></div>
+                <div><a class="NoneDecoration" href=""><i class="fas fa-search"></i></a></div>
+                <div><a class="NoneDecoration" href=""> <i class="fas fa-shopping-cart"></i></a> </div>
+                <div><a class="NoneDecoration" href=""> Login</a></div>
+        </div>
+        <div class="col-lg-2 fascet product-listing-div nullPadding">
+            <div class="filter col-lg-12 nullPadding" onClick='filterfun()'><i id="filter-logo"class="fas fa-filter"></i> Filters</div>
+            <div class="sort" onClick='sortfun()'>Sort  <i class="fas fa-sort-amount-down"></i></div>
+            <div id="viewSort" class="sort-view hidesortBy"> 
+                <span class="a1" data-bind="click: function(){$root.Product.SortByPopularity();}">Popularity </span><br>
+                <hr>
+                <span class="a2" data-bind="click: function(){$root.Product.SortByAsecnding();}"> Price--Low to High </span><br>
+                <hr>
+                <span class="a3" data-bind="click: function(){$root.Product.SortByDesecnding();}"> Price--High to Low </span>
+            </div>
+            <div id="viewFilter" class="desk-view hidefilter">
+                <div class="categories">
+                    <div class="panel-title ">CATEGORIES</div>
+                    <div data-bind="foreach:$root.Product.totalCategory">
+                        <p class="catgry"><span class="fas fa-chevron-left"></span><span data-bind="text:$data"></span></p>
+                    </div>
+                </div>
+                <div class="categories">
+                    <div data-role="main" class="ui-content">
+                        <div class="panel-title">PRICE</div>
+                        <div data-role="rangeslider" class="slidecontainer slide">
+                        <input type="range" class="slider" id="price-min" data-bind="value:$root.Product.fisrtRange , attr:{min:$root.Product.MinVal(),max:$root.Product.MaxVal()}">
+                        <input type="range" class="slider" id="price-max" data-bind="value:$root.Product.SecondRange , attr:{min:$root.Product.fisrtRange(),max:$root.Product.MaxVal()}">
+                        </div>
+                        <div>
+                            <b>Min Value:</b><div class="range-display" data-bind="text:$root.Product.fisrtRange()"></div><b>Max value:</b><div class="range-display" data-bind="text:$root.Product.SecondRange()"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading clickable">
+                        <div class="panel-title">SIZE</div>
+                        <span class="pull-right "><i class="glyphicon glyphicon-chevron-down"></i></span>
+                    </div>
+                    <div class="panel-body" >
+                        <div data-bind="foreach:$root.Product.sizeObserve">
+                            <div class="span-div" data-bind="visible: $root.Product.sizeFlag() ? $index() >= 0 : $index() < 5"> 
+                                <input type="checkbox" data-bind="attr : {value : $data , id: 'size-'+$data}, checked: $root.Product.size_select"> 
+                                <label class ="span-data" data-bind="{text:$data, attr:{for:'size-'+$data}}"></label>
+                            </div>
+                        </div>
+                        <a class="panel-less" data-bind="text:$root.Product.sizeFlag() ? 'less':$root.Product.sizeObserve().length - $root.Product.FascetLimit() +' more' ,click: function(){$root.Product.sizeFlagFun();}"></a>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                        <div class="panel-heading clickable">
+                            <div class="panel-title">BRANDS</div>
+                            <span class="pull-right "><i class="glyphicon glyphicon-chevron-down"></i></span>
+                        </div>
+                        <div class="panel-body">
+                            <div data-bind="foreach:$root.Product.brandObserve">
+                                <div class="span-div" data-bind="visible: $root.Product.brandFlag() ? $index() >= 0 : $index() < 5 "> 
+                                    <input type="checkbox" data-bind="attr : {value : $data , id : 'brand-'+$data} ,checked: $root.Product.brand_select"> 
+                                    <label class ="span-data" data-bind="{html:$data , attr:{'for' : 'brand-'+$data}}"></label>
+                                </div>
+                            </div>
+                            <a class="panel-less" data-bind="text:$root.Product.brandFlag() ? 'less': $root.Product.brandObserve().length - $root.Product.FascetLimit() +' more' ,click: function(){$root.Product.brandFlagFun();}"></a>
+                        </div>
+                </div>
+                <div class="panel panel-primary">
+                        <div class="panel-heading clickable">
+                            <div class="panel-title">COLORS</div>
+                            <span class="pull-right "><i class="glyphicon glyphicon-chevron-down"></i></span>
+                        </div>
+                        <div class="panel-body" >
+                            <div data-bind="foreach:$root.Product.colorObserve">
+                                <div class="span-div" data-bind="visible: $root.Product.colorFlag() ? $index() >= 0 : $index() < 5"> 
+                                    <input type="checkbox" data-bind="attr : {value : $data , id: 'color-'+$data} ,checked: $root.Product.color_select"><div class="temp-div" data-bind="style : {backgroundColor : $data}"></div> 
+                                    <label class ="span-data" data-bind="{html:$data , attr:{for:'color-'+$data}}"></label>
+                                </div>
+                            </div>
+                            <a class="panel-less" data-bind="text:$root.Product.colorFlag() ? 'less':$root.Product.colorObserve().length - $root.Product.FascetLimit() +' more' ,click: function(){$root.Product.colorFlagFun();}"></a>
+                        </div>
+                </div>
+                <div class="panel panel-primary">
+                        <div class="panel-heading clickable">
+                            <div class="panel-title">RATINGS</div>
+                            <span class="pull-right "><i class="glyphicon glyphicon-chevron-down"></i></span>
+                        </div>
+                        <div class="panel-body">
+                            <div data-bind="foreach:$root.Product.RatingArray">
+                                <div class="span-div"> 
+                                    <input type="checkbox" class="check" data-bind="attr :{value : $data , id: 'Rating-'+$data} ,checked: $root.Product.rating_select"> 
+                                    <label class ="span-data" data-bind="attr :{for :'Rating-'+$data}"><span data-bind="text:$data"></span> <span class="fas fa-star"></span> & Above</label>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+               
+        </div>
+        <div class="col-lg-9 col-md-12 col-sm-12 product-listing-div nullPadding">
+                <div class="col-lg-12 crump">Home > Clothing > Men's Clothing > Shirts</div>
+                <div class="col-lg-12 crump" data-bind="html:'<b>Shirts :</b> (showing - '+$root.Product.Products().length+ ' products)'"></div>
+                <div class="col-lg-12 crump">
+                    <b>Sort by:</b>
+                    <span class="a1" data-bind="click: function(){$root.Product.SortByPopularity();}">Popularity </span>
+                    <span class="a2" data-bind="click: function(){$root.Product.SortByAsecnding();}"> Price--Low to High </span>
+                    <span class="a3" data-bind="click: function(){$root.Product.SortByDesecnding();}"> Price--High to Low </span>
+                </div>
+            <div class="paddingLeftRight" data-bind="foreach:$root.Product.Products"> 
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 temp nullPadding">
+                    <div class="PaddingForDiv">
+                        <div class="product-grid ">
+                            <div class="product-image">
+                                <a>
+                                    <img class="picture"  data-bind="attr: {src:$data.Sku[0].imageurl, id:$data.Sku[0].prodId}">
+                                </a>
+                                <span class="product-discount-label"><i class="fas fa-heart heart" data-bind="{attr:{id: $data.Sku[0].prodId+'heart'},click: function(){$root.Product.changeColor($data)}}"></i></span>
+                            </div>
+                            <div class="product-content">
+                                <h3 class="title" data-bind="text:$data.Sku[0].brand"></h3>
+                                <h5 class="name" data-bind="text:$data.Sku[0].name"></h5>
+                                <span class="fas fa-rupee-sign"></span> <span class="title"data-bind="{text:$data.Sku[0].price ,attr:{id:$data.Sku[0].prodId+'_price'}}"></span>
+                                <div class="color" data-bind="foreach:{ data: $data.color ,as:'clr'}">
+                                        <div class="temp-div" data-bind="style:{backgroundColor:clr}, click: function(){$root.Product.ColorClick($parent,clr);}">
+                                        </div>
+                                </div>
+                                <div class="size"data-bind="text:'Size:'+$data.size , attr:{id:$data.Sku[0].prodId+'_size'}"></div>    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </script>
+
+    <script type="text/html" id="product-template">
+        <div data-bind="with: Product"> 
+        <h3 data-bind="text: title"></h3>
+        <div data-bind="text: productid"></div>
+        <div data-bind="text: skuid"></div>
+        <button data-bind="click: function(){ $root.Main.goToProduct(productid) }">Details</button>
+        </div>
+    </script>
+
+    <script type="text/javascript" src="js/app.js"></script>
+
+</body>
+
+</html>
