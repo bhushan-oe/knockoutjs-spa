@@ -1,13 +1,16 @@
 <div id="products-listing-area" class="col-sm-12 col-lg-9 col-xs-12">
     <!-- <span id="effect-element" data-bind="text:effect()">test</span> -->
     <div class="card-effect container">
+            <div class="row">
+                    <span>Showing <span class="product-count" data-bind="text: filteredProducts().length"></span> from <span class="product-count"  data-bind="text:api.getProducts().items.length"></span> results</span>
+                </div>
                 <div class="row topnav">
                         <label class=" col-sm-3" >Sort By</label>
                         <a class="active col-sm-2 sortByFilter" data-bind="click: sortByRelevence" >Relevence</a>
                         <a class=" col-sm-2 sortByFilter" data-bind="click: sortByPriceLowToHigh" >Price - Low to High</a>
                         <a class=" col-sm-2 sortByFilter" data-bind="click : sortByPriceHighToLow">Price - High to Low</a>
                         <a class=" col-sm-2 sortByFilter" data-bind="click : sortByPopularity">Popularity</a>
-                      </div>
+                </div>
             <div id="products-list" class="row" data-bind="foreach: {data: filteredProducts, as: 'product' }">
 
                 <div class="col-sm-6 col-xs-12 col-lg-3">

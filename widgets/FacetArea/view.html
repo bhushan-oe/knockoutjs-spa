@@ -20,7 +20,18 @@
                     </li>
                 </ul>
             </div>
-            
+            <div class="facet" >
+                    <label for="price-facets">Price:</label>
+                    <ul class="list-group" id="price-facets">
+                        <li class="list-group-item" >
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input id="price-facet" type="range" class="form-check-input price-slider" value="" data-bind="value: priceFilter,attr: { max: maxPriceRange(), value : maxPriceRange()}, valueUpdate: 'input'" />
+                                </label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
         <div class="facet" >
             <button class="accordion" >Brands:</button>
             <ul class="list-group" data-bind="foreach: justBrands" id="brand-facets">
@@ -37,25 +48,43 @@
             <button class="accordion" >Colors:</button>
             <ul class="list-group" data-bind="foreach: justColors ,as: color" id="color-facets">
                 <li class="list-group-item" >
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input color-checkbox" value="" data-bind="checked: $parent.colorFilters, value: $data"><span data-bind="text: $data"></span>
+                    <div class="form-check-inline">
+                        <label class="form-check-label d-flex flex-row align-items-center">
+                            <input type="radio" class="form-check-input color-checkbox" value="" name="color" data-bind="checked: $parent.colorFilter, value: $data">
+                            <span class="card-text color-circle form-check-input" data-bind="style: {'background-color' : $data}"></span>
+                            <span data-bind="text: $data"></span>
                         </label>
                     </div>
                 </li>
             </ul>
         </div>
         <div class="facet" >
-            <label for="price-facets">Price:</label>
-            <ul class="list-group" id="price-facets">
+            <button class="accordion" >Ratings:</button>
+            <ul class="list-group" data-bind="foreach: justRatings ,as: rating" id="rating-facet">
                 <li class="list-group-item" >
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input id="price-facet" type="range" class="form-check-input price-slider" value="" data-bind="value: priceFilter,attr: { max: maxPriceRange(), value : maxPriceRange()}, valueUpdate: 'input'" />
+                            <input type="radio" class="form-check-input rating-checkbox" value="" name="rating" data-bind="checked: $parent.ratingFilter, value: $data">
+                            <span data-bind="text: $data"></span><span>+</span>
                         </label>
                     </div>
                 </li>
             </ul>
         </div>
+        <div class="facet" >
+                <button class="accordion" >Sizes:</button>
+                <ul class="list-group" data-bind="foreach: justSizes ,as: size" id="size-facet">
+                    <li class="list-group-item" >
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input size-checkbox" value="" name="size" data-bind="checked: $parent.sizeFilter, value: $data">
+                                <span data-bind="text: $data"></span>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        
+        
     </div>
 </div>

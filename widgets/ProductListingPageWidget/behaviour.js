@@ -3,29 +3,16 @@ console.log("loading ProductListingPageWidget behaviour");
 function ListingViewModel(){
     self = this;
     self.filter = ko.observable('');
-    self.justBrands =  ko.computed(function() {
-        var brands = ko.utils.arrayMap(api.getProducts().items, function(item) {
-            return {"brand":item.brand};
-        });
-        brands = brands.sort().filter(function(a){return !this[a.brand] ? this[a.brand] = true : false;}, {});
-        console.log('item : ', brands);
-        return brands;
-    }, self);
-    self.maxPriceRange = ko.computed(function(){
-        var maxPrices =  ko.utils.arrayMap(api.getProducts().items, function(item) {
-            return item.maxPrice;
-        });
-        console.log('maxPrimaxPricesceRange found ===> ', maxPrices);
-        return Math.max.apply(null,maxPrices);
-    });
-    console.log('maxPriceRange found ===> ', self.maxPriceRange());
     self.priceFilter = ko.observable(700);
     console.log('priceFilter found ===> ', self.priceFilter());
     self.brandFilters = ko.observableArray();
     self.categoryFilters = ko.observableArray();
     self.sortBy = ko.observable();
     self.justColors = ko.observableArray(api.getProducts().colors);
-    self.colorFilters = ko.observableArray();
+    self.justSizes = ko.observableArray(api.getProducts().sizes);
+    self.colorFilter = ko.observable();
+    self.ratingFilter = ko.observable();
+    self.sizeFilter = ko.observable();
 
     self.filteredProducts = ko.computed(function() {
         var filter = this.filter;
@@ -33,12 +20,21 @@ function ListingViewModel(){
         var bfilters = this.brandFilters();
         var catFilters = this.categoryFilters();
         var sortByFilter = this.sortBy();
-        var colorFilters = this.colorFilters();
+        var colorFilter = this.colorFilter();
+        var ratingFilter = this.ratingFilter();
+        var sFilter = this.sizeFilter();
+
         console.log('sortBy', sortByFilter);
         
         var filteredList;
 
-        if (!filter() & (catFilters.length == 0) & (bfilters.length == 0) & (pFilter == 0)) {
+        if (!filter() &
+            (catFilters.length == 0) &
+            (bfilters.length == 0) &
+            (pFilter == 0) &
+            (colorFilter == undefined) &
+            (ratingFilter == undefined) &
+            (sFilter == undefined)) {
             retfilteredList = api.getProducts().items;
         } else {
             filteredList =  ko.utils.arrayFilter(api.getProducts().items, function(item) {
@@ -47,11 +43,16 @@ function ListingViewModel(){
                 console.log('brandFilters : ', bfilters);
                 console.log('categoryFilters : ', catFilters);
                 console.log('priceFilter : ', pFilter);
+                console.log('colorFilters : ', colorFilter);
+                console.log('ratingFilter : ', ratingFilter);
+                console.log('sizeFilter : ', sFilter);
                 
                 return isInPriceRange(item.maxPrice, item.minPrice, pFilter)
-                    && isArrayContainsForFilter(item.brand, bfilters)
-                    && isArrayContainsForFilter(item.category, catFilters)
-                    && isArrayContainsForFilter(item.colors, colorFilters)
+                    && isArrayContainsItemForFilter(item.brand, bfilters)
+                    && isArrayContainsItemForFilter(item.category, catFilters)
+                    && isArrayContainsItemForFilter(colorFilter, item.colors)
+                    && (ratingFilter != undefined ? ratingFilter <= item.minRating : true)
+                    && isArrayContainsItemForFilter(sFilter, item.sizes)
                     && stringStartsWith(item.name, filter());
             });
         }
@@ -78,7 +79,34 @@ function ListingViewModel(){
             }
         });
     }, self);
-    
+
+    self.justBrands =  ko.computed(function() {
+        var brands = ko.utils.arrayMap(api.getProducts().items, function(item) {
+            return {"brand":item.brand};
+        });
+        brands = brands.sort().filter(function(a){return !this[a.brand] ? this[a.brand] = true : false;}, {});
+        console.log('item : ', brands);
+        return brands;
+    }, self);
+
+    self.maxPriceRange = ko.computed(function(){
+        var maxPrices =  ko.utils.arrayMap(api.getProducts().items, function(item) {
+            return item.maxPrice;
+        });
+        console.log('maxPrimaxPricesceRange found ===> ', maxPrices);
+        return Math.max.apply(null,maxPrices);
+    });
+    console.log('maxPriceRange found ===> ', self.maxPriceRange());
+    self.justRatings = ko.computed(function(){
+        var ratingList = ko.utils.arrayMap(api.getProducts().items,function(item){
+            return Math.floor(item.minRating);
+        });
+
+        ratingList = ratingList.sort().filter(function(a){return !this[a] ? this[a] = true : false;}, {});
+        return ratingList;
+    });
+    console.log('justRatings =====>', self.justRatings());
+
     self.justCategories =  ko.computed(function() {
         var categories = ko.utils.arrayMap(api.getProducts().items, function(item) {
             return {"category":item.category};

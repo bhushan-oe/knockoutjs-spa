@@ -83,6 +83,7 @@ ko.components.register('product-tile', {
 
 performLateBinding(listingViewModel, 'products-list');
 performLateBindingByClass(listingViewModel, 'sortByFilter');
+performLateBindingByClass(listingViewModel, 'product-count');
 
 $(".sortByFilter").click(function(){
     $(".sortByFilter").removeClass('active');
