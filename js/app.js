@@ -4,6 +4,8 @@
     $(document).ready(function() {
         function viewModel() {
             var self = this;
+            self.SearchCategory = ko.observable('');
+
             self.chosenPageId = ko.observable();
             self.template = ko.observable();
             self.plp = "plppage";
@@ -12,7 +14,6 @@
             }
             self.goToProduct = function(productid) {
                 location.hash = 'Product/' + productid;
-
             }
         }
 
@@ -38,7 +39,6 @@
                 category.push(product.category);
                 price.push(product.price);
             });
-
             return {
                 brands: brands,
                 colors: colors,
@@ -55,13 +55,14 @@
             self.selectedBrand = ko.observableArray();
             self.selectedColor = ko.observableArray();
             self.selectedRating = ko.observableArray();
+            self.selectedCategory = ko.observableArray();
             self.selectedMinPrice = ko.observable(100);
-            self.selectedMaxPrice = ko.observable(0);
+            self.selectedMaxPrice = ko.observable(800);
             self.brandFlag = ko.observable(false);
             self.colorFlag = ko.observable(false);
             self.sizeFlag = ko.observable(false);
             self.priceFlag = ko.observable(false);
-            var bundleArray = [];
+            self.ratingFlag = ko.observable(false);
             var dataArray = [];
             var tempDataArray = [];
             var self = this;
@@ -69,79 +70,48 @@
                 url: "http://demo2828034.mockable.io/search/shirts",
                 success: function(result) {
                     var filterOptions = loadFilteroptions(result.items);
-                    var newbrand = [];
-                    var newcolor = [];
-                    var newsize = [];
-                    var newrating = [];
-                    var newprice = [];
-                    var newcategory = [];
 
-                    $.each(filterOptions.brands, function(i, col) {
-                        if ($.inArray(col, newbrand) === -1) newbrand.push(col);
-                    });
-                    vm.brands(newbrand);
+                    self.filterCategories(filterOptions.brands, 'brands');
 
-                    $.each(filterOptions.colors, function(i, col) {
-                        if ($.inArray(col, newcolor) === -1) newcolor.push(col);
-                    });
-                    vm.colors(newcolor);
+                    self.filterCategories(filterOptions.rating, 'rating');
 
-                    $.each(filterOptions.size, function(i, col) {
-                        if ($.inArray(col, newsize) === -1) newsize.push(col);
-                    });
-                    vm.size(newsize);
+                    self.filterCategories(filterOptions.colors, 'colors');
 
+                    self.filterCategories(filterOptions.size, 'size');
 
-                    $.each(filterOptions.rating, function(i, col) {
-                        if ($.inArray(col, newrating) === -1) newrating.push(col);
-                    });
-                    vm.rating(newrating);
+                    self.filterCategories(filterOptions.category, 'category');
 
-                    $.each(filterOptions.category, function(i, col) {
-                        if ($.inArray(col, newcategory) === -1) newcategory.push(col);
-                    });
-                    vm.category(newcategory);
+                    self.filterCategories(filterOptions.colors, 'colors');
 
-                    $.each(filterOptions.price, function(i, col) {
-                        if ($.inArray(col, newprice) === -1) newprice.push(col);
-                    });
-                    vm.price(newprice);
+                    self.filterCategories(filterOptions.price, 'price');
 
-                    self.showAllBrandFilter = function() {
-                        vm.Products.brandFlag(true);
-                        $("#showBrandTag").css('display', 'none')
-                    }
-                    self.showAllColorFilter = function() {
-                        vm.Products.colorFlag(true);
-                        $("#showColorTag").css('display', 'none')
-                    }
-                    self.showAllSizeFilter = function() {
-                        vm.Products.priceFlag(true);
-                        $("#showSizeTag").css('display', 'none')
-                    }
-                    self.ratingSort = function() {
-                        $("#popSort").css('font-weight', 'bold');
-                        $("#priceLtHSort").css('font-weight', 'normal');
-                        $("#priceHtLSort").css('font-weight', 'normal');
-                        var ratingSortArray = tempDataArray;
+                    self.toggleFilter = function(id, flag) {
+                        vm.Products[flag](true);
+                        $("#" + id).css('display', 'none');
+                    };
+                    self.ratingSort = function(e, _this) {
+                        $(_this.currentTarget).css({ 'font-weight': 'bold' });
+                        var ratingSortArray = vm.Products.productArray();
                         ratingSortArray.sort((a, b) => (a.skuId[0].rating > b.skuId[0].rating) ? -1 : ((b.skuId[0].rating > a.skuId[0].rating) ? 1 : 0));
                         vm.Products.productArray(ratingSortArray);
                     }
-                    self.priceLowtoHigh = function() {
-                        $("#priceLtHSort").css('font-weight', 'bold');
-                        $("#priceHtLSort").css('font-weight', 'normal');
-                        $("#popSort").css('font-weight', 'normal');
-                        var priceLowtoHighArray = tempDataArray;
+                    self.priceLowtoHigh = function(e, _this) {
+                        $(_this.currentTarget).css({ 'font-weight': 'bold' });
+                        var priceLowtoHighArray = vm.Products.productArray();
                         priceLowtoHighArray.sort((a, b) => (a.skuId[0].price > b.skuId[0].price) ? 1 : ((b.skuId[0].price > a.skuId[0].price) ? -1 : 0));
                         vm.Products.productArray(priceLowtoHighArray);
+
                     }
-                    self.priceHightoLow = function() {
-                        $("#priceHtLSort").css('font-weight', 'bold');
-                        $("#priceLtHSort").css('font-weight', 'normal');
-                        $("#popSort").css('font-weight', 'normal');
-                        var priceHightoLowArray = tempDataArray;
+                    self.priceHightoLow = function(e, _this) {
+                        $(_this.currentTarget).css({ 'font-weight': 'bold' });
+                        var priceHightoLowArray = vm.Products.productArray();
                         priceHightoLowArray.sort((a, b) => (a.skuId[0].price > b.skuId[0].price) ? -1 : ((b.skuId[0].price > a.skuId[0].price) ? 1 : 0));
                         vm.Products.productArray(priceHightoLowArray);
+                    }
+
+                    self.handleCategoryClick = function(e) {
+                        self.selectedCategory([]);
+                        self.selectedCategory.push(e);
                     }
 
                     for (var object in result.items) {
@@ -157,8 +127,6 @@
 
                     }
                     for (var sameProdId in dataArray) {
-                        var tryArray = [];
-
                         var colorArr = [];
                         var sizeArr = [];
                         var newColorArr = [];
@@ -177,82 +145,67 @@
                         tempDataArray.push({ 'prodId': sameProdId, 'skuId': dataArray[sameProdId], 'color': newColorArr, 'size': newSizeArr });
 
                     }
+                    var isPresentInArray = function(prop, arr) {
+                        var i = $.inArray(prop, arr);
+                        return i < 0 ? false : true;
+                    };
+                    self.productArray(tempDataArray);
+                    var minPrice = parseInt(self.selectedMinPrice());
+                    var maxPrice = parseInt(self.selectedMaxPrice());
+                    var aftrpriceArray = [];
+                    var priceFilter = [];
+                    if (maxPrice != 100) {
+                        $.each(tempDataArray, function(ind, elem) {
+
+                            for (i = 0; i < elem.skuId.length; i++)
+                                if (minPrice < elem.skuId[0].price && elem.skuId[0].price < maxPrice) {
+                                    aftrpriceArray.push(elem);
+                                    $.each(aftrpriceArray, function(i, col) {
+                                        if ($.inArray(col, priceFilter) === -1) priceFilter.push(col);
+                                    });
+                                }
+                        });
+                    } else {
+                        priceFilter = tempDataArray;
+                    }
+                    //Start filters Functionality
                     self.applyFilters = ko.computed(function() {
-                        var BrandArray = [];
-                        var SizeArray = [];
-                        var aftrpriceArray = [];
-                        var aftrColorArray = [];
-                        var minPrice = parseInt(self.selectedMinPrice());
-                        var maxPrice = parseInt(parseInt(self.selectedMaxPrice()) + parseInt(self.selectedMinPrice()));
-                        if (maxPrice != 100) {
-                            $.each(tempDataArray, function(ind, elem) {
+                        var pMinFilter = self.selectedMinPrice();
+                        var pMaxFilter = self.selectedMaxPrice();
+                        var bFilter = self.selectedBrand();
+                        var cFilters = self.selectedColor();
+                        var rFilter = self.selectedRating();
+                        var sFilter = self.selectedSize();
+                        var cateFilter = self.selectedCategory();
 
-                                for (i = 0; i < elem.skuId.length; i++)
-                                    if (minPrice < elem.skuId[0].price && elem.skuId[0].price < maxPrice) {
-                                        aftrpriceArray.push(elem);
-                                    }
-                            });
-                        } else {
-                            aftrpriceArray = tempDataArray;
-                        }
+                        if (bFilter.length > 0 || cFilters.length > 0 || rFilter.length > 0 || sFilter.length > 0 || cateFilter.length > 0 || pMinFilter > 100 || pMaxFilter < 800) {
+                            var filtered = ko.utils.arrayFilter(priceFilter, function(items) {
+                                var filterData = ko.utils.arrayFilter(items.skuId, function(data) {
+                                    return (bFilter.length > 0 ? isPresentInArray(data.brand, bFilter) : true) &&
+                                        (cFilters.length > 0 ? isPresentInArray(data.color, cFilters) : true) &&
+                                        (sFilter.length > 0 ? isPresentInArray(data.size, sFilter) : true) &&
+                                        (cateFilter.length > 0 ? isPresentInArray(data.category, cateFilter) : true) &&
+                                        (data.price < pMaxFilter) &&
+                                        (data.price > pMinFilter) &&
+                                        (rFilter.length > 0 ? isPresentInArray(data.rating.toString(), rFilter) : true);
 
-                        if (self.selectedSize().length != 0) {
-                            $.each(aftrpriceArray, function(ind, elem) {
-                                for (p = 0; p < self.selectedSize().length; p++) {
-
-                                    for (i = 0; i < elem.size.length; i++)
-                                        if (elem.size[i] == self.selectedSize()[p]) {
-                                            SizeArray.push(elem);
-                                        }
-                                }
-
+                                });
+                                if (filterData.length > 0) return filterData;
                             });
 
+                            self.productArray(filtered);
                         } else {
-                            SizeArray = aftrpriceArray;
-
+                            return self.productArray(tempDataArray);
                         }
-                        var filtBrandArr = [];
-                        if (self.selectedBrand().length != 0) {
-                            $.each(SizeArray, function(ind, elem) {
-                                for (q = 0; q < self.selectedBrand().length; q++) {
-                                    for (j = 0; j < elem.skuId.length; j++)
-
-                                        if (elem.skuId[j].brand == self.selectedBrand()[q]) {
-                                            BrandArray.push(elem);
-                                            $.each(BrandArray, function(i, col) {
-                                                if ($.inArray(col, filtBrandArr) === -1) filtBrandArr.push(col);
-                                            });
-                                        }
-
-                                }
-                            });
-                        } else {
-                            filtBrandArr = SizeArray;
-                        }
-                        if (self.selectedColor().length != 0) {
-                            $.each(filtBrandArr, function(ind, elem) {
-                                for (q = 0; q < self.selectedColor().length; q++) {
-                                    for (i = 0; i < elem.color.length; i++)
-                                        if (elem.color[i] == self.selectedColor()[q]) {
-                                            aftrColorArray.push(elem);
-                                        }
-                                }
-                            });
-                        } else {
-                            aftrColorArray = filtBrandArr;
-                        }
-                        self.productArray(aftrColorArray);
-                    })
-
+                    });
+                    //End filters Functionality
                 }
 
             });
             self.productArray = ko.observableArray();
-            self.myFunction = function(product, color) {
-                var size = [];
-                var img;
-                var price;
+            self.DispcolorSize = function(product, color) {
+                var size = [],
+                    img, price;
                 for (var skuId in product.skuId) {
                     if (color == product.skuId[skuId].color) {
                         size.push(product.skuId[skuId].size);
@@ -265,8 +218,15 @@
                 $("#" + product.prodId + "price").text(' ' + price);
 
             }
-        }
+            self.filterCategories = function(arr, category) {
+                var _arr = [];
+                $.each(arr, function(i, col) {
+                    if ($.inArray(col, _arr) === -1) _arr.push(col);
+                });
+                vm[category](_arr);
+            };
 
+        }
 
         var checkWidth = function() {
             var w = $(window);
