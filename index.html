@@ -2,73 +2,210 @@
 
 <head>
     <title>SPA - Single Page Application</title>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js" type="text/javascript"></script>
     <script src="js/sammy.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav" data-bind="foreach: Main.pages">
-                <li class="nav-item" data-bind="
-                    css: { active: $data == $root.Main.chosenPageId() },
-                    click: $root.Main.goToPage">
-                    <a class="nav-link" data-bind="text: $data">Features</a>
-                </li>
-
-            </ul>
-        </div>
-    </nav>
-
-
     <div data-bind="template: { name: $root.Main.template }"></div>
 
-
-
     <!-- home/static page template-->
-    <script type="text/html" id="page-template">
-        <div data-bind="with: Page">
-        <h3 data-bind="text: name"></h3>
-        <div data-bind="text: content"></div>
+
+    <script type="text/html" id="landing-template">
+        <div class="landingPage row">
+            <div class="col-lg-6 col-sm-12 searchDiv">
+                <button type="submit" class="btn btn-lg signup"> Sign Up</button>
+                <div class="search">
+                    <input type="text" name="landingSearchBox" class="form-control input-lg" maxlength="64" placeholder="Search..." data-bind="value : $root.Main.searchData"/>
+                    <button type="submit" class="btn  btn-lg" data-bind="click: function(){$root.Main.goToPage($root.Main.demo)}">Search</button>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12 imgdiv"></div>    
         </div>
     </script>
 
-    <script type="text/html" id="product-template">
-        <div data-bind="with: Product"> 
-        <h3 data-bind="text: title"></h3>
-        <div data-bind="text: productid"></div>
-        <div data-bind="text: skuid"></div>
-        <button data-bind="click: function(){ $root.Main.goToProduct(productid) }">Details</button>
+        <!-- productList page/template -->
+
+    <script type="text/html" id="productList-template">
+        <div class="productList-page">
+
+        <!-- Header Section -->
+
+        <div class="headSection row" >
+            <div class="col-lg-2 col-md-2"></div>
+            <div class="col-lg-6 col-md-6">
+                <div class="search">
+                    <input type="text" name="plpSearchBox" class="form-control input-lg" maxlength="64" placeholder="Search" data-bind="value : $root.Main.searchData()" />
+                    <button type="submit" class="btn  btn-lg searchHdr"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 hdrSection">
+                <a class="clickable">Login & signup</a>
+                <a class="clickable">More <span class="fas fa-chevron-down"></span></a>
+                <a class="clickable"><span class="fas fa-shopping-cart"> </span>Cart</a>
+            </div>
+        </div>
+
+        <!-- Facets Section -->
+
+        <div class="row totalBody">
+            <div class="col-12 mobHead hideDiv">
+                    <span class="fas fa-arrow-left col-2"></span>
+                    <h4 class="col-4">Shirts</h4>
+                    <span class="fas fa-search col-2"></span>
+                    <span class="fas fa-shopping-cart col-2"></span>
+                    <h4 class="col-2">Login</h4> 
+            </div>
+            <div class="col-lg-2 nullPadding" id="facetSection">
+                    <section class="filterTitle whiteBG"  data-toggle="collapse" data-target=".filterDiv">
+                        <h3 class="nullMargin">Filters<span class="fas fa-filter hideDiv filtrIcon"></span></h3>
+                    </section>
+                    <section class="filterTitle hideDiv mobHeadDisp whiteBG" data-bind="click : function(){$root.Product.showSortSection()}" data-toggle="collapse" data-target=".breadcrumb">
+                        <h3 class="nullMargin">Sort<span class="fas fa-sort-amount-down hideDiv filtrIcon"></span></h3>
+                    </section>
+                <div class="col-12-12 filterDiv whiteBG">
+                    <section class="clearedBoth">
+                        <h5>CATEGORIES</h5>
+                        <li class="listingNone" data-bind="foreach : $root.Product.categories()">
+                                <div><span class="fas fa-chevron-left"><label class="category" data-bind="text : $data"></label></span></div>
+                        </li>
+                    </section>
+                    <section>
+                        <h4>Price</h4>
+                        <div class="slidecontainer">
+                            <div class="dispFlex">
+                                <input type="range" min="0" max="1500" value="0" class="slider" id="myRange1" data-bind="value  : $root.Product.selectedMinPrice">
+                                  <input type="range" min="0" max="1500" value="0" class="slider" id="myRange2" data-bind="value : $root.Product.selectedMaxPrice">
+                            </div>
+                              <div class="dispFlex">
+                                <p><span id="minPrice" data-bind="text : 'Min : '+$root.Product.selectedMinPrice()"></span></p>
+                                <p><span id="maxPrice" data-bind="text : 'Max : '+ $root.Product.selectedMaxPrice()"></span></p>
+                            </div>
+                        </div>
+                    </section>                               
+                    <div class="col-md-12 filterSection">
+                        <div class="panel panelPrimary">
+                            <div class="panelHeading">
+                                <h5 class="panel-title">SIZE</h5>
+                                <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                            </div>
+                            <div class="panel-body hideDiv">
+                               <ul data-bind="foreach : $root.Product.sizeAll" class="listingNone">
+                                    <li data-bind="visible: $root.Product.sizeFlag()? true : $index() < $root.Product.listItems(), attr : {id : 'sizeList'}">
+                                        <input type="checkbox"   data-bind="attr :{value : $data, id : 'sizeList'+$data}, checked : $root.Product.selectedSize">
+                                        <label data-bind="text : $data, attr : {'for' : 'sizeList'+$data}"></label>
+                                    </li>
+                               </ul>
+                            <span data-bind="text : $root.Product.sizeFlag() ? 'Less' : ($root.Product.sizeAll().length - $root.Product.listItems())+' More', click : $root.Product.toggleSize()"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 filterSection">
+                        <div class="panel panelPrimary">
+                            <div class="panelHeading">
+                                <h5 class="panel-title">BRAND</h5>                                
+                                <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                            </div>
+                            <div class="panel-body hideDiv">
+                                <ul data-bind="foreach : $root.Product.brandAll" class="listingNone">
+                                    <li data-bind="visible: $root.Product.brandFlag()? true :$index() < $root.Product.listItems()">
+                                        <input type="checkbox"   data-bind="attr :{value : $data, id : 'brand'+$data}, checked : $root.Product.selectedBrand">
+                                        <label data-bind="text : $data, attr : {'for' : 'brand'+$data}"></label>
+                                    </li>
+                                </ul>
+                                <span data-bind="text : $root.Product.brandFlag() ? 'Less' : ($root.Product.brandAll().length - $root.Product.listItems())+' More', click : $root.Product.toggleBrand()"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 filterSection">
+                        <div class="panel panelPrimary">
+                            <div class="panelHeading">
+                                <h5 class="panel-title">COLOR</h5>                                
+                                <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                            </div>
+                            <div class="panel-body hideDiv">
+                                <ul data-bind="foreach : $root.Product.colorAll" class="listingNone">
+                                    <li data-bind="visible: $root.Product.colorFlag()? true :$index() < $root.Product.listItems()">
+                                        <input type="checkbox"   data-bind="attr :{value : $data, id : 'color'+$data}, checked : $root.Product.selectedColor">
+                                        <div class="colorDiv" data-bind="style: { 'backgroundColor': $data}"></div> 
+                                        <label data-bind="text : $data, attr : {'for' : 'color'+$data}"></label>
+                                    </li>
+                                </ul>
+                                <span data-bind="text : $root.Product.colorFlag() ? 'Less' : ($root.Product.colorAll().length - $root.Product.listItems())+' More', click : $root.Product.toggleColor()"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 filterSection">
+                        <div class="panel panelPrimary">
+                            <div class="panelHeading">
+                                <h5 class="panel-title">CUSTOMER RATING</h5>
+                                <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                            </div>
+                            <div class="panel-body hideDiv">
+                                <ul class="listingNone" data-bind="foreach : $root.Product.ratingNumbers()">
+                                    <li>
+                                        <input type="radio" class="rating" data-bind="checked : $root.Product.selectedRating, attr : {value : $data, id : 'rate'+$data}">
+                                        <label data-bind="text : $data+' & Above', attr : {'for' : 'rate'+$data}"><span class="fas fa-star"></span></label>
+                                    </li>
+                                </ul>                    
+                            </div>
+                        </div>
+                    </div>                                       
+                </div>
+            </div>
+
+            <!-- productList Section -->
+
+
+            <div class="col-lg-9 nullPadding">
+                <div class="breadcrumb whiteBG dispBlock">
+                    <div>
+                        <b><span>Shirts</span></b><span data-bind="text: ' ( Showing - '+$root.Product.displayProduct().length+' products)'"></span>
+                    </div>
+                    <div class="sortBy">
+                        <b><span>SORT BY</span></b>
+                        <span data-bind="click : function(){$root.Product.ratingSort()}" id="popSort">Popularity</span>
+                        <span data-bind="click : function(){$root.Product.priceLowtoHigh()}" id="priceLtHSort">Price - Low to High</span>
+                        <span data-bind="click : function(){$root.Product.priceHightoLow()}" id="priceHtLSort">Price - High to Low</span>
+                    </div>
+                </div>
+                <div data-bind="visible : $root.Product.displayProduct().length == 0" class="noProductFound">
+                    <h2>Sorry No Products Found for selected Filters!</h2>
+                </div>
+                <div class="row" id="ListProduct" data-bind="foreach : $root.Product.displayProduct" >          
+                    <div class="col-lg-3 col-md-6 col-12 tileDiv">
+                        <div class="subTile whiteBG" data-bind="style: { backgroundImage: 'url('+$data.colorUrl[0]+')'}, attr : {id : $data.prodId}">
+                                <span class="fas fa-heart wishList" data-bind="click : function(){$root.Product.addToFavourite($data.prodId)}, attr : {id : 'heart'+$data.prodId}"></span>
+                            <div class="overlay whiteBG">
+                                <b data-bind="text : $data.brand"></b>
+                                <div><p data-bind="text : $data.name" id="nameTag"></p></div>
+                                <span class="fas fa-rupee-sign"></span><b data-bind="text : ' '+$data.price[0], attr : {'class' : 'priceTag'+$data.prodId}"></b>
+                                <div data-bind="foreach : {data : $data.color, as : 'color'}">
+                                    <div class="colorDiv" data-bind="style: { 'backgroundColor': color}, click :function(){$root.Product.choosenColorImage([$index(), $parent, color])}">
+                                    </div>
+                                </div>
+                                <div data-bind="text : 'Size : '+$data.size, attr : {id : $data.prodId+'_size'}" class="clearedBoth"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+           <p><span class="far fa-copyright"></span>ObjectEdge India Services</p>
         </div>
     </script>
-
-
-
-
     <script type="text/javascript" src="js/app.js"></script>
-
 </body>
-
 </html>

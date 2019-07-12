@@ -1,0 +1,328 @@
+body{
+    font-family: Times New Roman; 
+    background-color: #f1f3f6;
+}
+.landingPage{
+    height: 100vh;
+}
+.productList-page{
+    position : relative;
+}
+#facetSection{
+    margin: 5px 0 0 75px;
+}
+.headSection{
+    padding: 15px;
+    background-color: #2874f0;
+}
+.headSearch{
+    width: 100%;
+}
+.hideDiv{
+    display:  none;
+}
+.nullMargin, .row, .panel{
+    margin: 0;
+}
+.nullPadding{
+    padding: 0;
+}
+.whiteBG{
+    background-color: #FFFFFF;
+}
+.noProductFound{
+    padding: 25px;
+}
+section{
+    padding: 15px;
+}
+.category{
+    padding : 10px  0 0 15px;
+}
+.priceFilter{
+    padding: 15px;
+}
+.hdrSection{
+    font-size: 20px;
+    color : #FFFFFF; 
+    display: flex; 
+    justify-content : space-around;
+}
+.listingNone{
+    list-style-type: none;
+}
+.slidecontainer {
+width: 100%;
+}
+.slider {
+-webkit-appearance: none;
+width: 100%;
+height: 5px;
+border-radius: 5px;
+background: #F5DEB3;
+outline: none;
+-webkit-transition: .2s;
+transition: opacity .2s;
+margin-bottom: 10px;
+}
+.slider::-webkit-slider-thumb {
+-webkit-appearance: none;
+appearance: none;
+width: 15px;
+height: 15px;
+border-radius: 50%;
+border:  1px solid #000000;
+background: #ffffff;
+cursor: pointer;
+}
+.slider::-moz-range-thumb {
+width: 25px;
+height: 25px;
+border-radius: 50%;
+background: #4CAF50;
+cursor: pointer;
+}
+.dispFlex{
+    display : flex; 
+    justify-content : space-between;
+}
+
+.clickable{
+    cursor: pointer;   
+}
+.panelHeading{
+    padding: 15px;
+}
+.panelPrimary{
+    border: none;
+}
+.panelPrimary >.panelHeading{
+    color: #000000;
+    background-color: #FFFFFF;
+    border: none;
+}
+.panelHeading span {
+	margin: -20px 0 0 0;
+	font-size: 15px;
+}
+.filterSection{
+    padding: 0;
+}
+.filterSection, .breadcrumb, section{
+    border-bottom: 1px solid #f0f0f0;
+}
+label{
+    margin: 0 0 0 10px;
+    font-weight:  normal;
+}
+.dispBlock{
+    display:  block;
+}
+.breadcrumb{
+    margin : 5px 5px 0 5px; 
+    padding :15px;
+}
+.breadcrumb div{
+    margin: 10px;
+}
+.breadcrumb div span{
+    font-size: 15px;
+    margin: 0 0 0 10px;
+}
+
+.tileDiv{
+    position: relative;
+    padding: 5px;
+}
+.tileDiv:hover .overlay {
+    height: 24%;
+}
+.productList{
+    padding: 0;
+    margin: 0;
+}
+.subTile{
+    border: .5px solid #F1F3F6;
+    position: relative;
+    height: 450px;
+    background-size:  contain;
+    background-repeat:  no-repeat;
+    background-position: top;
+}
+.subTile:hover{
+    box-shadow: 1px 1px 15px #808080;
+  }
+  
+#nameTag{
+    margin: 0;
+}
+.wishList{
+    color: #808080;
+    font-size: 20px;
+    position: relative;
+    top : 5%;
+    left: 85%;
+}
+.overlay {
+    padding: 10px 0 0 20px;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 15%;
+    transition: .5s ease;
+  }
+#nameTag{
+    display: inline-block;
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0;
+}
+.colorDiv{
+    float: left;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%; 
+    border: 2px solid #808080;
+    margin: 0 5px 0 5px;
+}
+.imgdiv{
+    padding: 30px;
+    height: 100vh; 
+    background-image: url(../images/landing.jpg); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.searchDiv{
+    height: 100vh;
+    padding: 30px;
+}
+.search {  
+    font-size: 25px;
+    width: 90%;
+    height: 50px;
+    position: relative;
+    float: left;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.search input{
+    border-radius: 0;
+    position: absolute;
+    float: Left;
+    height: 50px;
+    padding: 0 0 0 20px;
+    outline: #FEA501;
+}
+.search input:focus{
+    border-color: #FEA501;
+}
+.btn {
+    border-radius: 0;
+    width: 150px;
+    height: 50px;
+    position: absolute;
+    right: 0;
+    background-color: #FEA501;
+    border: none;
+}
+.signup{
+    background-color: #000000;
+    color: #FFFFFF;
+    top: 100px;
+    left: 65%;
+}
+.searchHdr{
+    background-color: #ffffff;
+}
+.searchHdr:focus{
+    box-shadow : none;
+    outline: none;
+}
+.signup:hover{
+    color: #FFFFFF;
+    box-shadow: 5px 5px 5px #808080;
+}
+.footer{
+    margin: 10px 0 0 0;
+    color: #FFFFFF;
+    text-align:  center;
+    padding: 15px;
+    background-color: #2874f0;
+}
+.clearedBoth{
+    clear: both;
+}
+.redHeart{
+    color: #FD010C;
+}
+@media screen and (max-width: 1500px){
+    #facetSection{
+        margin: 0;
+    }
+}
+@media screen and (max-width: 900px){
+    .filtrIcon{
+        display:  block;
+        float: left;
+    }
+    .mobHead{
+        display:  block;
+        background-color: #2874f0;
+        color: #FFFFFF;
+    }
+    .mobHead span{
+        padding: 25px 0 0 0;
+    }
+    .mobHead > *{
+        float: left;
+        padding: 15px;
+        font-size: 20px;
+    }
+    .filterTitle{
+        text-align:  center;
+        border:  1px solid #f0f0f0;
+        width: 50%;
+        float: left;
+    }
+    .filterDiv, .headSection, .imgdiv, .breadcrumb{
+        display:  none;
+    }
+    .mobHeadDisp{
+        display: block;
+    }
+    .subTile{
+        height: 500px;
+    }
+    .subTile:hover{
+        box-shadow: none;
+      }
+    .subTile:focus{
+    outline: none;
+    }
+    .overlay{
+        height: 25%;
+    }
+    .searchDiv{
+        background: #ffffff url(../images/landing.jpg) no-repeat;
+        background-size: cover 
+    }
+    .search, .search input{
+        width: 100%;
+    }
+    .search .btn, .signup{
+        width: 100px;
+    } 
+    .tileDiv{
+        padding: 5px;
+    }
+    .breadcrumb{
+        margin: 1px 1px 0 1px;
+    }
+}
