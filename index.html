@@ -123,7 +123,7 @@
                             <div class="panel-body">
                                 <ul class="ul-div" data-bind="foreach: $root.Product.allSize">
                                     <li>
-                                        <input type="radio" data-bind="{attr: {value: $data, id: $data}, checked: $root.Product.selectSize }">
+                                        <input type="checkbox" data-bind="{attr: {value: $data, id: $data}, checked: $root.Product.selectSize }">
                                         <label class="span_data" data-bind="{text: $data, attr:{for: $data}}"></label>
                                     </li>
                                 </ul>
@@ -138,10 +138,10 @@
                                 <span><i class="fas fa-chevron-down"></i></span>
                             </div>
                             <div class="panel-body">
-                                <ul class="ul_div" data-bind="foreach: $root.Product.allBrand">
+                                <ul class="ulDiv" data-bind="foreach: $root.Product.allBrand">
                                     <li>
                                         <input type="checkbox" data-bind="{attr: {value: $data, id: $data}, checked: $root.Product.selectBrand}">
-                                        <label class="span_data" data-bind="{text: $data, attr:{for: $data}}"></label>
+                                        <label class="spanData" data-bind="{text: $data, attr:{for: $data}}"></label>
                                     </li>
                                 </ul>
                             </div>
@@ -195,9 +195,9 @@
                                 <b>Shirts:</b><span data-bind="text: '(Showing -> '+$root.Product.productArray().length+')'"></span>
                             </div>
                             <b>Sort: &emsp; </b>
-                            <span class="sortPointer" data-bind = "click: function(){ $root.Product.SortByPopularity(); }">Popularity &emsp;</span>
-                            <span class="sortPointer" data-bind = "click: function() { $root.Product.SortDescending(); }">Price Ascending &emsp;</span>
-                            <span class="sortPointer" data-bind="click: function() { $root.Product.SortByAscending(); }">Price Descending</span>
+                            <span class="sortPointer" data-bind = "click: function(){ $root.Product.SortBy('popularity'); }">Popularity &emsp;</span>
+                            <span class="sortPointer" data-bind = "click: function() { $root.Product.SortBy('ascending'); }">Price Ascending &emsp;</span>
+                            <span class="sortPointer" data-bind="click: function() { $root.Product.SortBy('descending'); }">Price Descending</span>
                         </div>
                     </div>
                 </div>

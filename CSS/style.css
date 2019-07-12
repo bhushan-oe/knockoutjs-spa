@@ -14,8 +14,9 @@
 }
 
 .searchText{
-    width: 150px;
+    width: 100%;
     border: hidden;
+    outline: none;
 }
 
 .headerFont{
@@ -246,12 +247,12 @@
     overflow: auto;
 }
 
-.ul-div{
+.ulDiv{
     padding: 5px;
     list-style: none;
 }
 
-.span_data{
+.spanData{
     font-size: 17px;
 }
 
