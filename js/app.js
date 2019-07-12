@@ -52,23 +52,12 @@
             self.currentSelctedSortBy = ko.observable('popularity');
             
             self.pricefilter =ko.computed(function(){ 
-                if(self.selectSize().length != 0 || self.selectBrand().length != 0 || self.selectColor().length != 0 || self.selectedRating().length != 0 ) 
-                    var tempArr = $.extend(true, [], self.productArray());
-                else 
-                var tempArr = $.extend(true, [], self.allProduct());
-
-                var temp =[];
-                tempArr.map(function(ob){
+                var temp = [];
+                self.productArray().map(function(ob){
                     if(ob.sku[0].price >= self.selectedMinPrice() && ob.sku[0].price <= self.selectedMaxPrice())
-                     temp.push(ob); 
-                }); 
-
-                if(temp.length!=0){
-                    self.productArray(temp); 
-                } 
-                else { 
-                    self.productArray(self.allProduct()); 
-                } 
+                    temp.push(ob); 
+                });
+                self.productArray(temp); 
             });
 
             self.sortDiv = function(){
@@ -94,17 +83,17 @@
                 if(value === "asecnding"){
                     $("#a2").css({"font-weight":"bold"});
                     self.currentSelctedSortBy('asecnding');              
-                    self.productArray.sort((a,b)=>(a.sku[0].price <b.sku[0].price)?-1:((a.sku[0].price > b.sku[0].price)? 1 : 0));
+                    self.productArray.sort((a,b)=>(a.sku[0].price > b.sku[0].price ? 1: -1));
                 }
                 if(value === "desecnding"){
                     self.currentSelctedSortBy('desecnding');
                     $("#a3").css({"font-weight":"bold"});
-                     self.productArray.sort((a,b)=>(a.sku[0].price >b.sku[0].price)?-1:((a.sku[0].price < b.sku[0].price)? 1 : 0));
+                     self.productArray.sort((a,b)=>(a.sku[0].price < b.sku[0].price ? 1: -1));
                 }
                 if(value === "popularity"){
                     self.currentSelctedSortBy('popularity');
                     $("#a1").css({"font-weight":"bold"});
-                    self.productArray.sort((a,b)=>(a.sku[0].rating >b.sku[0].rating)?-1:((a.sku[0].rating < b.sku[0].rating)? 1 : 0));
+                    self.productArray.sort((a,b)=>(a.sku[0].rating < b.sku[0].rating ? 1 : -1));
                 }
             }
 
@@ -112,7 +101,7 @@
             self.applyFilter = function(filterArray){
                 var clonedArr = $.extend(true, [], self.allProduct());
                 var temp=[]; 
-                
+                console.log(filterArray);
                 for (var filter in filterArray){
                     filterArray[filter].map(function(SelectedValue){
                         clonedArr.map(function(product){
@@ -144,27 +133,23 @@
                     });                    
                     clonedArr=temp;
                     temp=[];
+                   
                 } 
-                if(clonedArr.length!=0){ 
+                
                     self.productArray(clonedArr); 
-                }
-                else{
-                    $('input:checkbox').prop('checked', false);
-                    alert("Serched item Not found");
-                    self.productArray(self.allProduct());
-                    self.selectSize('');
-                    self.selectColor('');
-                    self.selectBrand('');
-                    self.selectedRating('');             
-                }
+                    console.log(self.productArray())
+               
             };
             self.fascetsComputed = ko.computed(function() {
-                if(self.selectSize().length > 1) { 
+                if(self.selectSize().length > 1)  
                     self.selectSize().shift(); 
-                } 
-                if(self.selectedRating().length > 1) { 
+                 
+                if(self.selectedRating().length > 1)  
                     self.selectedRating().shift(); 
-                }
+                
+                if (self.selectColor().length > 1)
+                    self.selectColor().shift();
+
                     var filterArray =[];
                     if (self.selectSize().length != 0){
                         filterArray["size"]=self.selectSize() ;
@@ -184,6 +169,7 @@
                     else{
                         self.productArray(self.allProduct());
                     }
+
                     self.sortBy(self.currentSelctedSortBy());              
            });
 
