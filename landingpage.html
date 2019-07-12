@@ -31,15 +31,18 @@
     <div data-bind="template: { name: $root.Main.template }"></div>
     <!-- home/static page template-->
     <script type="text/html" id="page-template">
+        <!-- total page division -->
         <div class="landingpage_div col-lg-12">
             <div class="row smallScreenMargin">
+            <!-- div for signup and searchbar button -->
                 <div class="col-lg-6 col-sm-12 col-xs-12 search_content">
                     <button class="btn-primary signupButton">Sign Up</button>
                     <div class="searchBar">
                         <input type="text" class="form-control input-sm" maxlength="64" placeholder="Search Something.." />
-                        <button type="submit" class="btn btn-primary btn-sm" data-bind="click: function(){$root.Main.goToPage($root.Main.plp);}">Search</button>
+                        <button type="submit" class="btn-primary btn-sm" data-bind="click: function(){$root.Main.goToPage($root.Main.plp);}">Search</button>
                     </div> 
                 </div>
+                <!-- div for image only -->
                 <div class="col-lg-6 landing_image_div">
             
                 </div>
@@ -47,50 +50,60 @@
         </div>
     </script>
 
-
+    <!-- plp/dynamic page template-->
     <script type="text/html" id="plp-template">
+
+        <!-- mobile view navbar -->
         <nav class="smallScreenMargin spaNavbarMobile">
-            <i class="fas fa-arrow-left"></i>
-            <h4 class="">Shirts</h4>
-            <i class="fas fa-search"></i>
-            <i class="fas fa-shopping-cart"></i>
-            <h4 class="">Login</h4> 
+            <span class="navbarLinksMobile"><i class="fas fa-arrow-left"></i></span>
+            <span class="navbarLinksMobile"><h4>Shirts</h4></span>
+            <span class="navbarLinksMobile"><i class="fas fa-search"></i></span>
+            <span class="navbarLinksMobile"><i class="fas fa-shopping-cart"></i></span>
+            <span class="navbarLinksMobile"><h4>Login</h4></span>
         </nav>
+
+        <!-- desktop view navbar -->
         <nav class="spaNavbar">
             <div class="navbarContent">
                 <div class="navbarSearch">
-                    <input type="text" class="" placeholder="Search for products, brands and more" />
+                    <input type="text" placeholder="Search for products, brands and more" />
                     <span  class="searchIcon">
                         <i class="fas fa-search"></i>
                     </span>
                 </div>
                 <span class="navbarLinks"><i class="fas fa-shopping-cart"></i> Cart</span>
                 <span class="navbarLinks">More <i class="fas fa-angle-down"></i> </span>
-                <span class="navbarLinks">Login & Signup</span>&nbsp;&nbsp;
-                
+                <span class="navbarLinks">Login & Signup</span>
             </div>
         </nav>
         <div class="row smallScreenMargin">
+            <!-- division for col-2 -->
             <div class="col-lg-2 adjustRightPadding adjustMobilePadding">
+                <!-- plp filters container -->
                 <div class="plpFilterContainer">
+                    <!-- plp filter header division for mobile and desktop -->
                     <div class="plpHeaderContainer">
-                        <div class="filter sortByHideout" data-toggle="collapse" data-target=".sortByFilter">
+                        <div class="filter hideSortBy" data-toggle="collapse" data-target=".sortByFilter">
                             Sort
-                            <i class="fas fa-sort-amount-down filtrIcon"></i>
+                            <i class="fas fa-sort-amount-down filterIcon"></i>
                         </div><hr>
-                        <div class="filter" data-toggle="collapse" data-target=".filterCells">
+                        <div class="filter" data-toggle="collapse" data-target=".filterDataContainer">
                             Filters
                             <i class="fas fa-filter filterIcon"></i>
                         </div><hr>
                     </div>
-                    <div class="filterCells"> 
+                    <!-- plp filter data division for mobile and desktop -->
+                    <div class="filterDataContainer"> 
+                        <!-- categoryFilter -->
                         <div class="categoryFilter">
                             <span>CATEGORIES</span>
-                            <p class="categoryMargin fontLight"><i class="fas fa-angle-left">&nbsp&nbsp&nbsp</i><span>Clothing</span></p>
-                            <p class="categoryMargin fontLight"><i class="fas fa-angle-left"></i>&nbsp&nbsp&nbsp<span>Men's Clothing</span></p>
-                            <p class="categoryMargin"><b><i class="fas fa-angle-left"></i>&nbsp&nbsp&nbsp<span>Shirts</b></span></p>
-                        </div><hr>
+                            <p class="categoryMargin fontLight"><i class="fas fa-angle-left"></i><span class="categoryLeftPadding">Clothing</span></p>
+                            <p class="categoryMargin fontLight"><i class="fas fa-angle-left"></i><span class="categoryLeftPadding">Men's Clothing</span></p>
+                            <p class="categoryMargin"><b><i class="fas fa-angle-left"></i><span class="categoryLeftPadding">Shirts</b></span></p>
+                        </div>
+                        <hr>
 
+                        <!-- priceFilter -->
                         <div class="priceFilter">
                             <div data-role="main" class="ui-content">
                                 <span>PRICE</span>
@@ -98,129 +111,148 @@
                                         <input class="slider" type="range" name="price-min" id="price-min" data-bind="value:$root.Product.minRange , attr:{min:$root.Product.lowestPrice(),max:$root.Product.middlePrice()}">
                                         <input class="slider" type="range" name="price-max" id="price-max" data-bind="value:$root.Product.maxRange , attr:{min:$root.Product.middlePrice()+1,max:$root.Product.highestPrice()}">
                                 </div>
-                                <div style="display:flex; justify-content:space-between">
+                                <div class="priceSlider">
                                     <div class="range_display" data-bind="text:$root.Product.minRange()"></div><div class="range_display" data-bind="text:$root.Product.maxRange()"></div>
                                 </div>
                             </div>
-                        </div><hr class="moreHRMargin">
+                        </div>
+                        <hr class="moreHRMargin">
 
-                        <div>
+                        <!-- sizeFilter -->
+                        <div class="sizeFilter">
                             <div class="sizeFilterHead" data-bind="click: function(){$root.Product.sizePanelVisible();}">
                                 <span>SIZE</span>
                                 <span><i data-bind="visible: !($root.Product.showSizeFilter())" class="fas fa-angle-down fontLight"></i><i data-bind="visible: $root.Product.showSizeFilter()" class="fas fa-angle-up fontLight"></i></span>
                             </div>
                             <div data-bind="visible: $root.Product.showSizeFilter()">
                                 <div data-bind="foreach:$root.Product.distinctSizes">
-                                    <div class="sizeDiv" data-bind="visible: $root.Product.size_flag() ? $index() >= 0 : $index() < 5"> 
-                                        &nbsp&nbsp<input type="checkbox" data-bind="attr : {value : $data, id : $data}, checked: $root.Product.chosenSize">&nbsp&nbsp <label data-bind="text : $data, attr : {'for' : $data}">
+                                    <div class="sizeDiv" data-bind="visible: $root.Product.size_flag() ? $index() >= 0 : $index() < $root.Product.showFilterDisplayLimit()"> 
+                                        <input type="checkbox" data-bind="attr : {value : $data, id : $data}, checked: $root.Product.chosenSize"><label data-bind="text : $data, attr : {'for' : $data}">
                                         <span data-bind="html:$data"></span>
                                     </div>
                                 </div>
-                                &nbsp&nbsp&nbsp<a data-bind="text:$root.Product.size_flag() ? 'less':$root.Product.distinctSizes().length -5 +' more' ,click: function(){$root.Product.sizeFilterVisible();}"></a>
+                                <a data-bind="text:$root.Product.size_flag() ? 'less':$root.Product.distinctSizes().length - $root.Product.showFilterDisplayLimit() +' more' ,click: function(){$root.Product.sizeFilterVisible();}"></a>
                             </div>
                         </div><hr class="moreHRMargin">
 
-                        <div>
+                        <!-- brandFilter -->
+                        <div class="brandFilter">
                             <div class="brandFilterHead" data-bind="click: function(){$root.Product.brandPanelVisible();}">
                                 <span>BRANDS</span>
                                 <span><i data-bind="visible: !($root.Product.showBrandFilter())" class="fas fa-angle-down fontLight"></i><i data-bind="visible: $root.Product.showBrandFilter()" class="fas fa-angle-up fontLight"></i></span>
                             </div>
                             <div data-bind="visible: $root.Product.showBrandFilter()">
                                 <div data-bind="foreach:$root.Product.distinctBrands">
-                                    <div class="brandDiv" data-bind="visible: $root.Product.brand_flag() ? $index() >= 0 : $index() < 5 "> 
-                                        &nbsp&nbsp<input type="checkbox" data-bind="attr : {value : $data, id : $data} ,checked: $root.Product.chosenBrand">&nbsp&nbsp<label data-bind="text : $data, attr : {'for' : $data}"> 
+                                    <div class="brandDiv" data-bind="visible: $root.Product.brand_flag() ? $index() >= 0 : $index() < $root.Product.showFilterDisplayLimit() "> 
+                                        <input type="checkbox" data-bind="attr : {value : $data, id : $data} ,checked: $root.Product.chosenBrand"><label data-bind="text : $data, attr : {'for' : $data}"> 
                                         <span data-bind="html:$data"></span>
                                     </div>
                                 </div>
-                                &nbsp&nbsp&nbsp<a data-bind="text:$root.Product.brand_flag() ? 'less': $root.Product.distinctBrands().length -5 +' more' ,click: function(){$root.Product.brand_flag_fun();}"></a>
+                                <a data-bind="text:$root.Product.brand_flag() ? 'less': $root.Product.distinctBrands().length - $root.Product.showFilterDisplayLimit() +' more' ,click: function(){$root.Product.brandFilterVisible();}"></a>
                             </div>
                         </div><hr class="moreHRMargin">
 
-                        <div>
+                        <!-- colorFilter -->
+                        <div class="colorFilter">
                             <div class="colorFilterHead" data-bind="click: function(){$root.Product.colorPanelVisible();}">
                                 <span>COLORS</span>
                                 <span><i data-bind="visible: !($root.Product.showColorFilter())" class="fas fa-angle-down fontLight"></i><i data-bind="visible: $root.Product.showColorFilter()" class="fas fa-angle-up fontLight"></i></span>
                             </div>
                             <div data-bind="visible: $root.Product.showColorFilter()">
                                 <div data-bind="foreach:$root.Product.distinctColors">
-                                    <div class="colorDiv" data-bind="visible: $root.Product.color_flag() ? $index() >= 0 : $index() < 5"> 
-                                        &nbsp&nbsp<input type="checkbox" data-bind="attr : {value : $data, id : $data} ,checked: $root.Product.chosenColor">&nbsp
-                                        <div class="colorCircles marginAdjust" data-bind="style : {backgroundColor : $data}"></div>&nbsp&nbsp<label data-bind="text : $data, attr : {'for' : $data}"> 
+                                    <div class="colorDiv" data-bind="visible: $root.Product.color_flag() ? $index() >= 0 : $index() < $root.Product.showFilterDisplayLimit()"> 
+                                        <input type="checkbox" data-bind="attr : {value : $data, id : $data} ,checked: $root.Product.chosenColor">
+                                        <div class="skuColoredCircles" data-bind="style : {backgroundColor : $data}"></div><label data-bind="text : $data, attr : {'for' : $data}"> 
                                         <span data-bind="html:$data"></span>
                                     </div>
                                 </div>
-                                &nbsp&nbsp&nbsp<a data-bind="text:$root.Product.color_flag() ? 'less':$root.Product.distinctColors().length -5 +' more' ,click: function(){$root.Product.color_flag_fun();}"></a>
+                                <a data-bind="text:$root.Product.color_flag() ? 'less':$root.Product.distinctColors().length - $root.Product.showFilterDisplayLimit() +' more' ,click: function(){$root.Product.colorFilterVisible();}"></a>
                             </div>
                         </div><hr class="moreHRMargin">
 
-                        <div>
+                        <!-- ratingFilter -->
+                        <div class="ratingFilter">
                             <div class="ratingFilterHead" data-bind="click: function(){$root.Product.ratingPanelVisible();}">
                                 <span>RATINGS</span>
                                 <span><i data-bind="visible: !($root.Product.showRatingFilter())" class="fas fa-angle-down fontLight"></i><i data-bind="visible: $root.Product.showRatingFilter()" class="fas fa-angle-up fontLight"></i></span>
                             </div>
-                            <div data-bind="visible: $root.Product.showRatingFilter()">
+                            <div data-bind="visible: $root.Product.showRatingFilter(), foreach:$root.Product.distingRatings">
                                 <div class="ratingDiv"> 
-                                        &nbsp&nbsp<input type="checkbox" value="4" data-bind="checked: $root.Product.chosenRating, attr : {id : $data}"> &nbsp&nbsp<span><label data-bind="attr : {'for' : $data}">4 <i class="fas fa-star"></i> & Above</span></label>
-                                </div>
-                                <div class="ratingDiv"> 
-                                        &nbsp&nbsp<input type="checkbox" value="3" data-bind="checked: $root.Product.chosenRating, attr : {id : $data}"> &nbsp&nbsp<span><label data-bind="attr : {'for' : $data}">3 <i class="fas fa-star"></i> & Above</span></label>
-                                </div>
-                                <div class="ratingDiv"> 
-                                        &nbsp&nbsp<input type="checkbox" value="2" data-bind="checked: $root.Product.chosenRating, attr : {id : $data}"> &nbsp&nbsp<span><label data-bind="attr : {'for' : $data}">2 <i class="fas fa-star"></i> & Above</span></label>
-                                </div>
-                                <div class="ratingDiv"> 
-                                        &nbsp&nbsp<input type="checkbox" value="1" data-bind="checked: $root.Product.chosenRating, attr : {id : $data}"> &nbsp&nbsp<span><label data-bind="attr : {'for' : $data}">1 <i class="fas fa-star"></i> & Above</span></label>
+                                    <input type="checkbox" data-bind="checked: $root.Product.chosenRating, attr : {value: $data, id : $data}"> 
+                                        <label data-bind="attr : {'for' : $data}">
+                                            <span data-bind="text : $data"> </span>
+                                                <i class="fas fa-star"></i> & Above
+                                        </label>
                                 </div>
                             </div>
-                        </div><hr class="moreHRMargin">
+                        </div>
+                        <hr class="moreHRMargin">
+
                     </div>
                 </div>
             </div>
             
+            <!-- division for col-10 -->
             <div class="col-lg-10 adjustLeftPadding smallScreenMargin">
+                <!-- total col-10 data -->
                 <div class="plpDataContainer">
+                    <!-- sort by container -->
                     <div class="sortByFilter">
-                        <div class="col-lg-12 fontLight plpPageNavigationBarHomeFont plpPageNavigationBarPadding hideout">
-                            Home &nbsp>&nbsp Clothing &nbsp>&nbsp Men's Clothing &nbsp>&nbsp Shirts
+                        <!-- First Static row -->
+                        <div class="col-lg-12 fontLight plpPageNavigationBarHomeFont plpPageNavigationBarPadding hideContent">
+                            <span class="plpPageNavigationBarContentPadding">Home</span>  
+                            <span class="plpPageNavigationBarContentPadding">></span>  
+                            <span class="plpPageNavigationBarContentPadding">Clothing</span>  
+                            <span class="plpPageNavigationBarContentPadding">></span>  
+                            <span class="plpPageNavigationBarContentPadding">Men's Clothing</span>  
+                            <span class="plpPageNavigationBarContentPadding">></span>  
+                            <span class="plpPageNavigationBarContentPadding">Shirts</span>
                         </div>
-                        <div class="col-lg-12 plpPageNavigationBarPadding plpPageNavigationBarPaddingadjust hideout" 
-                            data-bind="html:'<b>Shirts &nbsp&nbsp</b> (showing 1 - '+$root.Product.Products().length+ ' products of '+$root.Product.Products().length+ ' products)'">
+                        <!-- second static row -->
+                        <div class="col-lg-12 plpPageNavigationBarPadding plpPageNavigationBarPaddingadjust hideContent"> 
+                            <span class="plpPageNavigationBarContentPadding"><b>Shirts</b></span> 
+                            <span class="plpPageNavigationBarContentPadding fontLight">(showing 1 - </span>
+                            <span class="fontLight" data-bind="text : $root.Product.Products().length"></span>  
+                            <span class="plpPageNavigationBarContentPadding fontLight">products of 
+                            <span class="fontLight" data-bind="text : $root.Product.Products().length"></span>     
+                            <span class="plpPageNavigationBarContentPadding fontLight">products)</span>
                         </div>
-                        <div id="plpSort" class="col-lg-12 plpPageSortBy plpPageNavigationBarPadding plpPageNavigationBarPaddingadjust">
-                            <div class="sortByHeading"><span class="hideout">Sort by</span>&nbsp&nbsp
-
+                        <!-- plp sort div -->
+                        <div id="plpSort" class="col-lg-12 plpPageNavigationBarPadding plpPageNavigationBarPaddingadjust">
+                            <div class="sortByHeading plpPageNavigationBarContentPadding">
+                                <span class="hideContent">Sort by</span>
                             </div>
                             <div class="sortBy">
-                                <div class="sortByContent"><span id="SortByPopularity" data-bind="click: function(){$root.Product.SortByPopularity();}">Popularity </div>&nbsp&nbsp
-                                <div class="sortByContent"><span id="SortByPriceLowToHigh" data-bind="click: function(){$root.Product.SortByPriceLowToHigh();}"> Price -- Low to High </span></div>&nbsp&nbsp
-                                <div class="sortByContent"><span id="SortByPriceHighToLow" data-bind="click: function(){$root.Product.SortByPriceHighToLow();}"> Price -- High to Low </span></div>&nbsp&nbsp
+                                <div class="sortByContent"><span id="SortByPopularity" data-bind="click: function(){$root.Product.SortByPopularity();}">Popularity </div>
+                                <div class="sortByContent"><span id="SortByPriceLowToHigh" data-bind="click: function(){$root.Product.SortByPriceLowToHigh();}"> Price -- Low to High </span></div>
+                                <div class="sortByContent"><span id="SortByPriceHighToLow" data-bind="click: function(){$root.Product.SortByPriceHighToLow();}"> Price -- High to Low </span></div>
                             </div>
                         </div>
                     </div>
                     <hr>
-                    <div class="row marginUpAdd" data-bind="foreach:$root.Product.Products, visible: $root.Product.areProductsAvailable()">
+                    <div class="row" data-bind="foreach:$root.Product.Products, visible: $root.Product.areProductsAvailable()">
                         <div class="col-xs-12 col-lg-3 col-sm-6 ">
                             <div class="productContainer">
                                 <div class="productImage">
                                     <a>
                                         <i class="fas fa-heart heart" data-bind="click : function(){$root.Product.addToFavourite($data.Sku[0].prodId)}, attr : {id : 'heart'+$data.Sku[0].prodId}"></i>
-                                        <img class="image1" alt="$data.Sku[0].name" data-bind="attr: {src:$data.Sku[0].imageurl, id:$data.Sku[0].prodId}">
+                                        <img alt="$data.Sku[0].name" data-bind="attr: {src:$data.Sku[0].imageurl, id:$data.Sku[0].prodId}">
                                     </a>                                    
                                 </div>
                                 <div class="productContent">
                                     <a class="brandName fontLight" data-bind="text:$data.Sku[0].brand"></a>
                                     <a class="skuName" data-bind="text:$data.Sku[0].name"></a>
-                                    <i class="fas fa-rupee-sign"></i><b><span class="title"data-bind="text:$data.Sku[0].price, attr:{id:$data.Sku[0].prodId+'_price'}"></span></b>
+                                    <i class="fas fa-rupee-sign"></i><b><span class="title" data-bind="text:$data.Sku[0].price, attr:{id:$data.Sku[0].prodId+'_price'}"></span></b>
                                     <div class="color" data-bind="foreach:{ data: $data.color ,as:'chosenColor'}">
-                                        <div class="colorCircles" data-bind="style:{backgroundColor:chosenColor}, click: function(){$root.Product.ColorClick($parent,chosenColor);}">
+                                        <div class="skuColoredCircles" data-bind="style:{backgroundColor:chosenColor}, click: function(){$root.Product.ColorClick($parent,chosenColor);}">
                                         </div>
                                     </div>
-                                    <div class="size" data-bind="text:'Size:'+$data.size , attr:{id:$data.Sku[0].prodId+'_size'}"></div>    
+                                    <div class="sizeName" data-bind="text:'Size:'+$data.size , attr:{id:$data.Sku[0].prodId+'_size'}"></div>    
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row marginUpAdd" data-bind="visible: !$root.Product.areProductsAvailable()">
+                    <div class="row" data-bind="visible: !$root.Product.areProductsAvailable()">
                         <div class="col-xs-12 col-lg-12 col-sm-12 ">
                             <div class="noProductAvailable">
                                 <h4>Sorry !! No Product is available for your filters</h4>

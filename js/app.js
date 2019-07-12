@@ -41,6 +41,8 @@
             self.distinctColors = ko.observableArray();
             self.distinctSizes = ko.observableArray();
             self.distinctBrands = ko.observableArray();
+            self.showFilterDisplayLimit = ko.observable(5);
+            self.distingRatings = ko.observableArray([4, 3, 2, 1]);
 
             // for displaying price range
             self.minRange = ko.observable();
@@ -60,38 +62,36 @@
             // filterchnagefunction : calculate products for each filter
             self.AllFiltersChange = ko.computed(function () {
                 var newPlpArray = [];
+                var filtersToApply = [];
                 if (self.chosenBrand().length != 0) {
-                    newPlpArray = self.applyBrandFilter(self.chosenBrand(), self.ProductsWithoutFilter());
+                    filtersToApply.push("brand");
+                    newPlpArray = self.applyfilters(self.chosenBrand(), self.ProductsWithoutFilter(),"brand");
                 }
 
                 if (self.chosenSize().length != 0) {
-                    for (var a in self.chosenSize()) {
-                        if (!(a == self.chosenSize().length - 1)) {
-                            delete self.chosenSize()[a];
-                        }
-                    }
+                    var last_size = self.chosenSize()[self.chosenSize().length - 1];
+                    self.chosenSize().length = 0;
+                    self.chosenSize().push(last_size);
                     if (newPlpArray.length != 0)
-                        newPlpArray = self.applySizeFilter(self.chosenSize(), newPlpArray);
+                        newPlpArray = self.applyfilters(self.chosenSize(), newPlpArray , "size");
                     else
-                        newPlpArray = self.applySizeFilter(self.chosenSize(), self.ProductsWithoutFilter());
+                        newPlpArray = self.applyfilters(self.chosenSize(), self.ProductsWithoutFilter() ,"size");
                 }
                 if (self.chosenColor().length != 0) {
                     if (newPlpArray.length != 0)
-                        newPlpArray = self.applyColorFilter(self.chosenColor(), newPlpArray);
+                        newPlpArray = self.applyfilters(self.chosenColor(), newPlpArray, "color");
                     else
-                        newPlpArray = self.applyColorFilter(self.chosenColor(), self.ProductsWithoutFilter());
+                        newPlpArray = self.applyfilters(self.chosenColor(), self.ProductsWithoutFilter(), "color");
                 }
 
                 if (self.chosenRating().length != 0) {
-                    for (var a in self.chosenRating()) {
-                        if (!(a == self.chosenRating().length - 1)) {
-                            delete self.chosenRating()[a];
-                        }
-                    }
+                    var last_rating = self.chosenRating()[self.chosenRating().length - 1];
+                    self.chosenRating().length = 0;
+                    self.chosenRating().push(last_rating);
                     if (newPlpArray.length != 0)
-                        newPlpArray = self.applyRatingFilter(self.chosenRating(), newPlpArray);
+                        newPlpArray = self.applyfilters(self.chosenRating(), newPlpArray,"rating");
                     else
-                        newPlpArray = self.applyRatingFilter(self.chosenRating(), self.ProductsWithoutFilter());
+                        newPlpArray = self.applyfilters(self.chosenRating(), self.ProductsWithoutFilter(),"rating");
                 }
 
                 if (parseInt(self.maxRange()) > parseInt(self.minRange())) {
@@ -109,7 +109,7 @@
                 // if filteres are applied but no product is available
                 self.areProductsAvailable(true);
                 if ((self.chosenSize().length != 0 || self.chosenBrand().length != 0 || self.chosenColor().length != 0 || self.chosenRating().length != 0) && newPlpArray.length == 0) {
-                     self.areProductsAvailable(false);
+                    self.areProductsAvailable(false);
                 }
 
                 self.filteredPlpArray(removeduplicatedArray);
@@ -139,64 +139,37 @@
                 return priceArr;
             }
 
-            // apply size on products
-            // input 1. selected sizes 2. filteredarray OR totalarray of products
+            // apply filter on products
+            // input 1. selected filter 2. filteredarray OR totalarray of products 3.filter to apply
             // output products array including given sizes
-            self.applySizeFilter = function (selectSizeArray, arr) {
-                var sizeFilteredArray = [];
-                for (var size in selectSizeArray) {
-                    for (var productWithSize in arr) {
-                        if ($.inArray(selectSizeArray[size], arr[productWithSize].size) != -1) {
-                            sizeFilteredArray.push(arr[productWithSize]);
+            self.applyfilters = function (selectedfilterArray, arr, filterChosed) {
+                var filteredArray = [];
+                for(var filter in selectedfilterArray){
+                    for (var eachProduct in arr) {
+                        if (filterChosed == "size") {
+                            if ($.inArray(selectedfilterArray[filter], arr[eachProduct].size) != -1) {
+                                filteredArray.push(arr[eachProduct]);
+                            }
+                        }
+                        if (filterChosed == "brand") {
+                            if ($.inArray(selectedfilterArray[filter], arr[eachProduct].brand) != -1) {
+                                filteredArray.push(arr[eachProduct]);
+                            }
+                        }
+                        if (filterChosed == "color") {
+                            if ($.inArray(selectedfilterArray[filter], arr[eachProduct].color) != -1) {
+                                filteredArray.push(arr[eachProduct]);
+                            }
+                        }
+                        if (filterChosed == "rating") {
+                            if (parseInt(selectedfilterArray[filter], 10) < arr[eachProduct].rating) {
+                                filteredArray.push(arr[eachProduct]);
+                            }
                         }
                     }
-                }
-                return sizeFilteredArray;
-            }
 
-            // apply brands on products
-            // input : 1. selected brands 2. filteredarray OR totalarray of products
-            // output : products array including given brands
-            self.applyBrandFilter = function (selectBrandArray, arr) {
-                var brandFilteredArray = [];
-                for (var brand in selectBrandArray) {
-                    for (var productWithBrand in arr) {
-                        if ($.inArray(selectBrandArray[brand], arr[productWithBrand].brand) != -1) {
-                            brandFilteredArray.push(arr[productWithBrand]);
-                        }
-                    }
                 }
-                return brandFilteredArray;
-            }
-
-            // apply colors on products
-            // input : 1. selected colors 2. filteredarray OR totalarray of products
-            // output : products array including given colors
-            self.applyColorFilter = function (selectColorArray, arr) {
-                var colorFilteredArray = [];
-                for (var color in selectColorArray) {
-                    for (var productWithColor in arr) {
-                        if ($.inArray(selectColorArray[color], arr[productWithColor].color) != -1) {
-                            colorFilteredArray.push(arr[productWithColor]);
-                        }
-                    }
-                }
-                return colorFilteredArray;
-            }
-
-            // apply ratings on products
-            // input : 1. selected ratings 2. filteredarray OR totalarray of products
-            // output : products array including given ratings
-            self.applyRatingFilter = function (selectRatingArray, arr) {
-                var ratingFilteredArray = [];
-                for (var rating in selectRatingArray) {
-                    for (var productWithRating in arr) {
-                        if (parseInt(selectRatingArray[rating], 10) < arr[productWithRating].rating) {
-                            ratingFilteredArray.push(arr[productWithRating]);
-                        }
-                    }
-                }
-                return ratingFilteredArray;
+                return filteredArray;
             }
 
             // sort by low to high price function
@@ -242,7 +215,7 @@
             self.brandPanelVisible = function () {
                 this.showBrandFilter() ? this.showBrandFilter(false) : this.showBrandFilter(true);
             }
-            self.brand_flag_fun = function () {
+            self.brandFilterVisible = function () {
                 this.brand_flag() ? this.brand_flag(false) : this.brand_flag(true);
             }
 
@@ -258,7 +231,7 @@
                 this.showColorFilter() ? this.showColorFilter(false) : this.showColorFilter(true);
             }
 
-            self.color_flag_fun = function () {
+            self.colorFilterVisible = function () {
                 this.color_flag() ? this.color_flag(false) : this.color_flag(true);
             }
 
@@ -337,11 +310,11 @@
                 $.getJSON('http://demo2828034.mockable.io/search/shirts', function (data) {
 
                     // create another similar array for array operations
-                    var duplicateArray = data["items"];
-                    duplicateArray.sort((a, b) => (a.price < b.price) ? -1 : ((a.price > b.price) ? 1 : 0));
-                    vm.Product.lowestPrice(duplicateArray[0].price);
-                    vm.Product.highestPrice(duplicateArray[duplicateArray.length - 1].price);
-                    vm.Product.middlePrice(duplicateArray[duplicateArray.length - 1].price - duplicateArray[0].price);
+                    var arrayForPriceRange = data["items"];
+                    arrayForPriceRange.sort((a, b) => (a.price < b.price) ? -1 : ((a.price > b.price) ? 1 : 0));
+                    vm.Product.lowestPrice(arrayForPriceRange[0].price);
+                    vm.Product.highestPrice(arrayForPriceRange[arrayForPriceRange.length - 1].price);
+                    vm.Product.middlePrice(arrayForPriceRange[arrayForPriceRange.length - 1].price - arrayForPriceRange[0].price);
 
                     // for filter calculation
                     var caculationsArray = data["items"];
