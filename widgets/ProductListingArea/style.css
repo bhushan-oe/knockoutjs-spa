@@ -81,3 +81,10 @@
     border-bottom: 3px solid #2874ef;
   }
 
+.heart{
+  height: 40px;
+  width: 36px;
+  position: absolute;
+  top: 5px;
+  right: 9px;
+}

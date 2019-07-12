@@ -93,10 +93,9 @@ function ListingViewModel(){
         var maxPrices =  ko.utils.arrayMap(api.getProducts().items, function(item) {
             return item.maxPrice;
         });
-        console.log('maxPrimaxPricesceRange found ===> ', maxPrices);
         return Math.max.apply(null,maxPrices);
     });
-    console.log('maxPriceRange found ===> ', self.maxPriceRange());
+
     self.justRatings = ko.computed(function(){
         var ratingList = ko.utils.arrayMap(api.getProducts().items,function(item){
             return Math.floor(item.minRating);
@@ -105,7 +104,6 @@ function ListingViewModel(){
         ratingList = ratingList.sort().filter(function(a){return !this[a] ? this[a] = true : false;}, {});
         return ratingList;
     });
-    console.log('justRatings =====>', self.justRatings());
 
     self.justCategories =  ko.computed(function() {
         var categories = ko.utils.arrayMap(api.getProducts().items, function(item) {
@@ -115,7 +113,6 @@ function ListingViewModel(){
         console.log('item : ', categories);
         return categories;
     }, self);
-    console.log('categories =====>', self.justCategories());
 
     
     self.sortByRelevence = function(){ this.sortBy('relevence')};
