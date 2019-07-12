@@ -18,18 +18,8 @@ var routing = function(){
             api.loadProducts.call(this, context, function(p) {
                 console.log('products from callback ==> ', p, api);
                 api.products = p;
-                // products = p.items;
                 loadWidget("ProductListingPageWidget", $('#main'));
             });
-            // var products = api.getProducts();
-            // console.log('PRODDDD ==> ', products);
-            
-            // var products = api.loadDummyProducts.call(this, context);
-            next();
-        }, function (context, next) {
-            console.log("loading products to DOM");
-
-            // loadWidget("ProductListingPageWidget", $('#main'));
             next();
         });
         

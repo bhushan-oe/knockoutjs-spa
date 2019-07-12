@@ -1,7 +1,5 @@
 console.log("loading ProductListingArea behaviour");
 
-//performLateBinding(viewModel, 'effect-element');
-
 ko.components.register('product-tile', {
     template: {require : 'text!../components/Product/product-template.html'},
     viewModel: function ProductViewModel(params) {
@@ -56,7 +54,6 @@ ko.components.register('product-tile', {
                     console.log('read ==> ', self);
                     
                     var _skus = self.skus;
-
                     var allSizes = self.loadSizes(_skus);
 
                     self.skuSizes(allSizes);

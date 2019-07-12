@@ -1,34 +1,62 @@
 .card{
     border: none;
+    margin: 7px 0px;
+    height: 450px;
+    overflow-y: hidden;
 }
 
 .card:hover{
     box-shadow: 0px 1px 15px 10px rgba(0,0,0,.06);
 }
-.image-tile-wrapper{
-    width: 100%;
-    height: 200px;
-}
 
 .card-img-top{
-    height: 213px;
+    height: 370px;
     object-fit: contain;
+    position: relative;
 }
-/* .card-body{
-    z-index:2;
+.product-info{
+  background-color: white;
+  bottom:0;
 }
 
-.card-body:hover{
-    transform: translate3d(0px, 0px, 0px);
-} */
+@media screen and (min-width:800px){
+  .card:hover .product-info{
+    position: absolute;
+    -webkit-animation: movement 1s 1; 
+    -webkit-animation-direction: alternate; 
+    animation: movement 1s 1;
+    animation-fill-mode: forwards; 
+  }
 
-.color-circle{
+  /* Safari 4.0 - 8.0 */
+  @-webkit-keyframes movement {
+    from   {bottom: -95px;}
+    to {bottom: 20px;}
+  }
+
+  @keyframes movement {
+    from   {bottom: -95px;}
+    to {bottom: 20px;}
+  }
+}
+
+@media screen and (max-width:800px){
+  .card{
+    border: none;
+    margin: 7px 0px;
+    height: 550px;
+    overflow-y: none;
+  }
+}
+
+.circle{
     width:25px;
     height: 25px;
     border-radius: 20px;
-    border: 1px black;
+    border: 1px solid black;
     display: inline-block;
 }
+
 .topnav {
     overflow: hidden;
     /* background-color: #f1f1f1; */
@@ -53,20 +81,3 @@
     border-bottom: 3px solid #2874ef;
   }
 
-/* .card:hover .card-body .product-info{
-    position: absolute;
-    -webkit-animation: myfirst 1s 1; 
-    -webkit-animation-direction: alternate; 
-    animation: myfirst 2s 1;
-}
-
-  /* Safari 4.0 - 8.0 */
- /* @-webkit-keyframes myfirst {
-    0%   {bottom: 0px;}
-    100% {bottom: 50px;}
-  }
-  
-  @keyframes myfirst {
-    0%   {bottom: 0px;}
-    100% {bottom: 50px;}
-  } */
