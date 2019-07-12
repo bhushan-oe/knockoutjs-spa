@@ -16,189 +16,162 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
-    
-
 </head>
-
-<body style="font-family: Times New Roman; background-color: #f1f3f6">
-
-    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav" data-bind="foreach: Main.pages">
-                <li class="nav-item" data-bind="
-                    css: { active: $data == $root.Main.chosenPageId() },
-                    click: $root.Main.goToPage">
-                    <a class="nav-link" data-bind="text: $data">Features</a>
-                </li>
-
-            </ul>
-        </div>
-    </nav> -->
-
-
+<body>
     <div data-bind="template: { name: $root.Main.template }"></div>
-
-
 
     <!-- home/static page template-->
 
-
     <script type="text/html" id="landing-template">
-        <div style="height: 100vh" class="row">
-            <div class="col-lg-6 col-sm-12 searchdiv">
+        <div class="landingPage row">
+            <div class="col-lg-6 col-sm-12 searchDiv">
                 <button type="submit" class="btn btn-lg signup"> Sign Up</button>
                 <div class="search">
-                    <input type="text" class="form-control input-lg" maxlength="64" placeholder="Search..." data-bind="value : $root.Main.searchData"/>
+                    <input type="text" name="landingSearchBox" class="form-control input-lg" maxlength="64" placeholder="Search..." data-bind="value : $root.Main.searchData"/>
                     <button type="submit" class="btn  btn-lg" data-bind="click: function(){$root.Main.goToPage($root.Main.demo)}">Search</button>
                 </div>
             </div>
-            <div class="col-lg-6 col-sm-12 imgdiv"></div>
-    
+            <div class="col-lg-6 col-sm-12 imgdiv"></div>    
         </div>
     </script>
 
-
-
         <!-- productList page/template -->
 
-
     <script type="text/html" id="productList-template">
-        <div style="position : relative">
+        <div class="productList-page">
+
         <!-- Header Section -->
 
         <div class="headSection row" >
             <div class="col-lg-2 col-md-2"></div>
             <div class="col-lg-6 col-md-6">
                 <div class="search">
-                    <input type="text" class="form-control input-lg" maxlength="64" placeholder="Search" data-bind="value : $root.Main.searchData()" />
-                    <button type="submit" class="btn  btn-lg">Search</button>
+                    <input type="text" name="plpSearchBox" class="form-control input-lg" maxlength="64" placeholder="Search" data-bind="value : $root.Main.searchData()" />
+                    <button type="submit" class="btn  btn-lg searchHdr"><i class="fas fa-search"></i></button>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6" style="color : white; display: flex; justify-content : space-around">
-                <div><h4>Login & signup</h4></div>
-                <div><h4>More &nbsp<i class="fas fa-chevron-down"></i></h4></div>
-                <div><h4><i class="fas fa-shopping-cart"> </i>&nbspCart</h4></div>
-
+            <div class="col-lg-4 col-md-6 hdrSection">
+                <a class="clickable">Login & signup</a>
+                <a class="clickable">More <span class="fas fa-chevron-down"></span></a>
+                <a class="clickable"><span class="fas fa-shopping-cart"> </span>Cart</a>
             </div>
         </div>
 
         <!-- Facets Section -->
 
         <div class="row totalBody">
-            <div class="col-12 mobHead">
-                    <i class="fas fa-arrow-left col-2"></i>
+            <div class="col-12 mobHead hideDiv">
+                    <span class="fas fa-arrow-left col-2"></span>
                     <h4 class="col-4">Shirts</h4>
-                    <i class="fas fa-search col-2"></i>
-                    <i class="fas fa-shopping-cart col-2"></i>
+                    <span class="fas fa-search col-2"></span>
+                    <span class="fas fa-shopping-cart col-2"></span>
                     <h4 class="col-2">Login</h4> 
             </div>
-            <div class="col-lg-2" id="facetSection">
-                    <section class="filterTitle"  data-toggle="collapse" data-target=".filterDiv"><h3 style="margin-top : 0; margin-bottom : 0">Filters<i class="fas fa-filter filtrIcon"></i></h3></section>
-                    <section class="filterTitle filterTitle2" data-bind="click : function(){$root.Product.showSortSection()}" data-toggle="collapse" data-target=".bredScrum"><h3 style="margin-top : 0; margin-bottom : 0">Sort<i class="fas fa-sort-amount-down filtrIcon"></i></h3></section>
-                <div class="col-12-12 filterDiv">
-                    <!-- <section class="filterTitle" data-bind="click : function(){$root.Product.showFacetSection()}"><h3 style="margin-top : 0; margin-bottom : 0">Filters</h3></section> -->
-                    <section style="clear : both">
+            <div class="col-lg-2 nullPadding" id="facetSection">
+                    <section class="filterTitle whiteBG"  data-toggle="collapse" data-target=".filterDiv">
+                        <h3 class="nullMargin">Filters<span class="fas fa-filter hideDiv filtrIcon"></span></h3>
+                    </section>
+                    <section class="filterTitle hideDiv mobHeadDisp whiteBG" data-bind="click : function(){$root.Product.showSortSection()}" data-toggle="collapse" data-target=".breadcrumb">
+                        <h3 class="nullMargin">Sort<span class="fas fa-sort-amount-down hideDiv filtrIcon"></span></h3>
+                    </section>
+                <div class="col-12-12 filterDiv whiteBG">
+                    <section class="clearedBoth">
                         <h5>CATEGORIES</h5>
-                        <div><i class="fas fa-chevron-left"></i><span class="category">Clothing</span></div>
-                        <div><i class="fas fa-chevron-left"></i><span class="category">Men's Clothing</span></div>
-                        <div><i class="fas fa-chevron-left"></i><span class="category">Shirts</span></div>
+                        <li class="listingNone" data-bind="foreach : $root.Product.categories()">
+                                <div><span class="fas fa-chevron-left"><label class="category" data-bind="text : $data"></label></span></div>
+                        </li>
                     </section>
                     <section>
                         <h4>Price</h4>
                         <div class="slidecontainer">
-                            <div style="display : flex">
-                                <input type="range" min="100" max="800" value="100" class="slider" id="myRange1" data-bind="value  : $root.Product.selectedMinPrice">
-                                  <input type="range" min="0" max="800" value="0" class="slider" id="myRange2" data-bind="value : $root.Product.selectedMaxPrice">
+                            <div class="dispFlex">
+                                <input type="range" min="0" max="1500" value="0" class="slider" id="myRange1" data-bind="value  : $root.Product.selectedMinPrice">
+                                  <input type="range" min="0" max="1500" value="0" class="slider" id="myRange2" data-bind="value : $root.Product.selectedMaxPrice">
                             </div>
-                              <div style="display : flex; justify-content : space-between">
+                              <div class="dispFlex">
                                 <p><span id="minPrice" data-bind="text : 'Min : '+$root.Product.selectedMinPrice()"></span></p>
-                                  <p><span id="maxPrice" data-bind="text : 'Max : '+parseInt(parseInt($root.Product.selectedMaxPrice()) + parseInt($root.Product.selectedMinPrice()))"></span></p>
+                                <p><span id="maxPrice" data-bind="text : 'Max : '+ $root.Product.selectedMaxPrice()"></span></p>
                             </div>
                         </div>
                     </section>                               
                     <div class="col-md-12 filterSection">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
+                        <div class="panel panelPrimary">
+                            <div class="panelHeading">
                                 <h5 class="panel-title">SIZE</h5>
-                                <!-- <span data-bind="text : $root.Product.selectedSize()"></span> -->
                                 <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
                             </div>
-                            <div class="panel-body">
-                            <span data-bind="click : function(){$root.Product.removeSize()}">Remove Size</span>
-                               <ul data-bind="foreach : $root.Product.sizeAll" style="list-style-type: none;">
-                                    <li data-bind="visible: $root.Product.sizeFlag()? true : $index() < 5, attr : {id : 'sizeList'}"><input type="radio" name="" id="" data-bind="attr :{value : $data, id : 'sizeList'+$data}, checked : $root.Product.selectedSize"><label data-bind="text : $data, attr : {'for' : 'sizeList'+$data}"></label></li>
+                            <div class="panel-body hideDiv">
+                               <ul data-bind="foreach : $root.Product.sizeAll" class="listingNone">
+                                    <li data-bind="visible: $root.Product.sizeFlag()? true : $index() < $root.Product.listItems(), attr : {id : 'sizeList'}">
+                                        <input type="checkbox"   data-bind="attr :{value : $data, id : 'sizeList'+$data}, checked : $root.Product.selectedSize">
+                                        <label data-bind="text : $data, attr : {'for' : 'sizeList'+$data}"></label>
+                                    </li>
                                </ul>
-                               <div data-bind="click : function(){$root.Product.showAllSizeFilter()}" id="showSizeTag"><span data-bind="text : $root.Product.sizeAll().length - 5+' More'"></span></div>
-                               <div data-bind="click : function(){$root.Product.hideAllSizeFilter()}" id="hideSizeTag" style="display: none"><span data-bind="text : 'Less'"></span></div>
+                            <span data-bind="text : $root.Product.sizeFlag() ? 'Less' : ($root.Product.sizeAll().length - $root.Product.listItems())+' More', click : $root.Product.toggleSize()"></span>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12 filterSection">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h5 class="panel-title">BRAND</h5>
-                                <!-- <span data-bind="text : $root.Product.selectedBrand()"></span> -->
+                        <div class="panel panelPrimary">
+                            <div class="panelHeading">
+                                <h5 class="panel-title">BRAND</h5>                                
                                 <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
                             </div>
-                            <div class="panel-body">
-                                <ul data-bind="foreach : $root.Product.brandAll" style="list-style-type: none;">
-                                    <li data-bind="visible: $root.Product.brandFlag()? true :$index() < 5"><input type="checkbox" name="" id="" data-bind="attr :{value : $data, id : 'brand'+$data}, checked : $root.Product.selectedBrand"><label data-bind="text : $data, attr : {'for' : 'brand'+$data}"></label></li>
+                            <div class="panel-body hideDiv">
+                                <ul data-bind="foreach : $root.Product.brandAll" class="listingNone">
+                                    <li data-bind="visible: $root.Product.brandFlag()? true :$index() < $root.Product.listItems()">
+                                        <input type="checkbox"   data-bind="attr :{value : $data, id : 'brand'+$data}, checked : $root.Product.selectedBrand">
+                                        <label data-bind="text : $data, attr : {'for' : 'brand'+$data}"></label>
+                                    </li>
                                 </ul>
-                                <div data-bind="click : function(){$root.Product.showAllBrandFilter()}" id="showBrandTag"><span data-bind="text : $root.Product.brandAll().length - 5+' More'"></span></div>
-                                <div data-bind="click : function(){$root.Product.hideAllBrandFilter()}" id="hideBrandTag" style="display: none"><span data-bind="text : 'Less'"></span></div>
+                                <span data-bind="text : $root.Product.brandFlag() ? 'Less' : ($root.Product.brandAll().length - $root.Product.listItems())+' More', click : $root.Product.toggleBrand()"></span>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12 filterSection">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h5 class="panel-title">COLOR</h5>
-                                <!-- <span data-bind="text : $root.Product.selectedColor()"></span> -->
+                        <div class="panel panelPrimary">
+                            <div class="panelHeading">
+                                <h5 class="panel-title">COLOR</h5>                                
                                 <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
                             </div>
-                            <div class="panel-body">
-                                <ul data-bind="foreach : $root.Product.colorAll" style="list-style-type: none;">
-                                    <li data-bind="visible: $root.Product.colorFlag()? true :$index() < 5"><input type="checkbox" name="" id="" data-bind="attr :{value : $data, id : 'color'+$data}, checked : $root.Product.selectedColor"><div class="colorDiv" data-bind="style: { 'backgroundColor': $data}"></div> &nbsp<label data-bind="text : $data, attr : {'for' : 'color'+$data}"></label></li>
+                            <div class="panel-body hideDiv">
+                                <ul data-bind="foreach : $root.Product.colorAll" class="listingNone">
+                                    <li data-bind="visible: $root.Product.colorFlag()? true :$index() < $root.Product.listItems()">
+                                        <input type="checkbox"   data-bind="attr :{value : $data, id : 'color'+$data}, checked : $root.Product.selectedColor">
+                                        <div class="colorDiv" data-bind="style: { 'backgroundColor': $data}"></div> 
+                                        <label data-bind="text : $data, attr : {'for' : 'color'+$data}"></label>
+                                    </li>
                                 </ul>
-                                <div data-bind="click : function(){$root.Product.showAllColorFilter()}" id="showColorTag"><span data-bind="text : $root.Product.colorAll().length - 5+' More'"></span></div>
-                                <div data-bind="click : function(){$root.Product.hideAllColorFilter()}" id="hideColorTag" style="display: none"><span data-bind="text : 'Less'"></span></div>
+                                <span data-bind="text : $root.Product.colorFlag() ? 'Less' : ($root.Product.colorAll().length - $root.Product.listItems())+' More', click : $root.Product.toggleColor()"></span>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12 filterSection">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
+                        <div class="panel panelPrimary">
+                            <div class="panelHeading">
                                 <h5 class="panel-title">CUSTOMER RATING</h5>
                                 <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
                             </div>
-                            <div class="panel-body">
-                                <ul style="list-style-type: none;">
-                                    <li><input type="radio" name="" class="rating" value="4" data-bind="checked : $root.Product.selectedRating"><span>&nbsp4 <i class="fas fa-star"></i>&nbsp & Above</span></li>
-                                    <li><input type="radio" name="" class="rating" value="3" data-bind="checked : $root.Product.selectedRating"><span>&nbsp3 <i class="fas fa-star"></i>&nbsp & Above</span></li>
-                                    <li><input type="radio" name="" class="rating" value="2" data-bind="checked : $root.Product.selectedRating"><span>&nbsp2 <i class="fas fa-star"></i>&nbsp & Above</span></li>
-                                    <li><input type="radio" name="" class="rating" value="1" data-bind="checked : $root.Product.selectedRating"><span>&nbsp1 <i class="fas fa-star"></i>&nbsp & Above</span></li>
-                                </ul>
-                                <!-- <span data-bind="text : $root.Product.selectedRating()"></span> -->
+                            <div class="panel-body hideDiv">
+                                <ul class="listingNone" data-bind="foreach : $root.Product.ratingNumbers()">
+                                    <li>
+                                        <input type="radio" class="rating" data-bind="checked : $root.Product.selectedRating, attr : {value : $data, id : 'rate'+$data}">
+                                        <label data-bind="text : $data+' & Above', attr : {'for' : 'rate'+$data}"><span class="fas fa-star"></span></label>
+                                    </li>
+                                </ul>                    
                             </div>
                         </div>
                     </div>                                       
-            
                 </div>
             </div>
 
             <!-- productList Section -->
 
 
-            <div class="col-lg-9 productListSection">
-                <div class="bredScrum">
+            <div class="col-lg-9 nullPadding">
+                <div class="breadcrumb whiteBG dispBlock">
                     <div>
-                        <!-- <span data-bind="text : $root.Main.searchData()"></span><br> -->
-                        <b><span>Shirts</span></b><span data-bind="text: ' ( Showing - '+$root.Product.jsonData().length+' products)'"></span>
+                        <b><span>Shirts</span></b><span data-bind="text: ' ( Showing - '+$root.Product.displayProduct().length+' products)'"></span>
                     </div>
                     <div class="sortBy">
                         <b><span>SORT BY</span></b>
@@ -207,22 +180,22 @@
                         <span data-bind="click : function(){$root.Product.priceHightoLow()}" id="priceHtLSort">Price - High to Low</span>
                     </div>
                 </div>
-
-                <div id="noProcuctsfound"></div>
-                <div class="row" id="ListProduct" data-bind="foreach : $root.Product.jsonData" >
-                    
+                <div data-bind="visible : $root.Product.displayProduct().length == 0" class="noProductFound">
+                    <h2>Sorry No Products Found for selected Filters!</h2>
+                </div>
+                <div class="row" id="ListProduct" data-bind="foreach : $root.Product.displayProduct" >          
                     <div class="col-lg-3 col-md-6 col-12 tileDiv">
-                        <div class="subTile" data-bind="style: { backgroundImage: 'url('+$data.colorUrl[0]+')'}, attr : {id : $data.prodId}">
-                                <i class="fas fa-heart heart" data-bind="click : function(){$root.Product.addToFavourite($data.prodId)}, attr : {id : 'heart'+$data.prodId}"></i>
-                            <div class="overlay">
-                                <b data-bind="text : $data.productsAll[0].brand"></b>
-                                <div><p data-bind="text : $data.productsAll[0].name" id="nameTag"></p></div>
-                                <i class="fas fa-rupee-sign"></i><b data-bind="text : ' '+$data.productsAll[0].price, attr : {'class' : 'priceTag'+$data.prodId}"></b>
+                        <div class="subTile whiteBG" data-bind="style: { backgroundImage: 'url('+$data.colorUrl[0]+')'}, attr : {id : $data.prodId}">
+                                <span class="fas fa-heart wishList" data-bind="click : function(){$root.Product.addToFavourite($data.prodId)}, attr : {id : 'heart'+$data.prodId}"></span>
+                            <div class="overlay whiteBG">
+                                <b data-bind="text : $data.brand"></b>
+                                <div><p data-bind="text : $data.name" id="nameTag"></p></div>
+                                <span class="fas fa-rupee-sign"></span><b data-bind="text : ' '+$data.price[0], attr : {'class' : 'priceTag'+$data.prodId}"></b>
                                 <div data-bind="foreach : {data : $data.color, as : 'color'}">
-                                    <div class="colorDiv" data-bind="style: { 'backgroundColor': color}, click :function(){$root.Product.colorHover([$index(), $parent, color])}">
+                                    <div class="colorDiv" data-bind="style: { 'backgroundColor': color}, click :function(){$root.Product.choosenColorImage([$index(), $parent, color])}">
                                     </div>
                                 </div>
-                                <div data-bind="text : 'Size : '+$data.size, attr : {id : $data.prodId+'_size'}" style="clear : both"></div>
+                                <div data-bind="text : 'Size : '+$data.size, attr : {id : $data.prodId+'_size'}" class="clearedBoth"></div>
                             </div>
                         </div>
                     </div>
@@ -230,28 +203,9 @@
             </div>
         </div>
         <div class="footer">
-           <p><i class="far fa-copyright"></i>ObjectEdge India Services</p>
+           <p><span class="far fa-copyright"></span>ObjectEdge India Services</p>
         </div>
     </script>
-
-
-    <!-- Product Details Page  -->
-
-    <script type="text/html" id="product-template">
-        <div data-bind="with: Product"> 
-        <h3 data-bind="text: title"></h3>
-        <div data-bind="text: productid"></div>
-        <div data-bind="text: skuid"></div>
-        <button data-bind="click: function(){ $root.Main.goToProduct(productid) }">Details</button>
-        </div>
-    </div>
-    </script>
-
-
-
-
     <script type="text/javascript" src="js/app.js"></script>
-
 </body>
-
 </html>

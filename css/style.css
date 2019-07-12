@@ -1,12 +1,15 @@
-#facetSection{
-    margin-left: 75px;
-    margin-top: 5px;
-    padding-left: 0;
-    padding-right: 0;
+body{
+    font-family: Times New Roman; 
+    background-color: #f1f3f6;
 }
-.productListSection{
-    padding-left: 0;
-    padding-right: 0;
+.landingPage{
+    height: 100vh;
+}
+.productList-page{
+    position : relative;
+}
+#facetSection{
+    margin: 5px 0 0 75px;
 }
 .headSection{
     padding: 15px;
@@ -15,61 +18,63 @@
 .headSearch{
     width: 100%;
 }
-.mobHead{
+.hideDiv{
     display:  none;
 }
-.filterDiv{
-    background-color: rgb(255, 255, 255);
+.nullMargin, .row, .panel{
+    margin: 0;
 }
-.filterTitle{
-    background-color: white;
+.nullPadding{
+    padding: 0;
 }
-.filterTitle2{
-    display:  none;
+.whiteBG{
+    background-color: #FFFFFF;
+}
+.noProductFound{
+    padding: 25px;
 }
 section{
     padding: 15px;
-    border-bottom: 1px solid #f0f0f0;
-}
-.row{
-    margin-left: 0;
-    margin-right: 0;
 }
 .category{
-    padding : 0  0 0 15px;
+    padding : 10px  0 0 15px;
 }
 .priceFilter{
     padding: 15px;
 }
-
-
+.hdrSection{
+    font-size: 20px;
+    color : #FFFFFF; 
+    display: flex; 
+    justify-content : space-around;
+}
+.listingNone{
+    list-style-type: none;
+}
 .slidecontainer {
 width: 100%;
 }
-
 .slider {
 -webkit-appearance: none;
 width: 100%;
 height: 5px;
 border-radius: 5px;
-background: wheat;
+background: #F5DEB3;
 outline: none;
 -webkit-transition: .2s;
 transition: opacity .2s;
 margin-bottom: 10px;
 }
-
 .slider::-webkit-slider-thumb {
 -webkit-appearance: none;
 appearance: none;
 width: 15px;
 height: 15px;
 border-radius: 50%;
-border:  1px solid black;
-background:white;
+border:  1px solid #000000;
+background: #ffffff;
 cursor: pointer;
 }
-
 .slider::-moz-range-thumb {
 width: 25px;
 height: 25px;
@@ -77,104 +82,82 @@ border-radius: 50%;
 background: #4CAF50;
 cursor: pointer;
 }
-
-
-
-
-
-
-
-
-
-
-
+.dispFlex{
+    display : flex; 
+    justify-content : space-between;
+}
 
 .clickable{
     cursor: pointer;   
 }
-.panel{
-    margin-bottom: 0;
-}
-.panel-heading{
+.panelHeading{
     padding: 15px;
 }
-.panel-primary{
+.panelPrimary{
     border: none;
 }
-.panel-body{
-    display: none;
-}
-.panel-primary >.panel-heading{
-    color: black;
-    background-color: white;
+.panelPrimary >.panelHeading{
+    color: #000000;
+    background-color: #FFFFFF;
     border: none;
 }
-.panel-heading span {
-	margin-top: -20px;
+.panelHeading span {
+	margin: -20px 0 0 0;
 	font-size: 15px;
 }
 .filterSection{
-    padding-left: 0;
-    padding-right: 0;
+    padding: 0;
+}
+.filterSection, .breadcrumb, section{
     border-bottom: 1px solid #f0f0f0;
 }
 label{
-    margin-left: 10px;
+    margin: 0 0 0 10px;
     font-weight:  normal;
 }
-.bredScrum{
-    background-color: white; 
+.dispBlock{
+    display:  block;
+}
+.breadcrumb{
     margin : 5px 5px 0 5px; 
     padding :15px;
-    border-bottom: 1px solid #f0f0f0;
 }
-.bredScrum div{
+.breadcrumb div{
     margin: 10px;
 }
-.bredScrum div span{
+.breadcrumb div span{
     font-size: 15px;
     margin: 0 0 0 10px;
 }
-.hideSizeTag{
-    display:  none;
-}
-.hideBrandTag{
-    display: none;
-} 
-.hideColorTag{
-    display:  none;
-}
-
-
-
 
 .tileDiv{
     position: relative;
-    padding-left: 0;
-    padding-right: 0;
     padding: 5px;
-    
+}
+.tileDiv:hover .overlay {
+    height: 24%;
 }
 .productList{
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: 0;
-    margin-right: 0;
+    padding: 0;
+    margin: 0;
 }
 .subTile{
-    border: .5px solid rgba(224, 222, 222, 0.5);
+    border: .5px solid #F1F3F6;
     position: relative;
     height: 450px;
-    background-color: white;
     background-size:  contain;
     background-repeat:  no-repeat;
-    background-position: center;
+    background-position: top;
 }
-p{
-    margin: 0 0 0 0;
+.subTile:hover{
+    box-shadow: 1px 1px 15px #808080;
+  }
+  
+#nameTag{
+    margin: 0;
 }
-.heart{
-    color: gray;
+.wishList{
+    color: #808080;
     font-size: 20px;
     position: relative;
     top : 5%;
@@ -186,57 +169,40 @@ p{
     bottom: -2px;
     left: 0;
     right: 0;
-    background-color:white;
     overflow: hidden;
     width: 100%;
     height: 15%;
     transition: .5s ease;
   }
-  
-  .tileDiv:hover .overlay {
-    height: 24%;
-  }
-  .subTile:hover{
-    box-shadow: 1px 1px 15px gray;
-  }
-  .heart:hover{
-      color: red;
-  }
-  #nameTag{
+#nameTag{
     display: inline-block;
     width: 100%;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     padding: 0;
-  }
-  .colorDiv{
-      float: left;
-      height: 20px;
-      width: 20px;
-      border-radius: 50%; 
-      border: 2px solid gray;
-      margin: 0 5px 0 5px;
-  }
-
-  .imgdiv{
-    padding-left: 0;
-    padding-right: 0;
+}
+.colorDiv{
+    float: left;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%; 
+    border: 2px solid #808080;
+    margin: 0 5px 0 5px;
+}
+.imgdiv{
     padding: 30px;
     height: 100vh; 
     background-image: url(../images/landing.jpg); 
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-  }
-.searchdiv{
+}
+.searchDiv{
     height: 100vh;
-    padding-left: 0;
-    padding-right: 0;
     padding: 30px;
 }
-.search {
-    
+.search {  
     font-size: 25px;
     width: 90%;
     height: 50px;
@@ -246,53 +212,59 @@ p{
     left: 50%;
     transform: translate(-50%, -50%);
 }
-
 .search input{
     border-radius: 0;
     position: absolute;
     float: Left;
     height: 50px;
     padding: 0 0 0 20px;
-    outline: orange
+    outline: #FEA501;
 }
-
+.search input:focus{
+    border-color: #FEA501;
+}
 .btn {
     border-radius: 0;
     width: 150px;
     height: 50px;
     position: absolute;
     right: 0;
-    background-color: orange;
+    background-color: #FEA501;
     border: none;
 }
-
-.search input:focus{
-    border-color: orange;
-}
 .signup{
-    background-color: black;
-    color: white;
+    background-color: #000000;
+    color: #FFFFFF;
     top: 100px;
     left: 65%;
 }
-.signup:hover{
-    color: white;
-    box-shadow: 5px 5px 5px gray;
+.searchHdr{
+    background-color: #ffffff;
 }
-.filtrIcon{
-    display:  none;
+.searchHdr:focus{
+    box-shadow : none;
+    outline: none;
+}
+.signup:hover{
+    color: #FFFFFF;
+    box-shadow: 5px 5px 5px #808080;
 }
 .footer{
-    margin-top: 10px;
-    color: white;
+    margin: 10px 0 0 0;
+    color: #FFFFFF;
     text-align:  center;
     padding: 15px;
     background-color: #2874f0;
 }
-
+.clearedBoth{
+    clear: both;
+}
+.redHeart{
+    color: #FD010C;
+}
 @media screen and (max-width: 1500px){
     #facetSection{
-        margin-left: 0;
+        margin: 0;
     }
 }
 @media screen and (max-width: 900px){
@@ -300,15 +272,12 @@ p{
         display:  block;
         float: left;
     }
-    #facetSection{
-        margin-left: 0;
-    }
     .mobHead{
         display:  block;
         background-color: #2874f0;
-        color: white;
+        color: #FFFFFF;
     }
-    .mobHead i{
+    .mobHead span{
         padding: 25px 0 0 0;
     }
     .mobHead > *{
@@ -316,64 +285,44 @@ p{
         padding: 15px;
         font-size: 20px;
     }
-    .filterDiv{
-        display:  none;
-    }
     .filterTitle{
+        text-align:  center;
         border:  1px solid #f0f0f0;
         width: 50%;
         float: left;
     }
-    .filterTitle2{
-        display: block;
-    }
-    .headSection{
+    .filterDiv, .headSection, .imgdiv, .breadcrumb{
         display:  none;
+    }
+    .mobHeadDisp{
+        display: block;
     }
     .subTile{
         height: 500px;
-    }
-    .overlay{
-        height: 25%;
-    }
-    .imgdiv{
-        display: none;
-    }
-    .searchdiv{
-        background-image: url(../images/landing.jpg);
-        background-repeat:  no-repeat;
-        background-size: cover
-    }
-    .search{
-        width: 100%;
-    }
-    .search input{
-        width: 100%
-    }
-    .search .btn{
-        width: 100px;
-    }
-    .signup{
-        width: 100px;
-    }
-    /* .subTile{
-        height: 50vh;
-        width: 50%;
-    } */
-    .tileDiv{
-        padding: 5px;
-    }
-    .bredScrum{
-        display:  none;
-        margin: 1px 1px 0 1px;
     }
     .subTile:hover{
         box-shadow: none;
       }
     .subTile:focus{
-    outline-width: 0; 
     outline: none;
     }
+    .overlay{
+        height: 25%;
+    }
+    .searchDiv{
+        background: #ffffff url(../images/landing.jpg) no-repeat;
+        background-size: cover 
+    }
+    .search, .search input{
+        width: 100%;
+    }
+    .search .btn, .signup{
+        width: 100px;
+    } 
+    .tileDiv{
+        padding: 5px;
+    }
+    .breadcrumb{
+        margin: 1px 1px 0 1px;
+    }
 }
-
-
