@@ -149,7 +149,7 @@
                         <div class="panel-body">
                             <ul data-bind="foreach: $data.colors" class="listStyle">
                                 <li data-bind="visible: $root.Products.colorFlag()? true :$index() < 5">
-                                    <input type="checkbox" data-bind="attr : {value : $data, id: 'color' + $index()},checked : $root.Products.selectedColor" />
+                                    <input type="radio" data-bind="attr : {value : $data, id: 'color' + $index()},checked: $root.Products.selectedColor" />
                                     <label data-bind="attr: { for: 'color' + $index() }, text: $data,style: { 'backgroundColor': $data}" class="colrPadding colorchk"></label>
                                 </li>
                             </ul>
@@ -172,7 +172,7 @@
                         <div class="panel-body">
                             <ul data-bind="foreach: $data.size" class="listStyle">
                                 <li data-bind="visible: $root.Products.sizeFlag()? true :$index() < 5">
-                                    <input type="checkbox" data-bind="attr : {value : $data, id: 'size' + $index()},checked : $root.Products.selectedSize" />
+                                    <input type="radio" data-bind="attr : {value : $data, id: 'size' + $index()},checked : $root.Products.selectedSize" />
                                     <label data-bind="attr: { for: 'size' + $index() }, text: $data" class="space"></label>
                                 </li>
                             </ul>
@@ -194,7 +194,7 @@
                         <div class="panel-body">
                             <ul data-bind="foreach: $data.rating" class="listStyle">
                                 <li data-bind="visible: $root.Products.ratingFlag()? true :$index() < 5">
-                                    <input type="checkbox" data-bind="attr : {value : $data,id: 'rating' + $index()},checked : $root.Products.selectedRating" />
+                                    <input type="radio" data-bind="attr : {value : $data,id: 'rating' + $index()},checked : $root.Products.selectedRating" />
                                     <label data-bind="attr: { for: 'rating' + $index() }, text: $data" class="space"></label>
 
                                 </li>
@@ -231,11 +231,11 @@
                 <div class="row rowDiv" data-bind="foreach: $root.Products.productArray">
                     <div class="col-lg-3 col-sm-6 outerDiv ">
 
-                        <div class="productImg" data-bind="style: { 'backgroundImage': 'url('+$data.skuId[0].imageurl+ ')'}, attr :{id : $data.prodId}">
+                        <div class="backgroundImage" data-bind="style: { 'backgroundImage': 'url('+$data.skuId[0].imageurl+ ')'}, attr :{id : $data.prodId}">
                             <div>
                                 <i class="fa fa-heart fa-color"></i>
                             </div>
-                            <div class="overDiv">
+                            <div class="hoverDiv">
                                 <div data-bind="text:$data.skuId[0].brand"></div>
                                 <div data-bind="text:$data.skuId[0].name"></div>
                                 <b data-bind="{text: $data.skuId[0].price , attr:{id : $data.prodId+ 'price'}}"></b>

@@ -126,6 +126,24 @@
                             dataArray[result.items[object].prodId] = [result.items[object]];
 
                     }
+                    // result.items.map(function(object) {
+                    //     if (pr = tempDataArray.find(p => p.prodId == object.prodId)) {
+                    //         pr.skuId.push(object);
+                    //         if ($.inArray(object.color, pr.color) === -1) {
+                    //             pr.color.push(object.color);
+                    //         }
+                    //         if ($.inArray(object.size, pr.size) === -1) {
+                    //             pr.size.push(object.size);
+                    //         }
+                    //     } else {
+                    //         var newColorArr = [];
+                    //         var newSizeArr = [];
+                    //         var skuArray = [];
+                    //         skuArray.push(object);
+                    //     }
+                    //     tempDataArray.push({ 'prodId': object.prodId, 'skuId': skuArray, 'color': newColorArr, 'size': newSizeArr });
+                    // });
+
                     for (var sameProdId in dataArray) {
                         var colorArr = [];
                         var sizeArr = [];
@@ -138,6 +156,7 @@
                         $.each(colorArr, function(i, col) {
                             if ($.inArray(col, newColorArr) === -1) newColorArr.push(col);
                         });
+
                         $.each(sizeArr, function(i, col) {
                             if ($.inArray(col, newSizeArr) === -1) newSizeArr.push(col);
                         });
@@ -149,7 +168,9 @@
                         var i = $.inArray(prop, arr);
                         return i < 0 ? false : true;
                     };
+
                     self.productArray(tempDataArray);
+
                     var minPrice = parseInt(self.selectedMinPrice());
                     var maxPrice = parseInt(self.selectedMaxPrice());
                     var aftrpriceArray = [];
@@ -165,6 +186,7 @@
                                     });
                                 }
                         });
+
                     } else {
                         priceFilter = tempDataArray;
                     }
@@ -173,9 +195,9 @@
                         var pMinFilter = self.selectedMinPrice();
                         var pMaxFilter = self.selectedMaxPrice();
                         var bFilter = self.selectedBrand();
-                        var cFilters = self.selectedColor();
-                        var rFilter = self.selectedRating();
-                        var sFilter = self.selectedSize();
+                        var cFilters = self.selectedColor().length > 0 ? [self.selectedColor()] : [];
+                        var rFilter = self.selectedRating().length > 0 ? [self.selectedRating()] : [];
+                        var sFilter = self.selectedSize().length > 0 ? [self.selectedSize()] : [];
                         var cateFilter = self.selectedCategory();
 
                         if (bFilter.length > 0 || cFilters.length > 0 || rFilter.length > 0 || sFilter.length > 0 || cateFilter.length > 0 || pMinFilter > 100 || pMaxFilter < 800) {

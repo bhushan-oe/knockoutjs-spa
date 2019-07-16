@@ -1,0 +1,6 @@
+projectKey=spa-priyanka
+serverUrl=http://sonar.objectedge.com
+serverVersion=7.1.0.11001
+dashboardUrl=http://sonar.objectedge.com/dashboard/index/spa-priyanka
+ceTaskId=AWv6aOgwMlgWRDezH248
+ceTaskUrl=http://sonar.objectedge.com/api/ce/task?id=AWv6aOgwMlgWRDezH248
