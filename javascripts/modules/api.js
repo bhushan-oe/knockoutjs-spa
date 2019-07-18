@@ -19,6 +19,8 @@ var api = function () {
                 var newItems = [];
                 var colors = [];
                 var sizes = [];
+                var maxPriceLimit = 0;
+                var minPriceLimit = 0;
 
                 $.each(data.items,(function(i,v){
                     var foundProd = getProductFromModel(newItems,v.prodId);
@@ -67,9 +69,13 @@ var api = function () {
                             "price": v.price
                         });
                     }
+                    if(v.price > maxPriceLimit) maxPriceLimit = v.price;
+                    if(v.price < minPriceLimit || minPriceLimit == 0) minPriceLimit = v.price;
                     if(!isArrayContains(v.size,sizes)) sizes.push(v.size);
                     if(!isArrayContains(v.color,colors)) colors.push(v.color);
                 }));
+                products.maxPriceLimit = maxPriceLimit;
+                products.minPriceLimit = minPriceLimit;
                 products.sizes = sizes;
                 products.colors = colors;
                 products.items = newItems;
@@ -92,9 +98,7 @@ var api = function () {
 
     function loadDummyProducts(context) {
         $.getJSON("./data/dummy_products.json", function (data) {
-            var items = [];
             $.each(data.items, function (key, val) {
-                items.push("<li id='" + key + "'>" + val + "</li>");
                 console.log("key : " + key + " val : " + val.skus[0].skuId);
             });
 

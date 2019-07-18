@@ -4,7 +4,8 @@ function ListingViewModel(){
     self = this;
     self.filter = ko.observable('');
     self.priceFilter = ko.observable(700);
-    console.log('priceFilter found ===> ', self.priceFilter());
+    self.maxPriceFilter = ko.observable(api.getProducts().maxPriceLimit);
+    self.minPriceFilter = ko.observable(api.getProducts().minPriceLimit);
     self.brandFilters = ko.observableArray();
     self.categoryFilters = ko.observableArray();
     self.sortBy = ko.observable();
@@ -23,6 +24,8 @@ function ListingViewModel(){
         var colorFilter = this.colorFilter();
         var ratingFilter = this.ratingFilter();
         var sFilter = this.sizeFilter();
+        var maxpFilter = this.maxPriceFilter();
+        var minpFilter = this.minPriceFilter();
 
         console.log('sortBy', sortByFilter);
         
@@ -31,11 +34,12 @@ function ListingViewModel(){
         if (!filter() &
             (catFilters.length == 0) &
             (bfilters.length == 0) &
-            (pFilter == 0) &
             (colorFilter == undefined) &
+            (maxpFilter == api.getProducts().maxPriceLimit) &
+            (minpFilter == api.getProducts().minPriceLimit) &
             (ratingFilter == undefined) &
             (sFilter == undefined)) {
-            retfilteredList = api.getProducts().items;
+            filteredList = api.getProducts().items;
         } else {
             filteredList =  ko.utils.arrayFilter(api.getProducts().items, function(item) {
                 console.log('item : ', item);
@@ -46,8 +50,10 @@ function ListingViewModel(){
                 console.log('colorFilters : ', colorFilter);
                 console.log('ratingFilter : ', ratingFilter);
                 console.log('sizeFilter : ', sFilter);
+                console.log('maxpFilter : ', maxpFilter);
+                console.log('minpFilter : ', minpFilter);
                 
-                return isInPriceRange(item.maxPrice, item.minPrice, pFilter)
+                return isInPriceRange(item.maxPrice, item.minPrice, maxpFilter, minpFilter)
                     && isArrayContainsItemForFilter(item.brand, bfilters)
                     && isArrayContainsItemForFilter(item.category, catFilters)
                     && isArrayContainsItemForFilter(colorFilter, item.colors)
@@ -95,6 +101,7 @@ function ListingViewModel(){
         });
         return Math.max.apply(null,maxPrices);
     });
+    
 
     self.justRatings = ko.computed(function(){
         var ratingList = ko.utils.arrayMap(api.getProducts().items,function(item){
@@ -123,6 +130,6 @@ function ListingViewModel(){
 
 }
 var listingViewModel = new ListingViewModel();
-
+loadWidget('ListingHeaderArea',$('#header'));
 loadWidget('FacetArea',$('#product-listing-page-widget-row'));
 loadWidget('ProductListingArea',$('#product-listing-page-widget-row'));

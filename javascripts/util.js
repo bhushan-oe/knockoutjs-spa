@@ -67,10 +67,22 @@ var isArrayContainsItemForFilter = function(element, arr){
     }
 };
 
-var isInPriceRange = function(minPrice, maxPrice, priceFilter){
-    if(maxPrice <= priceFilter){
+var isInPriceRange = function(maxPrice, minPrice, maxpFilter, minpFilter){
+    if(maxPrice <= maxpFilter && minPrice >= minpFilter){
         return true;
     }else{
         return false;
     }
 }
+
+var landingPageViewModel = {
+    goToPage : function(hash, keyword) {
+        this.searchedKeyword = keyword;
+        navigation.goToPage(hash);
+    },
+
+    checkIfPlpPage: ko.computed(function(){
+        console.log('page check ', location.hash === '#/plp');
+        return location.hash === '#/plp' ? true : false;
+    })
+};

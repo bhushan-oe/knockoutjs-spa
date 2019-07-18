@@ -26,3 +26,22 @@
     background-color: white;
     overflow: hidden;
   }
+  
+  .price-slider{
+    padding-left: 0;
+    padding-right: 0;
+    width:50%;
+  }
+
+  .align-slider-left{
+    text-align: center;
+  }
+  
+  .align-slider-{
+    text-align: left;
+
+  }
+
+  #price-container{
+    height: 53px;
+  }

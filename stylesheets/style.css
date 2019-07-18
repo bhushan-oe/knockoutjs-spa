@@ -1,11 +1,20 @@
-div#header{
+nav#header{
     width:100%;
     height: 8vh;
     background-color: #2874ef;
     position: relative;
 }
 
+nav#header ul{
+    width:100%;
+}
+
 #main{
     position: relative;
     width: 100%;
+}
+
+.icons{
+    width:34px;
+    height:34px;
 }

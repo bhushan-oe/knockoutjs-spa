@@ -1,6 +1,6 @@
 <div class="card">
     <img class="card-img-top" alt="Card image" style="width:100%" data-bind="attr: { src: imageurl() }" />
-    <img class="heart" src="../resources/images/heart.svg" alt="heart.svg">
+    <img class="heart" src="../resources/images/heart.svg" alt="heart.svg" data-bind="click: clickHeart.bind($parent) , attr: { src: heartImage() }">
     <div class="card-body product-info">
         <strong>
             <p class="card-title" data-bind="text: productName"></p>

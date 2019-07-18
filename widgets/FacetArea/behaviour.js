@@ -3,12 +3,13 @@ console.log("loading FacetArea behaviour");
 performLateBinding(listingViewModel, 'filter');
 performLateBinding(listingViewModel, 'brand-facets');
 performLateBinding(listingViewModel, 'category-facets');
-performLateBinding(listingViewModel, 'price-facet');
+performLateBindingByClass(listingViewModel, 'price-facet');
 performLateBinding(listingViewModel, 'color-facets');
 performLateBinding(listingViewModel, 'rating-facet');
 performLateBinding(listingViewModel, 'size-facet');
 
-performLateBinding(listingViewModel, 'price-label');
+performLateBinding(listingViewModel, 'min-price-label');
+performLateBinding(listingViewModel, 'max-price-label');
 
 var acc = document.getElementsByClassName("accordion");
 var i;

@@ -9,6 +9,24 @@ ko.components.register('product-tile', {
             self.skus = ko.observableArray(self.product.skus)();
             self.imageurl = ko.observable(self.skus[0].imageurl);
             self.price = ko.observable(self.skus[0].price);
+            self.heartImage = ko.observable("../resources/images/heart.svg");
+            self.like = ko.observable(false);
+            self.clickHeart = ko.computed({
+                read: function(){
+                    return "";
+                },
+                write: function(parentContext){
+                    var _self = parentContext;
+                    var like = _self.like();
+                    var heartImage = _self.heartImage;
+                    _self.like(!like);
+                    if(_self.like()){
+                        heartImage("../resources/images/like.svg")
+                    }else{
+                        heartImage("../resources/images/heart.svg")
+                    }
+                }
+            });
             self.onlyColors = ko.computed(function () {
                 var colors = ko.utils.arrayMap(self.skus, function (item) {
                     return item.color;

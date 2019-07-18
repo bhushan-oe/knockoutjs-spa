@@ -1,5 +1,5 @@
 var navigation = function(){
-    goToPage = function (page) {
+    let goToPage = function (page) {
         location.hash = page;
     }
 
