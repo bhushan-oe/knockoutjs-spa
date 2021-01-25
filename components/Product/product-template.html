@@ -1,0 +1,27 @@
+<div class="card">
+    <img class="card-img-top" alt="Card image" style="width:100%" data-bind="attr: { src: imageurl() }" />
+    <img class="heart" src="../resources/images/heart.svg" alt="heart.svg" data-bind="click: clickHeart.bind($parent) , attr: { src: heartImage() }">
+    <div class="card-body product-info">
+        <strong>
+            <p class="card-title" data-bind="text: productName"></p>
+        </strong>
+
+        Color : <div class="d-inline" data-bind="foreach: {data: onlyColors(), as: 'color' }">
+            <div class="d-inline highlight">
+                <div class="card-text circle"
+                    data-bind="style: {'background-color' : color}, event: { click: $parent.selectColor.bind(color, $parent)}">
+                </div>
+            </div>
+        </div>
+        <div>
+            Size : <div class="d-inline"
+                data-bind="foreach: {data: skuSizes, as: 'size' }, event: {onload: $parent.loadSize}">
+                <span data-bind="text: size"></span>
+            </div>
+        </div>
+        <div>
+            Price :
+            ₹<span data-bind="text: price()"></span>
+        </div>
+    </div>
+</div>

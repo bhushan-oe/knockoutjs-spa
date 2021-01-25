@@ -1,0 +1,16 @@
+.card-effect{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 16px;
+    box-shadow: 0 1px 8px 0 rgba(0,0,0,.06);
+    background-color: white;
+}
+
+#product-listing-page-widget{
+    background-color: #eef0f3;
+}
+
+.toggle-btn{
+    width: 100%;
+    background-color: #aeb0b3;
+}

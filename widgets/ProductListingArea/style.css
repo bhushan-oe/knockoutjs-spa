@@ -1,0 +1,94 @@
+.card{
+    border: none;
+    margin: 7px 0px;
+    height: 450px;
+    overflow-y: hidden;
+}
+
+.card:hover{
+    box-shadow: 0px 1px 15px 10px rgba(0,0,0,.06);
+}
+
+.card-img-top{
+    height: 370px;
+    object-fit: contain;
+    position: relative;
+}
+.product-info{
+  background-color: white;
+  bottom:0;
+}
+
+@media screen and (min-width:800px){
+  .card:hover .product-info{
+    position: absolute;
+    -webkit-animation: movement 1s 1; 
+    -webkit-animation-direction: alternate; 
+    animation: movement 1s 1;
+    animation-fill-mode: forwards; 
+  }
+
+  /* Safari 4.0 - 8.0 */
+  @-webkit-keyframes movement {
+    from   {bottom: -95px;}
+    to {bottom: 20px;}
+  }
+
+  @keyframes movement {
+    from   {bottom: -95px;}
+    to {bottom: 20px;}
+  }
+}
+
+@media screen and (max-width:800px){
+  .card{
+    border: none;
+    margin: 7px 0px;
+    height: 550px;
+    overflow-y: none;
+  }
+}
+
+.circle{
+    width:25px;
+    height: 25px;
+    border-radius: 20px;
+    border: 1px solid black;
+    display: inline-block;
+}
+
+.topnav {
+    overflow: hidden;
+    /* background-color: #f1f1f1; */
+  }
+  
+  .topnav a ,.topnav label{
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    border-bottom: 3px solid transparent;
+  }
+  
+  .topnav a:hover {
+    border-bottom: 3px solid #2874ef;
+  }
+  
+  .topnav a.active {
+    border-bottom: 3px solid #2874ef;
+  }
+
+.heart{
+  height: 40px;
+  width: 36px;
+  position: absolute;
+  top: 5px;
+  right: 9px;
+}
+
+.sortByFilter{
+  height:80px;
+}

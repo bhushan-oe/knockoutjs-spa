@@ -1,0 +1,112 @@
+<div class="col-sm-12 col-lg-3 col-xs-12 order-1">
+    <div class="card-effect d-md-block collapse" id="filters">
+        <div class="facet">
+            <div class="form-group">
+                <label for="filter">Product name starts with :</label>
+                <input type="text" data-bind="value: filter, valueUpdate: 'afterkeydown'" class="form-control"
+                    id="filter" />
+            </div>
+
+        </div>
+        <div class="facet">
+            <button class="accordion">Categories:</button>
+            <ul class="list-group" data-bind="foreach: justCategories" id="category-facets">
+                <li class="list-group-item">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input category-checkbox" value=""
+                                data-bind="checked: $parent.categoryFilters, value: category"><span
+                                data-bind="text: category"></span>
+                        </label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="facet">
+            <label for="price-facet">Price:</label>
+            <div class="container">
+                <div class="row">
+                        <div class="d-inline col-2">₹<span id="min-price-label" data-bind="text: minPriceFilter()"></span></div>
+                    <div class="container col-8" id="price-container">
+                        <div class="row no-gutters">
+                            <div class="col-sm-6 remove-gutter price-slider align-slider-left price-facet"><input id="price-facet"
+                                    type="range" class="form-check-input price-slider d-inline price-slider" value=""
+                                    data-bind="value: minPriceFilter,attr: { max: api.getProducts().maxPriceLimit/2 -1, min:api.getProducts().minPriceLimit, value : api.getProducts().minPriceLimit}, valueUpdate: 'input'">
+                            </div>
+                            <div class="col-sm-6 remove-gutter price-slider align-slider-right price-facet"><input id="price-facet"
+                                    type="range" class="col-sm-6 form-check-input price-slider d-inline price-slider"
+                                    value=""
+                                    data-bind="value: maxPriceFilter,attr: { max: api.getProducts().maxPriceLimit,min: api.getProducts().maxPriceLimit/2,  value : api.getProducts().maxPriceLimit}, valueUpdate: 'input'">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="d-inline col-2">₹<span id="max-price-label" data-bind="text: maxPriceFilter()"></span></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="facet">
+            <button class="accordion">Brands:</button>
+            <ul class="list-group" data-bind="foreach: justBrands" id="brand-facets">
+                <li class="list-group-item">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input brand-checkbox" value=""
+                                data-bind="checked: $parent.brandFilters, value: brand"><span
+                                data-bind="text: brand"></span>
+                        </label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="facet">
+            <button class="accordion">Colors:</button>
+            <ul class="list-group" data-bind="foreach: justColors ,as: color" id="color-facets">
+                <li class="list-group-item">
+                    <div class="form-check-inline">
+                        <label class="form-check-label d-flex flex-row align-items-center">
+                            <input type="radio" class="form-check-input color-checkbox" value="" name="color"
+                                data-bind="checked: $parent.colorFilter, value: $data">
+                            <span class="card-text circle form-check-input"
+                                data-bind="style: {'background-color' : $data}"></span>
+                            <span data-bind="text: $data"></span>
+                        </label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="facet">
+            <button class="accordion">Ratings:</button>
+            <ul class="list-group" data-bind="foreach: justRatings ,as: rating" id="rating-facet">
+                <li class="list-group-item">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input rating-checkbox" value="" name="rating"
+                                data-bind="checked: $parent.ratingFilter, value: $data">
+                            <span data-bind="text: $data"></span><span>★ & above</span>
+                        </label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="facet">
+            <button class="accordion">Sizes:</button>
+            <ul class="list-group" data-bind="foreach: justSizes ,as: size" id="size-facet">
+                <li class="list-group-item">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input size-checkbox" value="" name="size"
+                                data-bind="checked: $parent.sizeFilter, value: $data">
+                            <span data-bind="text: $data"></span>
+                        </label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
+</div>
