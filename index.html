@@ -2,6 +2,7 @@
 
 <head>
     <title>SPA - Single Page Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -17,57 +18,226 @@
     <script src="js/sammy.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+        integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="CSS/style.css">
 
 </head>
 
 <body>
-
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav" data-bind="foreach: Main.pages">
-                <li class="nav-item" data-bind="
-                    css: { active: $data == $root.Main.chosenPageId() },
-                    click: $root.Main.goToPage">
-                    <a class="nav-link" data-bind="text: $data">Features</a>
-                </li>
-
-            </ul>
-        </div>
-    </nav>
-
-
     <div data-bind="template: { name: $root.Main.template }"></div>
 
-
-
-    <!-- home/static page template-->
-    <script type="text/html" id="page-template">
-        <div data-bind="with: Page">
-        <h3 data-bind="text: name"></h3>
-        <div data-bind="text: content"></div>
+    <!-- #region search Page Template-->
+    <script type="text/html" id="landing-page">
+        <div class="row row-div">
+            <div class="col-lg-7 col-xs-12 landing-page-height mobile">
+                <button class="col-lg-1 col-3 signupbtn" type="submit">Sign Up</button>
+                <div class="row search col-lg-6 col-10">
+                    <div class="col-lg-8 col-div col-8">
+                        <input type="text" maxlength="60" placeholder="Search Something" data-bind="value: $root.searchedData">
+                    </div>
+                    <div class="col-lg-4 col-div col-4">
+                        <button type="submit" class="search-button" data-bind="click: function(){ $root.Main.goToPage($root.Main.plp)}">Search</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 landing-page-height image"></div>
         </div>
     </script>
+    <!-- #endregion -->
 
-    <script type="text/html" id="product-template">
-        <div data-bind="with: Product"> 
-        <h3 data-bind="text: title"></h3>
-        <div data-bind="text: productid"></div>
-        <div data-bind="text: skuid"></div>
-        <button data-bind="click: function(){ $root.Main.goToProduct(productid) }">Details</button>
+    <!-- #region Product Listing Page-->
+    <script type="text/html" id="product-listing-page">
+        <!--Header-->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-xs-12 headerdiv">
+                <div class="row headerContent">
+                    <div class="col-xs-2 col-lg-2"></div>
+                    <div class="col-xs-6 col-lg-6">
+                        <div class="d-flex">
+                            <div class="searchBar space">
+                                <input type="text" class="searchText" placeholder="Search Something..." data-bind="value: $root.searchedData">
+                                <a href="#" class="searchIcon"><i class="fas fa-search"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-lg-4 col-md-4">
+                        <span class="headerFont">Login & Signup</span>
+                        <span class="headerFont">more <i class="fas fa-angle-down"></i></span>
+                        <span class="headerFont"> <i class="fas fa-shopping-cart"></i> Cart</span>
+                    </div>
+                </div>
+
+                <div class="hide mobileHeader headerFont">
+                    <div><i class="fas fa-chevron-left"></i></div>
+                    <div>Shirts</div>
+                    <div><i class="fas fa-search"></i></div>
+                    <div><i class="fas fa-shopping-cart"></i></div>
+                    <div>Login</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row row-div background">
+        <!--Filters-->
+            <div class="col-lg-2">
+                <div class="sidebar background shadow">
+                    <div class="row row-div space">
+                        <div class="col-lg-12 col-5 filters filtersDiv" onclick='filterDiv()'>
+                            <span class="mainFont">
+                                <i class="fas fa-filter"></i>Filters </span>
+                        </div>
+                        <div class="col-5 sortByMobile filters filtersDiv" onclick='sortDiv()'>
+                            <span class="mainFont"><i class="fas fa-sort-amount-down"></i>Sort By</span>
+                        </div>
+                    </div>
+                    <div id="filterMobileDiv" class="row row-div hidefilterD hidefilter">
+                        <div class="col-lg-12 filters col-div">
+                            <span>CATEGORIES</span>
+                            <div data-bind="foreach: $root.Product.category">
+                                <div><i class="fas fa-chevron-left pad"></i><span data-bind="text: $data"></span></div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="col-lg-12 filters col-div pad">
+                            
+                            <span class="bold">PRICE</span>
+                            <div id="slider-range"></div>
+                            <div>
+                                <input type="text" id="amount" readonly class="sliderAmount bold">
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="col-lg-12 panel panel-primary">
+                            <div class="space panel-heading clickable">
+                                <span class="bold">SIZE</span><span><i class="fas fa-chevron-down"></i></span>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="ul-div" data-bind="foreach: $root.Product.allSize">
+                                    <li>
+                                        <input type="checkbox" data-bind="{attr: {value: $data, id: $data}, checked: $root.Product.selectSize }">
+                                        <label class="span_data" data-bind="{text: $data, attr:{for: $data}}"></label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="col-lg-12 panel panel-primary">
+                            <div class="panel-heading clickable space">
+                                <span class="bold">BRANDS</span>
+                                <span><i class="fas fa-chevron-down"></i></span>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="ulDiv" data-bind="foreach: $root.Product.allBrand">
+                                    <li>
+                                        <input type="checkbox" data-bind="{attr: {value: $data, id: $data}, checked: $root.Product.selectBrand}">
+                                        <label class="spanData" data-bind="{text: $data, attr:{for: $data}}"></label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="col-lg-12 panel panel-primary">
+                            <div class="panel-heading clickable space">
+                                <span class="bold">COLORS</span>
+                                <span><i class="fas fa-chevron-down"></i></span>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="ul_div" data-bind="foreach: $root.Product.allColor">
+                                    <li>
+                                        <input type="checkbox" data-bind="{attr: {value: $data, id: $data}, checked: $root.Product.selectColor}">
+                                        <div class="color" data-bind="{style: { 'background-color': $data }}"></div>
+                                        <label class="span_data" data-bind="{text: $data, attr:{ for:$data }}"></label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="col-lg-12 panel panel-primary">
+                            <div class="panel-heading clickable space">
+                                <span class="bold">CUSTOMER RATINGS</span>
+                                <span><i class="fas fa-chevron-down"></i></span>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="ul_div"> 
+                                    <li><input type="checkbox" value="4" data-bind="{ checked: $root.Product.selectedRating, attr:{id:'rating4'}}">4 * & above</li>
+                                    <li><input type="checkbox" value="3" data-bind="{ checked: $root.Product.selectedRating, attr:{id:'rating3'}}">3 * & above</li>
+                                    <li><input type="checkbox" value="2" data-bind="{ checked: $root.Product.selectedRating, attr:{id:'rating2'}}">2 * & above</li>
+                                    <li><input type="checkbox" value="1" data-bind="{ checked: $root.Product.selectedRating, attr:{id:'rating1'}}">1 * & above</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--#region Cards-->
+            <div class="col-lg-10 col-div">
+                <!--#region Breadcrumbs-->     
+                <div id="sortByHide" class="row row-div hideSortByD hideSortBy">
+                    <div class="col-lg-12">
+                        <div class="whiteBackground">
+                            <div>
+                                <b>Shirts:</b><span data-bind="text: '(Showing -> '+$root.Product.productArray().length+')'"></span>
+                            </div>
+                            <b>Sort: &emsp; </b>
+                            <span class="sortPointer" data-bind = "click: function(){ $root.Product.SortBy('popularity'); }">Popularity &emsp;</span>
+                            <span class="sortPointer" data-bind = "click: function() { $root.Product.SortBy('ascending'); }">Price Ascending &emsp;</span>
+                            <span class="sortPointer" data-bind="click: function() { $root.Product.SortBy('descending'); }">Price Descending</span>
+                        </div>
+                    </div>
+                </div>
+                <!--#endregion-->
+                
+                <!-- #region Cards -->
+                <div class="row row-div" data-bind="foreach: $root.Product.productArray()">
+                    <div class="col-lg-3 col-sm-6 col-12 outer-div background">
+                        <div class="whiteBackground">
+                            <div class="prodImg" data-bind="{style: {'backgroundImage': 'url('+$data.sku[0].imageurl+')'}, attr: { id: $data.prodId }}">
+                                <i class="far fa-heart hearts" data-bind="{ attr: {id: $data.prodId+'heart'}, click: function(){ $root.Product.addToWishList($data)}}"></i>
+
+                                <div class="overDiv">
+                                    <!-- <span data-bind="text: $root.Product.num"></span> -->
+                                    <div data-bind="text: $data.sku[0].brand"></div>
+                                    <div data-bind="text: $data.sku[0].name"></div>
+                                    <!-- <i class="fas fa-rupee-sign"></i> -->
+                                    <b data-bind="{text: '$ '+$data.sku[0].price, attr:{id: $data.prodId+'price'}}"></b>
+                                    <div class="colordiv" data-bind="foreach: $data.color">
+                                        <span class="color" data-bind="{style: {'backgroundColor': $data}, click: function(divColor){$root.Product.colorSelect($parent, divColor)}}"></span>
+                                    </div>
+                                    <div class="size">
+                                        <span data-bind="{text: 'size: '+ $data.size, attr: {id: $data.prodId+'size'}}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- #endregion -->
+            </div>
+        <!--#endregion-->
         </div>
     </script>
+    <!-- #endregion -->
 
-
-
+    
 
     <script type="text/javascript" src="js/app.js"></script>
+    
 
 </body>
 

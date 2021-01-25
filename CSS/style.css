@@ -1,0 +1,458 @@
+.header{
+    display: none;
+}
+
+.landing-page-height{
+    height: 100vh;
+    background-color: aliceblue;
+}
+
+.row-div{
+    margin: 0;
+    padding: 0;
+    background-color: aliceblue;
+}
+
+.searchText{
+    width: 100%;
+    border: hidden;
+    outline: none;
+}
+
+.headerFont{
+    font-size: 17px;
+    padding: 5%;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.image{
+    background-image: url(../Images/landing.jpg);
+    background-size: cover;
+}
+
+.col-div{
+    padding: 0;
+    margin: 0;
+}
+
+.search{
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    right: 20%;
+}
+
+.search input{
+    padding: 10px;
+    width: 100%;
+    outline: 2px solid orange;
+}
+
+.search-button{
+    background-color: orange;
+    color: white;
+    padding: 12px;
+    width: 100%;
+    border-radius:1px;
+}
+
+.signupbtn{
+    background-color: black;
+    color: white;
+    padding: 5px;
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    outline: none;
+    border: none;
+}
+
+.pad{
+    padding: 5px;
+}
+
+.outer-div{
+    padding: 10px;
+}
+
+.header{
+    margin: 0;
+    padding: 0 0 10px 0;
+}
+
+.headerdiv{
+    background-color: rgb(32, 119, 255);
+    padding: 10px 50px;
+}
+
+.headerContent{
+    padding: 0 15px;
+    text-align: center;
+}
+
+.searchBar{
+    background: rgb(255, 255, 255);
+    border-radius: 10px;
+    padding: 4px 10px;
+    width: 100%;
+}
+
+.sortPointer{
+    cursor: pointer;
+}
+
+.space{
+    display: flex;
+    justify-content: space-between;
+}
+
+.background{
+    background-color: rgb(231, 229, 229);
+}
+
+.whiteBackground{
+    border-radius: 5px;
+    background-color: white;
+}
+
+.whiteBackground:hover{
+    box-shadow: 1px 1px 10px;
+}
+
+.breadcrumb{
+    background-color: aliceblue;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.sliderAmount{
+    border: 0;
+    color: rgb(0, 0, 0);
+    background-color: aliceblue;
+    outline: none;
+}
+
+.overDiv{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    padding: 15px;
+}
+
+.size{
+    display: none;
+}
+
+.colordiv{
+    display: none;
+}
+
+.prodImg{
+    width: 100%;
+    height: 400px;
+    position: relative;
+    background-image: url();
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.prodImg:hover .colordiv{
+    display: block;
+}
+
+.prodImg:hover .size{
+    display: block;
+}
+
+.color{
+    outline: none;
+    border: 2px solid gray;
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.color:hover{
+    border: 2px solid blue;
+}
+
+.sidebar{
+    padding: 10px 20px;
+    background-color: lightgray;
+}
+
+.background{
+    background-color: aliceblue;
+}
+
+.shadow:hover{
+    box-shadow: 1px 1px 10px;
+}
+
+.filters{
+    padding: 10px 15px;
+    border-bottom: 1px solid aliceblue;
+}
+
+.mainFont{
+    font-size: 2vh;
+}
+
+.hide{
+    display: none;
+}
+
+.hidefilterD{
+    display: block;
+}
+
+.hideSortByD{
+    display: block;
+}
+
+.categories{
+    padding: 5px 10px;
+}
+
+.panel{
+    border-radius: 0px;
+}
+
+.panel-primary{
+    border-color: transparent;
+    border-bottom: 1px solid aliceblue;
+}
+
+.panel-primary>.panel-heading{
+    color: black;
+    background-color: aliceblue;
+    border-color: aliceblue;
+    padding: 15px;
+}
+
+.clickable{
+    cursor: pointer;
+}
+
+.panel-body{
+    display: scroll;
+    height: 250px;
+    overflow: auto;
+}
+
+.ulDiv{
+    padding: 5px;
+    list-style: none;
+}
+
+.spanData{
+    font-size: 17px;
+}
+
+.slidecontainer{
+    width: 100%;
+}
+
+.slider{
+    -webkit-appearance: none;
+    border-radius: 5px;
+    background: rgba(24, 61, 228, 0.863);
+    height: 5px;
+    outline: none;
+    transition: opacity .2s;
+    margin-bottom: 10px;
+    appearance: none;
+    width: 100%;
+    -webkit-transition: .2s;
+    
+}
+
+.slider::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    border-radius: 50%;
+    border: 1px solid black;
+    cursor: pointer;
+    background: white;
+    height: 15px;
+    width: 15px;
+    appearance: none;
+}
+
+.slider::-moz-range-thumb{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: rgb(16, 211, 42);
+    cursor: pointer;
+}
+
+.sortByMobile{
+    display: none;
+}
+
+.hearts{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;    
+    cursor: pointer;
+}
+
+.redheart{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: red;
+    cursor: pointer
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
+    border: 1px solid #37b2e2;
+    background: #03a9f4;
+    font-weight: normal;
+    color: #03a9f4;
+}
+
+.ui-slider-horizontal .ui-slider-range{
+    color: #7bd0f7;
+    background-color: #7bd0f7;
+}
+
+@media only screen and (max-width: 990px){
+    
+    .image{
+        display: none;
+    }
+
+    .mainFont{
+        padding-left: 10vw;
+    }
+
+    .mobile{
+        padding: 0;
+        background-image: url(../Images/landing.jpg);
+        background-size: cover;
+    }
+
+    .show{
+        display: block;
+    }
+
+    .colorDiv{
+        display: block;
+    }
+
+    .sortByMobile{
+        display: block;
+    }
+
+    .hide{
+        display: none;
+    }
+
+    .search{
+        right: 10%;
+        height: 23%
+    }
+
+    .search input{
+        height: 25%;
+    }
+
+    .search-button{
+        font-size: xx-large;
+    }
+
+    .signupbtn{
+        height: 5%;
+        font-size: x-large;
+    }
+
+    .size{
+        display: block;
+    }
+
+    .filtersDiv{
+        border: 1px solid black;
+    }
+
+    .hidefilter{
+        display: none;
+    }
+
+    .showfilter{
+        display: block;
+    }
+
+    .hideSortBy{
+        display: none;
+    }
+
+    .howSortBy{
+        display: block;
+    }
+
+    .searchBar{
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        padding: 0px 10px;
+    }
+
+    .sortPointer{
+        display: block;
+        padding: 5px 15px;
+        
+    }
+
+    .inputPrice{
+        width: 10vh;
+    }
+
+    .mobileHeader{
+        color: rgb(231, 229, 229);
+        width: 100%;
+        padding: 5px 0;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .headerContent{
+        display: none;
+    }
+
+    .headerFont{
+        font-size: 30px;
+    }
+
+}
+
+@media only screen and (max-width: 400px){
+
+    .search{
+        height: 17%
+    }
+
+    .headerdiv{
+        padding: 5px;
+    }
+
+    .hidefilter{
+        display: none;
+    }
+
+    .headerFont{
+        font-size: 20px;
+    }
+
+    .mainFont{
+        padding-left: 5vw;
+    }
+}
