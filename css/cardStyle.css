@@ -1,0 +1,75 @@
+.margintTop{
+    margin-top: 1%;
+}
+
+.paddingLeft{
+    padding: 0% 2%;    
+}
+.cardEncloseDiv{
+    margin-bottom: 2%;
+    padding: 0px;
+}
+
+.imageEncloseDiv{
+    position: relative; 
+    height: 75%!important;              
+}
+.image{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.card-deck{
+    width: 100%; 
+}
+.card{
+    height: 425px;
+    overflow: hidden;
+}
+.card:hover > .card-body{
+    transform: translateY(-60px);
+}
+.card-body{                  
+    transition: transform 0.5s;
+    background-color: white;
+}
+
+p.productContent{
+    margin-bottom: 2px;
+}
+span.middle{
+    vertical-align: middle;
+}
+span.colorSpan:hover{
+    cursor: pointer;
+}
+span.sorting:hover{
+    cursor: pointer;
+}
+span.selected:first-child {    
+    font-weight: bold;
+  }
+.dot {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 1px solid black;
+    display: inline-block;
+}
+
+.icon{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: grey;
+}
+.icon:hover{
+    cursor: pointer;
+}
+
+@media (max-width: 576px) { 
+.paddingLeft{
+    padding: 0% 5%;    
+    }
+}

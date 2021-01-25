@@ -1,0 +1,91 @@
+.filterMargin{
+    margin-top: 5px;
+}
+.filterLine{
+    border-width: 1px;
+    border-color: black;
+}
+#collapseCategories > ul > li:hover{
+    cursor: pointer;
+}
+
+.filterIcon{
+    padding-right: 10%;
+}
+
+.filterContent, .filterHeading{
+    padding-left: 10%;
+}
+
+.toggleIcon{
+    display: none;
+}
+#filterDiv{
+    width: 100%;
+}
+.sortOptionHide, #sortDiv{
+    display: none;
+}
+
+@media (max-width: 576px) {    
+    .toggleIcon{
+        display: block;
+    }
+    .toggleFilters{
+        display: none;
+    }
+      
+    .sortOptionHide{
+        display: none;
+    }
+
+    #sortDiv, #filterDiv{
+        display: inline-block;
+    }
+    #filterDiv{
+        width: auto;
+    }
+    .mobileHide{
+        display: none;
+    }
+    .toggleIcon{
+        display: inline-block;
+    }
+    .optionsMarginTop{
+        margin-top: 2%;
+    }
+
+ }
+
+/* color #007bff*/
+.priceDiv{
+    font-size: 14px;
+}
+.slider-selection {
+    background: #2874f0;
+}
+.slider-handle {
+    background-color: aliceblue;
+}
+.slider-handle.round {
+    border: 1px solid #bababa;
+    outline: none;
+}
+
+
+/* clear box*/
+.clearButton{
+    font-size: 14px;
+    padding: 1px 10px;
+}
+.clearDivPadding{
+    padding-bottom: 10px; 
+}
+
+/* category selection */
+.currentCategory{
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+

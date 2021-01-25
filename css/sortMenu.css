@@ -1,0 +1,18 @@
+.navIcon{
+    padding: 0px 15px;
+}
+.sorting{  
+    cursor: pointer;
+    padding: 0px 10px;  
+}
+.selectedSort{
+    border-bottom: 2px solid #2874f0;       
+    font-weight: 600;
+    color: #2874f0;
+    cursor: default;
+    padding: 0px 10px;
+}
+.headingTitle{
+    font-weight: bold;
+    padding-right: 5px; 
+}
