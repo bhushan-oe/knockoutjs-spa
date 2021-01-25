@@ -1,0 +1,475 @@
+/* css to tags */
+
+body {
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    background-color: rgb(236, 243, 245);
+    font-size: 15px;
+}
+
+hr {
+    margin: 0;
+    opacity: 0.4;
+}
+
+/* css for all pages */
+
+.smallScreenMargin {
+    margin: 0;
+}
+
+.adjustRightPadding {
+    padding-right: 0;
+}
+
+.adjustLeftPadding {
+    padding-left: 0;
+}
+
+.fontLight {
+    color: rgb(168, 172, 173) !important;
+}
+
+.moreHRMargin {
+    margin-top: 1rem;
+}
+
+/* landing page css */
+
+.search_content {
+    height: 100vh;
+}
+
+.signupButton {
+    background-color: black;
+    color: white;
+    float: right;
+    margin: 10%;
+    height: 3rem;
+    padding: 10px;
+    border-color: black;
+}
+
+.searchBar {
+    padding: 5px 0;
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.searchBar input {
+    height: 3rem;
+    border-radius: 1px;
+    border: 1px solid orange;
+}
+
+.searchBar button {
+    height: 3rem;
+    position: absolute;
+    right: 0;
+    border-radius: 1px;
+    padding: 15px 30px;
+    background-color: orange;
+    border: 1px solid orange;
+    bottom: 0.3rem;
+}
+
+.landing_image_div {
+    background-image: url("landing.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+/* plp page css */
+
+/* desktop view navigation header bar */
+
+.spaNavbarMobile {
+    display: none;
+}
+
+.spaNavbar {
+    position: relative;
+    margin-bottom: 5px;
+    height: 4rem;
+    background-color: blue;
+    display: flex;
+    flex-direction: row;
+}
+
+.navbarContent {
+    position: absolute;
+    right: 0;
+    margin: auto;
+    top: 0.5rem;
+    left: 25vw;
+    color: white;
+}
+
+.navbarSearch {
+    display: inline;
+    color: blue;
+}
+
+.navbarSearch input[type=text] {
+    float: left;
+    padding: 5px;
+    border: none;
+    margin: 5px 0px 5px 5px;
+    width: 35vw;
+}
+
+.searchIcon {
+    float: left;
+    background-color: white;
+    margin: 5px 5px 5px 0px;
+    padding: 5px;
+}
+
+.navbarLinks {
+    float: right;
+    margin: 5px 5px 5px 0px;
+    padding: 0px 2rem 0px 2rem;
+    font-size: 20px;
+}
+
+.navbarLinksMobile {
+    float: right;
+    margin: 5px 5px 5px 0px;
+    padding: 10px 5% 5px 5%;
+}
+
+/* filters division */
+
+.plpFilterContainer {
+    margin: 10px 0px 0px 10px;
+    background-color: rgb(255, 255, 255);
+}
+
+.filter {
+    font-size: 20px;
+    padding: 10px;
+}
+
+.hideSortBy, .filterIcon {
+    display: none;
+}
+
+.categoryFilter, .priceFilter, .ratingFilter, .sizeFilter, .colorFilter, .brandFilter {
+    padding: 10px 10px 0px 10px;
+}
+
+.categoryMargin {
+    margin-top: 1rem;
+}
+
+.categoryLeftPadding {
+    padding-left: 1rem;
+}
+
+.priceSlider {
+    display: flex;
+    justify-content: space-between;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    background: blue;
+    outline: none;
+    margin-bottom: 10px;
+    height: 0.3rem;
+    border-radius: 0;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    border: 1px solid black;
+    background: white;
+    cursor: pointer;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+}
+
+.sizeFilterHead, .brandFilterHead, .colorFilterHead, .ratingFilterHead {
+    padding: 10px 10px 0px 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ratingDiv, .sizeDiv, .colorDiv, .brandDiv {
+    padding: 0.6rem;
+}
+
+.sizeDiv input, .sizeDiv a, .brandDiv input, .brandDiv a, .colorDiv input, .colorDiv a, .ratingDiv input, .ratingDiv label {
+    margin: 0px 10px 0px 10px;
+}
+
+/* plp Page Data Division */
+
+.plpDataContainer {
+    margin: 10px;
+    background-color: white;
+}
+
+/* sortBy division row */
+
+.plpPageNavigationBarHomeFont {
+    font-size: 0.9rem;
+}
+
+.plpPageNavigationBarPadding {
+    padding: 1rem 3rem 1rem 3rem;
+}
+
+.plpPageNavigationBarPaddingadjust {
+    padding-top: 0;
+}
+
+.plpPageNavigationBarContentPadding {
+    padding: 0px 5px 0px 5px;
+}
+
+.sortBy {
+    display: inline;
+}
+
+.sortByHeading {
+    display: inline;
+    font-weight: bold;
+}
+
+.sortByContent {
+    display: inline;
+    padding-left: 5px;
+}
+
+/* Product List Divisions */
+
+.productContainer {
+    position: relative;
+    align-content: center;
+    overflow: hidden;
+    z-index: 1;
+    background-color: white;
+    height: 25rem;
+    margin: 10px 0px 10px 0px;
+}
+
+.productImage {
+    padding: 10px;
+    position: relative;
+    height: 18rem;
+    background-color: white;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 20px 5px 20px 5px;
+}
+
+.productImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.productContent {
+    padding: 10px 0 0 20px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    overflow: hidden;
+    width: 100%;
+    height: 20%;
+    transition: .5s ease;
+}
+
+.productImage a {
+    display: block
+}
+
+.productContainer:hover {
+    box-shadow: 4px 8px 8px 4px rgba(146, 146, 146, 0.2);
+}
+
+.productContainer:hover .productContent {
+    height: 35%;
+}
+
+.skuName, .brandName {
+    display: block;
+}
+
+.sizeName {
+    clear: both;
+    font-weight: bold;
+}
+
+.skuColoredCircles {
+    height: 20px;
+    width: 20px;
+    margin: 0 3px 0 3px;
+    border-radius: 50%;
+    border: 1px solid gray;
+    float: left
+}
+
+.heart {
+    color: rgb(194, 193, 193);
+    font-size: 20px;
+    position: relative;
+    top: 5%;
+    left: 85%;
+}
+
+.noProductAvailable {
+    margin: 1rem;
+    padding: 2rem;
+    border: 1px solid;
+    border-style: dashed;
+    background-color: cornflowerblue;
+    color: white;
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .landingpage_div {
+        position: absolute;
+        padding-left: 0;
+        padding-right: 0;
+        background-image: url("landing.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+    }
+    .smallScreenMargin {
+        margin-right: 0;
+        margin-left: 0;
+    }
+    .landing_image_div {
+        display: none;
+    }
+    .spaNavbar {
+        display: none;
+    }
+    .spaNavbarMobile {
+        display: flex;
+        flex-direction: row;
+        background-color: blue;
+        color: white;
+    }
+    .adjustMobilePadding {
+        padding: 0;
+    }
+    .plpFilterContainer {
+        margin: 0;
+        width: 100%;
+    }
+    .plpHeaderContainer {
+        display: flex;
+    }
+    .filter {
+        text-align: center;
+        width: 50%;
+        border: 1px black;
+    }
+    .filterIcon {
+        display: inline;
+        padding: 10px;
+    }
+    .hideSortBy {
+        display: block;
+    }
+    .hideContent {
+        display: none;
+    }
+    .adjustLeftPadding {
+        padding-left: 0;
+    }
+    .adjustLeftPadding {
+        padding: 0;
+    }
+    .plpDataContainer {
+        margin: 0;
+    }
+    .sortByContent {
+        display: block;
+    }
+    .productContent {
+        height: 30%;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .landingpage_div {
+        position: absolute;
+        padding-left: 0;
+        padding-right: 0;
+        background-image: url("landing.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+    }
+    .smallScreenMargin {
+        margin-right: 0;
+        margin-left: 0;
+    }
+    .landing_image_div {
+        display: none;
+    }
+    .spaNavbar {
+        display: none;
+    }
+    .spaNavbarMobile {
+        display: flex;
+        flex-direction: row;
+        background-color: blue;
+        color: white;
+    }
+    .adjustMobilePadding {
+        padding: 0;
+    }
+    .plpFilterContainer {
+        margin: 0;
+        width: 100%;
+    }
+    .plpHeaderContainer {
+        display: flex;
+    }
+    .filter {
+        text-align: center;
+        width: 50%;
+        border: 1px black;
+    }
+    .filterIcon {
+        display: inline;
+        padding: 10px;
+    }
+    .hideSortBy {
+        display: block;
+    }
+    .hideContent {
+        display: none;
+    }
+    .adjustLeftPadding {
+        padding-left: 0;
+    }
+    .adjustLeftPadding {
+        padding: 0;
+    }
+    .plpDataContainer {
+        margin: 0;
+    }
+    .sortByContent {
+        display: block;
+    }
+    .productContent {
+        height: 30%;
+    }
+}
