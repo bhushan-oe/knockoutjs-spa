@@ -1,74 +1,263 @@
+<!DOCTYPE html>
 <html>
 
 <head>
     <title>SPA - Single Page Application</title>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js" type="text/javascript"></script>
     <script src="js/sammy.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 
 <body>
-
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav" data-bind="foreach: Main.pages">
-                <li class="nav-item" data-bind="
-                    css: { active: $data == $root.Main.chosenPageId() },
-                    click: $root.Main.goToPage">
-                    <a class="nav-link" data-bind="text: $data">Features</a>
-                </li>
-
-            </ul>
-        </div>
-    </nav>
-
-
     <div data-bind="template: { name: $root.Main.template }"></div>
 
+    <!--starts landing page -->
+    <script type="text/html" id="searchingPage">
+        <div class="row rowDiv">
+            <div class="col-lg-7 col-sm-12 col-xs-12 page response">
+                <button class="col-lg-1 col-3 signbtn" type="submit">Sign up</button>
+                <div class="row rowDiv search col-lg-6 col-10">
+                    <div class="col-lg-8 colDiv col-8"><input type="text" placeholder="search" data-bind="textInput: $root.Main.searchCategory" /></div>
+                    <div class="col-lg-4 colDiv col-4"><button class="btn width-100" type="submit" data-bind="click: function(){ $root.Main.goToPage($root.Main.plp) }">Search</button></div>
+                </div>
+            </div>
+            <div class="col-lg-5 col-sm-12 col-xs-12 page images hide">
 
-
-    <!-- home/static page template-->
-    <script type="text/html" id="page-template">
-        <div data-bind="with: Page">
-        <h3 data-bind="text: name"></h3>
-        <div data-bind="text: content"></div>
+            </div>
         </div>
     </script>
+    <!--end landing page -->
 
-    <script type="text/html" id="product-template">
-        <div data-bind="with: Product"> 
-        <h3 data-bind="text: title"></h3>
-        <div data-bind="text: productid"></div>
-        <div data-bind="text: skuid"></div>
-        <button data-bind="click: function(){ $root.Main.goToProduct(productid) }">Details</button>
+    <script type="text/html" id="plppage">
+        <!--starts header  functionality -->
+
+        <div class="headerBlue row">
+            <div class="col-12 col-6 mobHeader">
+                <i class="fa fa-arrow-left col-2"></i>
+                <h4 class="col-4">Shirts</h4>
+                <i class="fa fa-search col-2"></i>
+                <i class="fa fa-shopping-cart col-2"></i>
+                <h4 class="col-2">Login</h4>
+            </div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-6">
+                <div class="searchResult hide">
+                    <input type="text" class="form-control input-lg" maxlength="64" placeholder="search" data-bind="textInput: $root.Main.searchCategory" />
+                    <button type="submit" class="btn  btn-lg">Search</button>
+                </div>
+            </div>
+            <div class="col-lg-4 dispFlex arrangeHeader">
+                <div>
+                    <h4 class="mobileDisplay hide">Login & signup</h4>
+                </div>
+                <div>
+                    <h4 class="mobileDisplay hide">More<i class="fa fa-angle-down paddingLeft"></i></h4>
+                </div>
+                <div>
+                    <h4 class="mobileDisplay hide"><i class="fa fa-shopping-cart paddingRight"></i>Cart</h4>
+                </div>
+
+            </div>
+        </div>
+        <!--end header  functionality -->
+
+        <div class="row d-lg-none">
+            <div class="filter">
+                <div class="filterTitle" data-toggle="collapse" data-target="#filters">
+                    <h3>Filters<i class="fa fa-filter filtrIcon"></i></h3>
+                </div>
+
+            </div>
+            <div class="sort">
+                <div class="filterTitle" data-toggle="collapse" data-target="#sortOrder">
+                    <h3 class="filterStyle">Sort<i class="fa fa-sort-amount-asc"></i></h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="row rowDiv">
+            <!--starts filters page -->
+
+            <div id="filters" class="col-lg-2 colDiv d-md-block collapse" data-bind="css: { 'd-md-block': checkWidth() > 768  }">
+                <h3 class="hide">Filters</h3>
+                <hr>
+                <span class="paddingLeft">CATEGORY</span>
+
+                <div data-bind="foreach: $data.category">
+                    <div class="clicked" data-bind="attr: {value : $data}, click: $root.Products.handleCategoryClick">
+                        <i class="fa fa-angle-left arrow"></i>
+                        <span data-bind="text: $data"></span>
+                    </div>
+                </div>
+
+                <hr>
+                <span class="paddingLeft">PRICE</span>
+
+                <div class="slideContainer">
+                    <div class="dispFlex">
+                        <input type="range" min="100" max="800" value="100" class="slider" id="minRange" data-bind="value  : $root.Products.selectedMinPrice">
+                        <input type="range" min="100" max="800" value="0" class="slider" id="maxRange" data-bind="value : $root.Products.selectedMaxPrice">
+                    </div>
+                    <div class="rangeDiv dispFlex">
+                        <p><span id="minPrice" data-bind="text : 'Min : '+$root.Products.selectedMinPrice()"></span></p>
+                        <p><span id="maxPrice" data-bind="text : 'Max : '+$root.Products.selectedMaxPrice()"></span></p>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <p class="panel-title header" data-toggle="collapse" data-target="#collapseOne">
+                            BRAND<span class="pull-right arrArrange"><i class="fa fa-angle-down"></i></span>
+                        </p>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul data-bind="foreach: $data.brands" class="listStyle">
+                                <li data-bind="visible: $root.Products.brandFlag()? true :$index() < 5">
+                                    <input type="checkbox" data-bind="attr : {value : $data,id: 'brand'+ $index()}, checked : $root.Products.selectedBrand" />
+                                    <label data-bind="attr: { for: 'brand' + $index() }, text: $data" class="space"></label>
+
+                                </li>
+
+                            </ul>
+                            <div data-bind="click : function(){$root.Products.toggleFilter('showBrandTag', 'brandFlag')}" id="showBrandTag"><span data-bind="text : $data.brands().length - 5+' More'"></span></div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <p class="panel-title header" data-toggle="collapse" data-target="#collapsetwo">
+                            COLOR<span class="pull-right arrArrange"><i class="fa fa-angle-down"></i></span>
+                        </p>
+                    </div>
+                    <div id="collapsetwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul data-bind="foreach: $data.colors" class="listStyle">
+                                <li data-bind="visible: $root.Products.colorFlag()? true :$index() < 5">
+                                    <input type="radio" data-bind="attr : {value : $data, id: 'color' + $index()},checked: $root.Products.selectedColor" />
+                                    <label data-bind="attr: { for: 'color' + $index() }, text: $data,style: { 'backgroundColor': $data}" class="colrPadding colorchk"></label>
+                                </li>
+                            </ul>
+                            <div data-bind="click : function(){$root.Products.toggleFilter('showColorTag', 'colorFlag')}" id="showColorTag"><span data-bind="text : $data.colors().length - 5+' More'"></span></div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <hr>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <p class="panel-title header" data-toggle="collapse" data-target="#collapsethree">
+                            SIZE <span class="pull-right arrArrange "><i class="fa fa-angle-down"></i></span>
+                        </p>
+                    </div>
+                    <div id="collapsethree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul data-bind="foreach: $data.size" class="listStyle">
+                                <li data-bind="visible: $root.Products.sizeFlag()? true :$index() < 5">
+                                    <input type="radio" data-bind="attr : {value : $data, id: 'size' + $index()},checked : $root.Products.selectedSize" />
+                                    <label data-bind="attr: { for: 'size' + $index() }, text: $data" class="space"></label>
+                                </li>
+                            </ul>
+                            <span data-bind="text : $root.Products.selectedSize() "></span>
+                            <div data-bind="click : function(){$root.Products.toggleFilter('showSizeTag', 'sizeFlag')}" id="showSizeTag"><span data-bind="text : $data.size().length - 5+' More'"></span></div>
+
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <p class="panel-title header" data-toggle="collapse" data-target="#collapsefour">
+                            RATINGS<span class="pull-right arrArrange"><i class="fa fa-angle-down"></i></span>
+                        </p>
+                    </div>
+                    <div id="collapsefour" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul data-bind="foreach: $data.rating" class="listStyle">
+                                <li data-bind="visible: $root.Products.ratingFlag()? true :$index() < 5">
+                                    <input type="radio" data-bind="attr : {value : $data,id: 'rating' + $index()},checked : $root.Products.selectedRating" />
+                                    <label data-bind="attr: { for: 'rating' + $index() }, text: $data" class="space"></label>
+
+                                </li>
+
+                            </ul>
+                            <span data-bind="text : $root.Products.selectedRating()"></span>
+                            <div data-bind="click : function(){$root.Products.toggleFilter('showRatingTag', 'ratingFlag')}" id="showCategoryTag"><span data-bind="text : $data.rating().length - 5+' More'"></span></div>
+
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <!--end filters functionality -->
+
+            <div class="col-lg-10 colDiv">
+                <!--starts sorting functionality -->
+
+                <div id="sortOrder" class="d-md-block collapse" data-bind="css: { 'd-md-block': checkWidth()> 768 }">
+                    <div>
+                        <b><span>Shirts</span></b><span data-bind="text: ' ( Showing - '+$root.Products.productArray().length+ ' products)'"></span>
+                    </div>
+                    <div class="sortBy">
+                        <b><span>SORT BY</span></b>
+                        <span data-bind="click: $root.Products.ratingSort" id="popSort">Popularity</span> |
+                        <span data-bind="click: $root.Products.priceLowtoHigh" id="priceLtHSort">Price - Low to High</span> |
+                        <span data-bind="click: $root.Products.priceHightoLow" id="priceHtLSort">Price - High to Low</span>
+                    </div>
+                </div>
+                <!--end sorting functionality -->
+
+                <!--starts display card functionality -->
+
+                <div class="row rowDiv" data-bind="foreach: $root.Products.productArray">
+                    <div class="col-lg-3 col-sm-6 outerDiv ">
+
+                        <div class="backgroundImage" data-bind="style: { 'backgroundImage': 'url('+$data.skuId[0].imageurl+ ')'}, attr :{id : $data.prodId}">
+                            <div>
+                                <i class="fa fa-heart fa-color"></i>
+                            </div>
+                            <div class="hoverDiv">
+                                <div data-bind="text:$data.skuId[0].brand"></div>
+                                <div data-bind="text:$data.skuId[0].name"></div>
+                                <b data-bind="{text: $data.skuId[0].price , attr:{id : $data.prodId+ 'price'}}"></b>
+                                <div class="colordiv hide" data-bind="foreach:$data.color">
+                                    <div class="color" data-bind="style: { 'backgroundColor': $data}, click : function(){ $root.Products.DispcolorSize($parent, $data)} "></div>
+                                </div>
+                                <div class="size">
+                                    <span data-bind="{text: $data.skuId[0].size , attr:{id : $data.prodId+ 'size'}}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end display card functionality -->
+
+        <div class="footer ">
+            Flipcart
         </div>
     </script>
-
-
-
-
-    <script type="text/javascript" src="js/app.js"></script>
-
+    <script type="text/javascript " src="js/app.js "></script>
 </body>
 
 </html>
